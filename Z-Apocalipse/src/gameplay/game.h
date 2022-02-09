@@ -1,27 +1,34 @@
 #ifndef GAME_H
 #define GAME_H
 
-class Game
+#include "scene_manager.h"
+
+namespace Z_APOCALIPSE 
 {
-private:
-	int screenWidth;
-	int screenHeight;
-	const char* title = "Z-APOCALIPSE";
-	const short fps = 60;
-public:
-	Game(int screenWidth, int screenHeight);
-	~Game();
+	class Game
+	{
+	private:
+		int screenWidth;
+		int screenHeight;
+		const char* title = "Z-APOCALIPSE";
+		const short fps = 60;
+		
+		SceneManager* sceneManager;
+	public:
+		Game(int screenWidth, int screenHeight);
+		~Game();
 
-	void setScreenWidth(int screenWidth);
-	void setScreenHeight(int screenHeight);
+		void setScreenWidth(int screenWidth);
+		void setScreenHeight(int screenHeight);
 
-	void init();
-	void input();
-	void update();
-	void draw();
-	void deinit();
+		void init();
+		void input();
+		void update();
+		void draw();
+		void deinit();
 
-	void runGame();
-};
+		void runGame();
+	};
+}
 
 #endif
