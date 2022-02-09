@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "scene_manager.h"
+#include "gameplay.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -14,6 +15,7 @@ namespace Z_APOCALIPSE
 		const short fps = 60;
 		
 		SceneManager* sceneManager;
+		Gameplay* gameplay;
 	public:
 		Game(int screenWidth, int screenHeight);
 		~Game();
@@ -21,10 +23,7 @@ namespace Z_APOCALIPSE
 		void setScreenWidth(int screenWidth);
 		void setScreenHeight(int screenHeight);
 
-		void init();
-		void input();
-		void update();
-		void draw();
+		void init();		
 		void deinit();
 
 		void runGame();

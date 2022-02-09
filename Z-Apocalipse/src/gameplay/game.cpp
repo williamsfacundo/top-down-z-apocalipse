@@ -34,34 +34,15 @@ namespace Z_APOCALIPSE
 		SetTargetFPS(fps);
 
 		sceneManager = new SceneManager(Scenes::gameplay);
-	}
-
-	void Game::input()
-	{
-
-	}
-
-	void Game::update()
-	{
-
-	}
-
-	void Game::draw()
-	{
-		BeginDrawing();
-
-		ClearBackground(RAYWHITE);
-
-		DrawText("Z-APOCALIPSE", 190, 200, 20, RED);
-
-		EndDrawing();
-	}
+		gameplay = new Gameplay();
+	}	
 
 	void Game::deinit()
 	{
 		CloseWindow();
 
 		delete sceneManager;
+		delete gameplay;
 	}
 
 	void Game::runGame()
@@ -72,9 +53,9 @@ namespace Z_APOCALIPSE
 			{
 			case Scenes::gameplay:
 				
-				input();
-				update();
-				draw();
+				gameplay->input();
+				gameplay->update();
+				gameplay->draw();
 				break;
 			default:
 				break;
