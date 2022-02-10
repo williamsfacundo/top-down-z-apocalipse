@@ -10,7 +10,7 @@ namespace Z_APOCALIPSE
 	private:
 		const Color backgroundColor = GRAY;
 		const Color gameplaySpaceColor = BLACK;
-		const float hudHeightPercentage = 0.30f;
+		const float hudHeightPercentage = 0.36f;
 		Vector2 gameplaySpacePos;
 		float gameplaySpaceHeight;
 	public:
