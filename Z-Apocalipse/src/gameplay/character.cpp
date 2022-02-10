@@ -4,10 +4,15 @@
 
 namespace Z_APOCALIPSE 
 {
-	Character::Character(Vector2 position, float radius)
+	Character::Character(Color characterColor, Vector2 position, float radius)
 	{
 		setPosition(position);
 		setRadius(radius);
+	}
+
+	void Character::setCharacterColor(Color characterColor) 
+	{
+		this->characterColor = characterColor;
 	}
 
 	void Character::setPosition(Vector2 position) 
@@ -20,6 +25,11 @@ namespace Z_APOCALIPSE
 		this->radius = radius;
 	}
 	
+	Color Character::getCharacterColor()
+	{
+		return characterColor;
+	}
+
 	Vector2 Character::getPosition() 
 	{
 		return position;

@@ -6,27 +6,29 @@ namespace Z_APOCALIPSE
 {
 	Gameplay::Gameplay()
 	{
+		init();
+
 		updateHudSpace();
 	}
 
 	Gameplay::~Gameplay() 
 	{
-
+		deinit();
 	}
 
 	void Gameplay::init()
 	{
-
+		playerOne = new Survivor(playerOneColor, {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f}, playerOneRadius);
 	}
 	
 	void Gameplay::input() 
 	{
-
+		playerOne->input();
 	}
 	
 	void Gameplay::update() 
 	{
-	
+		playerOne->update();
 	}
 	
 	void Gameplay::draw() 
@@ -36,12 +38,14 @@ namespace Z_APOCALIPSE
 
 		drawHudSpace();
 
+		playerOne->draw();	
+
 		EndDrawing();
 	}
 	
 	void Gameplay::deinit() 
 	{
-
+		delete playerOne;
 	}
 
 	void Gameplay::drawHudSpace() 

@@ -13,7 +13,7 @@ namespace Z_APOCALIPSE
 		short lives;
 		short money;
 	public:
-		Survivor(Vector2 position, float radius);
+		Survivor(Color color, Vector2 position, float radius);
 
 		void setLives(short lives);
 		void setMoney(short money);

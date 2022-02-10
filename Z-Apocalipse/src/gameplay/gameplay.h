@@ -1,6 +1,8 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
+#include "survivor.h"
+
 #include <raylib.h>
 
 namespace Z_APOCALIPSE
@@ -13,6 +15,10 @@ namespace Z_APOCALIPSE
 		const float hudHeightPercentage = 0.36f;
 		Vector2 gameplaySpacePos;
 		float gameplaySpaceHeight;
+		
+		const float playerOneRadius = 30.0f;
+		const Color playerOneColor = YELLOW;
+		Survivor* playerOne;
 	public:
 		Gameplay();
 		~Gameplay();

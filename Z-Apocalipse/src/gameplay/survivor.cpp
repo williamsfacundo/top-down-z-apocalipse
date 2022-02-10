@@ -2,7 +2,7 @@
 
 namespace Z_APOCALIPSE 
 {
-	Survivor::Survivor(Vector2 position, float radius) : Character(position, radius)
+	Survivor::Survivor(Color color, Vector2 position, float radius) : Character(color, position, radius)
 	{
 		setLives(initialLives);
 		setMoney(initialMoney);
