@@ -4,9 +4,9 @@
 
 namespace Z_APOCALIPSE 
 {
-	Gameplay::Gameplay() 
+	Gameplay::Gameplay()
 	{
-
+		updateHudSpace();
 	}
 
 	Gameplay::~Gameplay() 
@@ -26,7 +26,7 @@ namespace Z_APOCALIPSE
 	
 	void Gameplay::update() 
 	{
-
+	
 	}
 	
 	void Gameplay::draw() 
@@ -34,7 +34,7 @@ namespace Z_APOCALIPSE
 		BeginDrawing();
 		ClearBackground(backgroundColor);
 
-		DrawText("Z-APOCALIPSE", 190, 200, 20, RED);
+		drawHudSpace();
 
 		EndDrawing();
 	}
@@ -42,5 +42,16 @@ namespace Z_APOCALIPSE
 	void Gameplay::deinit() 
 	{
 
+	}
+
+	void Gameplay::drawHudSpace() 
+	{
+		DrawRectangleV(gameplaySpacePos, {static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight}, gameplaySpaceColor);
+	}
+
+	void Gameplay::updateHudSpace()
+	{
+		gameplaySpaceHeight = GetScreenHeight() - (GetScreenHeight() * hudHeightPercentage);
+		gameplaySpacePos.y = GetScreenHeight() * (hudHeightPercentage / 2.0f);
 	}
 }

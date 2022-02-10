@@ -8,7 +8,11 @@ namespace Z_APOCALIPSE
 	class Gameplay
 	{
 	private:
-		const Color backgroundColor = WHITE;
+		const Color backgroundColor = GRAY;
+		const Color gameplaySpaceColor = BLACK;
+		const float hudHeightPercentage = 0.30f;
+		Vector2 gameplaySpacePos;
+		float gameplaySpaceHeight;
 	public:
 		Gameplay();
 		~Gameplay();
@@ -18,6 +22,9 @@ namespace Z_APOCALIPSE
 		void update();
 		void draw();
 		void deinit();
+
+		void drawHudSpace();
+		void updateHudSpace();
 	};
 }
 
