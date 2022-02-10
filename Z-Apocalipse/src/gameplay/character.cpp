@@ -1,11 +1,13 @@
 #include "character.h"
 
+#include <raylib.h>
+
 namespace Z_APOCALIPSE 
 {
-	Character::Character() 
+	Character::Character(Vector2 position, float radius)
 	{
-		setPosition({0,0});
-		setRadius(20);
+		setPosition(position);
+		setRadius(radius);
 	}
 
 	void Character::setPosition(Vector2 position) 

@@ -12,7 +12,7 @@ namespace Z_APOCALIPSE
 		Vector2 position;
 		float radius;
 	public:
-		Character();		
+		Character(Vector2 position, float radius);
 
 		void setPosition(Vector2 position);
 		void setRadius(float radius);
