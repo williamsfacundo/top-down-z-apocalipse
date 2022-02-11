@@ -10,14 +10,14 @@ namespace Z_APOCALIPSE
 	class Gameplay
 	{
 	private:
-		const Color backgroundColor = GRAY;
-		const Color gameplaySpaceColor = BLACK;
+		const Color backgroundColor = LIGHTGRAY;
+		const Color gameplaySpaceColor = GRAY;
 		const float hudHeightPercentage = 0.36f;
 		Vector2 gameplaySpacePos;
 		float gameplaySpaceHeight;
 		
 		const float playerOneRadius = 30.0f;
-		const Color playerOneColor = YELLOW;
+		const Color playerOneColor = RED;
 		Survivor* playerOne;
 	public:
 		Gameplay();

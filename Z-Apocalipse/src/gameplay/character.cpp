@@ -6,6 +6,7 @@ namespace Z_APOCALIPSE
 {
 	Character::Character(Color characterColor, Vector2 position, float radius)
 	{
+		setCharacterColor(characterColor);
 		setPosition(position);
 		setRadius(radius);
 	}
