@@ -33,7 +33,7 @@ namespace Z_APOCALIPSE
 
 		SetTargetFPS(fps);
 
-		sceneManager = new SceneManager(Scenes::gameplay);
+		sceneManager = new SceneManager(Scenes::GAMEPLAY);
 		gameplay = new Gameplay();
 	}	
 
@@ -51,7 +51,7 @@ namespace Z_APOCALIPSE
 		{
 			switch (sceneManager->getCurrentScene())
 			{
-			case Scenes::gameplay:
+			case Scenes::GAMEPLAY:
 				
 				gameplay->input();
 				gameplay->update();

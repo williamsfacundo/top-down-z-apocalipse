@@ -16,12 +16,15 @@ namespace Z_APOCALIPSE
 
 		void setCharacterColor(Color characterColor);
 		void setPosition(Vector2 position);
+		void move(Vector2 distance);
 		void setRadius(float radius);
+
 		Color getCharacterColor();
 		Vector2 getPosition();
 		float getRadius();
 						
 		virtual void update() = 0;
+		virtual void movementUpdate() = 0;
 		void draw();
 	};
 }

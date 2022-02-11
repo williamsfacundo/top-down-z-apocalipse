@@ -3,7 +3,7 @@
 
 namespace Z_APOCALIPSE 
 {
-	enum class Scenes { gameplay };
+	enum class Scenes { GAMEPLAY };
 
 	class SceneManager
 	{

@@ -21,6 +21,12 @@ namespace Z_APOCALIPSE
 		this->position = position;
 	}
 	
+	void Character::move(Vector2 distance) 
+	{
+		position.x += distance.x;
+		position.y += distance.y;
+	}
+
 	void Character::setRadius(float radius)
 	{
 		this->radius = radius;
