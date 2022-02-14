@@ -1,33 +1,46 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "raylib.h"
+#include <raylib.h>
 
 namespace Z_APOCALIPSE 
 {
+	enum class BulletsType { GUN };
+
 	class Bullet
 	{
 	private:
 		const float initialVelocity = 250.0f;
+		const Color gunTypeColor = BLACK;
+		const float gunTypeRadius = 3.5f;
+		
+		BulletsType type;
 		Vector2 position;		
 		Vector2 direction;
 		Color color;
 		float velocity;
 		float radius;
-	public:
-		Bullet(Vector2 position, Vector2 direction, Color color, float radius);
 
+		static short bulletsCreated;
+	public:
+		Bullet(Vector2 position, Vector2 direction, BulletsType type);
+		~Bullet();
+
+		void setType(BulletsType type);
 		void setPosition(Vector2 position);
 		void setDirection(Vector2 direction);
 		void setColor(Color color);
 		void setVelocity(float velocity);
-		void setRadius(float radius);
+		void setRadius(float radius);		
+		void setBulletsCreated(short bulletsCreated);
 
+		BulletsType getType();
 		Vector2 getPosition();
 		Vector2 getDirection();
 		Color getColor();
 		float getVelocity();
 		float getRadiu();
+		static short getBulletsCreated();
 
 		void update();
 		void draw();

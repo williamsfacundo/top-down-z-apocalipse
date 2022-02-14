@@ -25,7 +25,7 @@ namespace Z_APOCALIPSE
 						
 		virtual void update() = 0;
 		virtual void movementUpdate() = 0;
-		void draw();
+		virtual void draw() = 0;
 	};
 }
 

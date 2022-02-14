@@ -45,10 +45,5 @@ namespace Z_APOCALIPSE
 	float Character::getRadius() 
 	{
 		return radius;
-	}	
-	
-	void Character::draw() 
-	{
-		DrawCircleV(position, radius, characterColor);
 	}
 }

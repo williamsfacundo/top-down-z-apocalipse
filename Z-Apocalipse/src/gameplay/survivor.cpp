@@ -1,5 +1,7 @@
 #include "survivor.h"
 
+#include <iostream>
+#include <cmath>
 #include <raylib.h>
 
 namespace Z_APOCALIPSE 
@@ -14,9 +16,27 @@ namespace Z_APOCALIPSE
 		setMoveDownKey(initialMoveDownKey);
 		setMoveRightKey(initialMoveRightKey);
 		setMoveLeftKey(initialMoveLeftKey);
+		setShootButton(initialShootButton);
 		setVelocity(50.5f);
 		setAceleration(0.0f);
-		setDirectionNumberMultiplyer(1);		
+		setDirectionNumberMultiplyer(1);	
+		setShootingTimer(startingShootingTimer);
+
+		for (short i = 0; i < maxBullets; i++)
+		{
+			bullets[i] = NULL;
+		}
+	}
+
+	Survivor::~Survivor() 
+	{
+		for (short i = 0; i < maxBullets; i++) 
+		{
+			if(bullets[i] != NULL)
+			{
+				delete bullets[i];				
+			}
+		}
 	}
 
 	void Survivor::setLives(short lives) 
@@ -59,6 +79,11 @@ namespace Z_APOCALIPSE
 		this->moveLeftKey = key;
 	}
 
+	void Survivor::setShootButton(MouseButton shootButton) 
+	{
+		this->shootButton = shootButton;
+	}
+
 	void Survivor::setVelocity(float velocity) 
 	{
 		this->velocity = velocity;
@@ -72,6 +97,11 @@ namespace Z_APOCALIPSE
 	void Survivor::setDirectionNumberMultiplyer(float directionNumberMultiplyer) 
 	{
 		this->directionNumberMultiplyer = directionNumberMultiplyer;
+	}
+
+	void Survivor::setShootingTimer(float shootingTimer) 
+	{
+		this->shootingTimer = shootingTimer;
 	}
 
 	short Survivor::getLives() 
@@ -114,6 +144,11 @@ namespace Z_APOCALIPSE
 		return moveLeftKey;
 	}
 
+	MouseButton Survivor::getShootButton() 
+	{
+		return shootButton;
+	}
+
 	float Survivor::getVelocity() 
 	{
 		return velocity;
@@ -129,14 +164,62 @@ namespace Z_APOCALIPSE
 		return directionNumberMultiplyer;
 	}
 
+	short Survivor::getEmptyBulletIndex() 
+	{
+		short index = maxBullets + 1;
+
+		for (short i = 0; i < maxBullets; i++) 
+		{
+			if(bullets[i] == NULL)
+			{
+				index = i;
+			}
+		}
+
+		return index;
+	}
+
+	Vector2 Survivor::getBulletDirection() 
+	{
+		float distanceX = GetMousePosition().x - getPosition().x;
+		float distanceY = GetMousePosition().y - getPosition().y;
+		double module = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
+		distanceX /= static_cast<float>(module);
+		distanceY /= static_cast<float>(module);
+		Vector2 direction = { distanceX, distanceY };
+		
+		return direction;
+	}
+
+	float Survivor::getShootingTimer() 
+	{
+		return shootingTimer;
+	}
+
 	void Survivor::input() 
 	{
 		movementInput();
+		inputShooting();
 	}
 	
+	void Survivor::inputShooting() 
+	{		
+		if (IsMouseButtonPressed(getShootButton()) && Bullet::getBulletsCreated() < maxBullets && getShootingTimer() == 0.0f) 
+		{
+			shootingTimer = startingShootingTimer;
+
+			bullets[getEmptyBulletIndex()] = new Bullet(getPosition(), getBulletDirection(), BulletsType::GUN);
+		}
+	}
+
 	void Survivor::update() 
 	{
 		movementUpdate();
+		updateBullets();
+				
+		decreaseShootingTimer();
+		system("cls");
+		std::cout << "Shooting timer: " << shootingTimer << ".";
 	}
 
 	void Survivor::movementUpdate()
@@ -169,6 +252,30 @@ namespace Z_APOCALIPSE
 			break;
 		default:
 			break;
+		}
+	}
+
+	void Survivor::updateBullets() 
+	{
+		for (short i = 0; i < maxBullets; i++) 
+		{
+			if (bullets[i] != NULL) 
+			{
+				bullets[i]->update();
+			}
+		}
+	}
+
+	void Survivor::draw() 
+	{
+		DrawCircleV(getPosition(), getRadius(), getCharacterColor());
+
+		for (short i = 0; i < maxBullets; i++) 
+		{
+			if (bullets[i] != NULL) 
+			{
+				bullets[i]->draw();
+			}
 		}
 	}
 
@@ -256,6 +363,19 @@ namespace Z_APOCALIPSE
 		else 
 		{
 			move({ 0.0f, (directionNumberMultiplyer * (velocity + aceleration)) * GetFrameTime() });
+		}
+	}
+
+	void Survivor::decreaseShootingTimer() 
+	{
+		if (shootingTimer > 0.0f) 
+		{
+			shootingTimer -= GetFrameTime();
+
+			if (shootingTimer < 0.0f) 
+			{
+				shootingTimer = 0.0f;
+			}
 		}
 	}
 }
