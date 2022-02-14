@@ -212,14 +212,13 @@ namespace Z_APOCALIPSE
 		}
 	}
 
-	void Survivor::update() 
+	void Survivor::update(Rectangle gameplayDimensions)
 	{
 		movementUpdate();
 		updateBullets();
 				
 		decreaseShootingTimer();
-		system("cls");
-		std::cout << "Shooting timer: " << shootingTimer << ".";
+		destroyBulletsOutsideMap(gameplayDimensions);
 	}
 
 	void Survivor::movementUpdate()
@@ -376,6 +375,37 @@ namespace Z_APOCALIPSE
 			{
 				shootingTimer = 0.0f;
 			}
+		}
+	}
+
+	void Survivor::destroyBulletsOutsideMap(Rectangle map)
+	{
+		for (short i = 0; i < maxBullets; i++) 
+		{
+			if (isBulletOutsideMap(i, map)) 
+			{
+				delete bullets[i];
+				bullets[i] = NULL;
+			}
+		}
+	}
+
+	bool Survivor::isBulletOutsideMap(short index, Rectangle map) 
+	{
+		if(bullets[index] != NULL)
+		{
+			if (CheckCollisionCircleRec(bullets[index]->getPosition(), bullets[index]->getRadius(), map))
+			{
+				return false;
+			}
+			else 
+			{
+				return true;
+			}
+		}
+		else 
+		{
+			return false;
 		}
 	}
 }

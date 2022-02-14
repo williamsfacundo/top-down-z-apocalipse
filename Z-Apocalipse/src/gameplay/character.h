@@ -23,7 +23,7 @@ namespace Z_APOCALIPSE
 		Vector2 getPosition();
 		float getRadius();
 						
-		virtual void update() = 0;
+		virtual void update(Rectangle gameplayDimensions) = 0;
 		virtual void movementUpdate() = 0;
 		virtual void draw() = 0;
 	};

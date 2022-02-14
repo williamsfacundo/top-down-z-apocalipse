@@ -87,7 +87,7 @@ namespace Z_APOCALIPSE
 		return velocity;
 	}
 
-	float Bullet::getRadiu()
+	float Bullet::getRadius()
 	{
 		return radius;
 	}

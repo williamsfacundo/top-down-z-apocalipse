@@ -28,7 +28,7 @@ namespace Z_APOCALIPSE
 	
 	void Gameplay::update() 
 	{
-		playerOne->update();
+		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 	}
 	
 	void Gameplay::draw() 

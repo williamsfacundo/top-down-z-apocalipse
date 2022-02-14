@@ -75,7 +75,7 @@ namespace Z_APOCALIPSE
 
 		void input();
 		void inputShooting();
-		virtual void update();
+		virtual void update(Rectangle gameplayDimensions);
 		virtual void movementUpdate();
 		void updateBullets();
 		virtual void draw();
@@ -84,6 +84,8 @@ namespace Z_APOCALIPSE
 		void decreasAceleration();
 		void moveDependingCoordinate(bool xCoordinate);
 		void decreaseShootingTimer();
+		void destroyBulletsOutsideMap(Rectangle map);
+		bool isBulletOutsideMap(short index, Rectangle map);
 	};
 }
 

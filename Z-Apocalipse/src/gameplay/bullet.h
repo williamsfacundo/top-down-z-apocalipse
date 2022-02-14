@@ -39,11 +39,11 @@ namespace Z_APOCALIPSE
 		Vector2 getDirection();
 		Color getColor();
 		float getVelocity();
-		float getRadiu();
+		float getRadius();
 		static short getBulletsCreated();
 
 		void update();
-		void draw();
+		void draw();		
 	};
 }
 
