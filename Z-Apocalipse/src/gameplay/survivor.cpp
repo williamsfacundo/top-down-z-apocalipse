@@ -6,7 +6,7 @@
 
 namespace Z_APOCALIPSE 
 {
-	Survivor::Survivor(Color color, Vector2 position, float radius) : Character(color, position, radius)
+	Survivor::Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap) : Character(color, position, radius, gameplayMap)
 	{
 		setLives(initialLives);
 		setMoney(initialMoney);
@@ -353,7 +353,7 @@ namespace Z_APOCALIPSE
 		}
 	}
 
-	void Survivor::moveDependingCoordinate(bool xCoordinate) 
+	void Survivor::moveDependingCoordinate(bool xCoordinate)
 	{
 		if (xCoordinate) 
 		{

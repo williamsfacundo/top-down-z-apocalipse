@@ -6,9 +6,8 @@ namespace Z_APOCALIPSE
 {
 	Gameplay::Gameplay()
 	{
-		init();
-
 		updateHudSpace();
+		init();		
 	}
 
 	Gameplay::~Gameplay() 
@@ -17,8 +16,9 @@ namespace Z_APOCALIPSE
 	}
 
 	void Gameplay::init()
-	{
-		playerOne = new Survivor(playerOneColor, {GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f}, playerOneRadius);
+	{		
+		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, playerOneRadius, 
+			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 	}
 	
 	void Gameplay::input() 

@@ -39,8 +39,9 @@ namespace Z_APOCALIPSE
 		float shootingTimer;
 
 		Bullet* bullets[maxBullets];
+		Rectangle gameplayMap;
 	public:
-		Survivor(Color color, Vector2 position, float radius);
+		Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap);
 		~Survivor();
 
 		void setLives(short lives);
