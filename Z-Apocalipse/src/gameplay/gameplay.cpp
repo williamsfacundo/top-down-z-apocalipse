@@ -16,6 +16,51 @@ namespace Z_APOCALIPSE
 		deinit();
 	}
 
+	void Gameplay::setZombiesSpawnsPositions()
+	{
+		zombiesSpawnsPositions[0] = { zombiesRadius / 2.0f, gameplaySpacePos.y + (zombiesRadius / 2.0f) };
+		zombiesSpawnsPositions[1] = { static_cast<float>(GetScreenWidth()) - (zombiesRadius / 2.0f), gameplaySpacePos.y + (zombiesRadius / 2.0f) };
+		zombiesSpawnsPositions[2] = { zombiesRadius / 2.0f, gameplaySpacePos.y + gameplaySpaceHeight - (zombiesRadius / 2.0f) };
+		zombiesSpawnsPositions[3] = { static_cast<float>(GetScreenWidth()) - (zombiesRadius / 2.0f), gameplaySpacePos.y + gameplaySpaceHeight - (zombiesRadius / 2.0f) };
+	}
+
+	void Gameplay::setTimerToSpawnZombie(float timer) 
+	{
+		this->timerToSpawnZombie = timer;
+	}
+
+	float Gameplay::getTimerToSpawnZombie() 
+	{
+		return timerToSpawnZombie;
+	}
+
+	Vector2 Gameplay::getRandomZombieSpawnPosition() 
+	{
+		Vector2 pos = { 0.0f, 0.0f };
+		short random = GetRandomValue(1, 4); 
+
+		switch (random)
+		{
+		case 1:
+			pos = zombiesSpawnsPositions[0];
+			break;
+		case 2:
+			pos = zombiesSpawnsPositions[1];
+			break;
+		case 3:
+			pos = zombiesSpawnsPositions[2];
+			break;
+		case 4:
+			pos = zombiesSpawnsPositions[3];
+			break;
+		default:
+			pos = zombiesSpawnsPositions[0];
+			break;
+		}
+
+		return pos;
+	}
+
 	void Gameplay::init()
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, playerOneRadius, 
@@ -26,11 +71,8 @@ namespace Z_APOCALIPSE
 			zombies[i] = NULL;
 		}
 
-		for (short i = 0; i < maxZombies; i++) 
-		{ 
-			zombies[i] = new Zombie(zombiesColor, { GetScreenWidth() / 2.0f + 300, GetScreenHeight() / 2.0f }, zombiesRadius,
-				{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight }, 1);
-		}
+		setZombiesSpawnsPositions();
+		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
 	}
 	
 	void Gameplay::input() 
@@ -39,10 +81,9 @@ namespace Z_APOCALIPSE
 	}
 	
 	void Gameplay::update() 
-	{		
-		system("cls");
-		std::cout << "Lives: " << playerOne->getLives();
+	{			
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
+		updateZombieSpawnTimer();
 		zombiesUpdate();
 		bulletsCollisionWithZombies();
 		zombiesDeath();
@@ -163,5 +204,45 @@ namespace Z_APOCALIPSE
 				}
 			}
 		}
+	}
+
+	void Gameplay::updateZombieSpawnTimer() 
+	{
+		if (timerToSpawnZombie > 0.0f)
+		{
+			timerToSpawnZombie -= GetFrameTime();
+
+			if (timerToSpawnZombie < 0.0f)
+			{
+				timerToSpawnZombie = 0.0f;
+			}
+		}
+		else 
+		{
+			createZombie();
+			timerToSpawnZombie = initialtimeToSpawnZombie;
+		}
+	}
+
+	void Gameplay::createZombie() 
+	{
+		if (Zombie::getZombiesCreated() < maxZombies) 
+		{			
+			zombies[findEmptyZombieIndex()] = new Zombie(zombiesColor, getRandomZombieSpawnPosition(), zombiesRadius,
+				{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight }, 1);
+		}		
+	}
+
+	short Gameplay::findEmptyZombieIndex() 
+	{
+		for (short i = 0; i < maxZombies; i++) 
+		{
+			if (zombies[i] == NULL) 
+			{
+				return i;
+			}
+		}
+
+		return 0;
 	}
 }

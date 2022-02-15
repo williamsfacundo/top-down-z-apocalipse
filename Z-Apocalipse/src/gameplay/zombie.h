@@ -16,9 +16,12 @@ namespace Z_APOCALIPSE
 		float damageToDie;
 		float velocity;
 		short level;
+
+		static short zombiesCreated;
 	public:
 		Zombie(Color characterColor, Vector2 position, float radius, Rectangle gameplayMap, short level);
-		
+		~Zombie();
+
 		void setDamageTaken(float damageTaken);
 		void addDamageTaken(float damage);
 		void setDamageToDie(float damageToDie);
@@ -30,6 +33,7 @@ namespace Z_APOCALIPSE
 		float getVelocity();
 		short getLevel();
 		Vector2 getZombieDirection(Vector2 playerPosition);
+		static short getZombiesCreated();
 
 		void update(Vector2 playerPosition);
 		void movementUpdate(Vector2 playerPosition);

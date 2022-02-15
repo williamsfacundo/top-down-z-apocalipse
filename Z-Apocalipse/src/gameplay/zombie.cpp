@@ -6,13 +6,22 @@
 
 namespace Z_APOCALIPSE 
 {
+	short Zombie::zombiesCreated = 0;
+
 	Zombie::Zombie(Color characterColor, Vector2 position, float radius, Rectangle gameplayMap, short level) : Character(characterColor, position, radius, gameplayMap)
 	{
 		setDamageTaken(initialDamageTaken);
 		setDamageToDie(initialDamageToDie);
 		setVelocity(initialVelocity);
 		setLevel(level);
+
+		zombiesCreated += 1;
 	}	
+
+	Zombie::~Zombie() 
+	{
+		zombiesCreated -= 1;
+	}
 
 	void Zombie::setDamageTaken(float damageTaken) 
 	{
@@ -69,6 +78,11 @@ namespace Z_APOCALIPSE
 		Vector2 direction = { distanceX, distanceY };
 
 		return direction;
+	}
+
+	short Zombie::getZombiesCreated() 
+	{
+		return zombiesCreated;
 	}
 
 	void Zombie::update(Vector2 playerPosition)

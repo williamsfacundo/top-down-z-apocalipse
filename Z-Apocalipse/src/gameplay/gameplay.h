@@ -18,16 +18,26 @@ namespace Z_APOCALIPSE
 		const float hudHeightPercentage = 0.36f;		
 		const float playerOneRadius = 30.0f;
 		const float zombiesRadius = 22.5f;
-		static const short maxZombies = 1;
+		const float initialtimeToSpawnZombie = 2.0f;
+		static const short maxZombies = 5;
+		static const short maxSpawners = 4;		
 
 		Vector2 gameplaySpacePos;
-		float gameplaySpaceHeight;		
+		Vector2 zombiesSpawnsPositions[maxSpawners];
+		float gameplaySpaceHeight;	
+		float timerToSpawnZombie;
 		
 		Survivor* playerOne;
 		Zombie* zombies[maxZombies];
 	public:
 		Gameplay();
 		~Gameplay();
+				
+		void setZombiesSpawnsPositions();
+		void setTimerToSpawnZombie(float timer);
+
+		float getTimerToSpawnZombie();
+		Vector2 getRandomZombieSpawnPosition();
 
 		void init();
 		void input();
@@ -43,6 +53,10 @@ namespace Z_APOCALIPSE
 		void bulletsCollisionWithZombies();
 		void zombiesCollisionWithPlayer();
 		void zombiesDeath();
+
+		void updateZombieSpawnTimer();
+		void createZombie();
+		short findEmptyZombieIndex();
 	};
 }
 
