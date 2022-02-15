@@ -21,6 +21,7 @@ namespace Z_APOCALIPSE
 		setAceleration(0.0f);
 		setDirectionNumberMultiplyer(1);	
 		setShootingTimer(startingShootingTimer);
+		setDamage(initialDamage);
 
 		for (short i = 0; i < maxBullets; i++)
 		{
@@ -102,6 +103,11 @@ namespace Z_APOCALIPSE
 	void Survivor::setShootingTimer(float shootingTimer) 
 	{
 		this->shootingTimer = shootingTimer;
+	}
+
+	void Survivor::setDamage(float damage) 
+	{
+		this->damage = damage;
 	}
 
 	short Survivor::getLives() 
@@ -194,6 +200,16 @@ namespace Z_APOCALIPSE
 	float Survivor::getShootingTimer() 
 	{
 		return shootingTimer;
+	}
+
+	short Survivor::getMaxBullets() 
+	{
+		return maxBullets;
+	}
+
+	float Survivor::getDamage() 
+	{
+		return damage;
 	}
 
 	void Survivor::input() 
@@ -384,8 +400,7 @@ namespace Z_APOCALIPSE
 		{
 			if (isBulletOutsideMap(i, map)) 
 			{
-				delete bullets[i];
-				bullets[i] = NULL;
+				destroyBullet(i);
 			}
 		}
 	}
@@ -406,6 +421,25 @@ namespace Z_APOCALIPSE
 		else 
 		{
 			return false;
+		}
+	}
+
+	bool Survivor::isBulletNull(short index) 
+	{
+		return bullets[index] == NULL;
+	}
+
+	Bullet* Survivor::getBullet(short index) 
+	{
+		return bullets[index];
+	}
+
+	void Survivor::destroyBullet(short index) 
+	{
+		if(!isBulletNull(index))
+		{
+			delete bullets[index];
+			bullets[index] = NULL;
 		}
 	}
 }

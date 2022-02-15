@@ -23,6 +23,7 @@ namespace Z_APOCALIPSE
 		const short secondsForAcelerationDecrease = 3;
 		static const short maxBullets = 3;
 		const float startingShootingTimer = 1.15f;
+		const float initialDamage = 10.0f;
 
 		short lives;
 		short money;
@@ -37,6 +38,7 @@ namespace Z_APOCALIPSE
 		float velocity;
 		float aceleration;
 		float shootingTimer;
+		float damage;
 
 		Bullet* bullets[maxBullets];
 		Rectangle gameplayMap;
@@ -57,6 +59,7 @@ namespace Z_APOCALIPSE
 		void setAceleration(float aceleration);
 		void setDirectionNumberMultiplyer(float directionNumberMultiplyer);		
 		void setShootingTimer(float shootingTimer);
+		void setDamage(float damage);
 
 		short getLives();
 		short getMoney();
@@ -73,11 +76,13 @@ namespace Z_APOCALIPSE
 		short getEmptyBulletIndex();
 		Vector2 getBulletDirection();
 		float getShootingTimer();
+		short getMaxBullets();
+		float getDamage();
 
 		void input();
 		void inputShooting();
-		virtual void update(Rectangle gameplayDimensions);
-		virtual void movementUpdate();
+		void update(Rectangle gameplayDimensions);
+		void movementUpdate();
 		void updateBullets();
 		virtual void draw();
 		void movementInput();
@@ -87,6 +92,9 @@ namespace Z_APOCALIPSE
 		void decreaseShootingTimer();
 		void destroyBulletsOutsideMap(Rectangle map);
 		bool isBulletOutsideMap(short index, Rectangle map);
+		bool isBulletNull(short index);
+		Bullet* getBullet(short index);
+		void destroyBullet(short index);
 	};
 }
 

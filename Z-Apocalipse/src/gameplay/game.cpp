@@ -14,7 +14,7 @@ namespace Z_APOCALIPSE
 
 	Game::~Game()
 	{
-		deinit();
+		
 	}
 
 	void Game::setScreenWidth(int screenWidth)
@@ -61,5 +61,7 @@ namespace Z_APOCALIPSE
 				break;
 			}			
 		}
+
+		deinit();
 	}
 }

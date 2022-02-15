@@ -38,6 +38,10 @@ namespace Z_APOCALIPSE
 		void drawHudSpace();
 		void updateHudSpace();
 		void drawZombies();
+
+		void zombiesUpdate();
+		void bulletsCollisionWithZombies();
+		void zombiesDeath();
 	};
 }
 

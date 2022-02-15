@@ -40,6 +40,9 @@ namespace Z_APOCALIPSE
 	void Gameplay::update() 
 	{
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
+		zombiesUpdate();
+		bulletsCollisionWithZombies();
+		zombiesDeath();
 	}
 	
 	void Gameplay::draw() 
@@ -48,7 +51,6 @@ namespace Z_APOCALIPSE
 		ClearBackground(backgroundColor);
 
 		drawHudSpace();
-
 		drawZombies();
 		playerOne->draw();	
 
@@ -87,6 +89,56 @@ namespace Z_APOCALIPSE
 			if (zombies[i] != NULL) 
 			{
 				zombies[i]->draw();
+			}
+		}
+	}
+
+	void Gameplay::zombiesUpdate() 
+	{
+		for (short i = 0; i < maxZombies; i++)
+		{
+			if (zombies[i] != NULL)
+			{
+				zombies[i]->update(playerOne->getPosition());
+			}
+		}
+	}
+
+	void Gameplay::bulletsCollisionWithZombies() 
+	{
+		for (short i = 0; i < playerOne->getMaxBullets(); i++) 
+		{
+			if (!playerOne->isBulletNull(i)) 
+			{
+				for (short v = 0; v < maxZombies; v++) 
+				{
+					if (zombies[v] != NULL) 
+					{
+						if (CheckCollisionCircles(playerOne->getBullet(i)->getPosition(), playerOne->getBullet(i)->getRadius(),
+							zombies[v]->getPosition(), zombies[v]->getRadius())) 
+						{
+							zombies[v]->addDamageTaken(playerOne->getDamage());							
+
+							playerOne->destroyBullet(i);
+							v = maxZombies;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void Gameplay::zombiesDeath() 
+	{
+		for(short i = 0; i < maxZombies; i++)
+		{
+			if (zombies[i] != NULL) 
+			{
+				if (zombies[i]->isZombieDead()) 
+				{
+					delete zombies[i];
+					zombies[i] = NULL;
+				}
 			}
 		}
 	}

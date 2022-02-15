@@ -1,27 +1,37 @@
 #include "zombie.h"
 
+#include <cmath>
+
+#include <raylib.h>
+
 namespace Z_APOCALIPSE 
 {
 	Zombie::Zombie(Color characterColor, Vector2 position, float radius, Rectangle gameplayMap, short level) : Character(characterColor, position, radius, gameplayMap)
 	{
-		setDamageTaken(0.0f);
-		setDamageToDie(20.0f);
+		setDamageTaken(initialDamageTaken);
+		setDamageToDie(initialDamageToDie);
+		setVelocity(initialVelocity);
 		setLevel(level);
-	}
+	}	
 
-	Zombie::~Zombie() 
-	{
-
-	}
-
-	void Zombie::setDamageTaken(float damageTaken)
+	void Zombie::setDamageTaken(float damageTaken) 
 	{
 		this->damageTaken = damageTaken;
+	}
+
+	void Zombie::addDamageTaken(float damage) 
+	{
+		damageTaken += damage;
 	}
 
 	void Zombie::setDamageToDie(float damageToDie)
 	{
 		this->damageToDie = damageToDie;
+	}
+
+	void Zombie::setVelocity(float velocity) 
+	{
+		this->velocity = velocity;
 	}
 
 	void Zombie::setLevel(short level) 
@@ -39,23 +49,46 @@ namespace Z_APOCALIPSE
 		return damageToDie;
 	}
 
+	float Zombie::getVelocity()
+	{
+		return velocity;
+	}
+
 	short Zombie::getLevel() 
 	{
 		return level;
 	}
 
-	void Zombie::update(Rectangle gameplayDimensions) 
+	Vector2 Zombie::getZombieDirection(Vector2 playerPosition) 
 	{
+		float distanceX = playerPosition.x - getPosition().x;
+		float distanceY = playerPosition.y - getPosition().y;
+		double module = sqrt(pow(distanceX, 2) + pow(distanceY, 2));
+		distanceX /= static_cast<float>(module);
+		distanceY /= static_cast<float>(module);
+		Vector2 direction = { distanceX, distanceY };
 
+		return direction;
+	}
+
+	void Zombie::update(Vector2 playerPosition)
+	{
+		movementUpdate(playerPosition);
 	}
 	
-	void Zombie::movementUpdate()
+	void Zombie::movementUpdate(Vector2 playerPosition)
 	{
-
+		move({ getZombieDirection(playerPosition).x * velocity * GetFrameTime(),
+			getZombieDirection(playerPosition).y * velocity * GetFrameTime()});
 	}
 	
 	void Zombie::draw() 
 	{
-		DrawCircleV(getPosition(), getRadius(), getCharacterColor());
+		DrawCircleV(getPosition(), getRadius(), getCharacterColor());		
+	}
+
+	bool Zombie::isZombieDead() 
+	{
+		return (damageTaken >= damageToDie);
 	}
 }
