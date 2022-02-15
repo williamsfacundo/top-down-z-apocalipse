@@ -100,6 +100,7 @@ namespace Z_APOCALIPSE
 		zombiesDeath();
 		zombiesCollisionWithPlayer();		
 		decreasTimerToEndRound();
+		defeatCondition();
 	}
 	
 	void Gameplay::draw() 
@@ -277,7 +278,15 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::winRound() 
 	{
-		//Change scene 
-		//Restart game for now
+		//Advance to next round
+	}
+
+	void Gameplay::defeatCondition() 
+	{
+		if (playerOne->getLives() <= 0) 
+		{			
+			deinit();
+			init();
+		}
 	}
 }

@@ -62,6 +62,7 @@ namespace Z_APOCALIPSE
 		short findEmptyZombieIndex();
 		void decreasTimerToEndRound();
 		void winRound();
+		void defeatCondition();
 	};
 }
 
