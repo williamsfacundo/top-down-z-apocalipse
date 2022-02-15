@@ -41,6 +41,7 @@ namespace Z_APOCALIPSE
 
 		void zombiesUpdate();
 		void bulletsCollisionWithZombies();
+		void zombiesCollisionWithPlayer();
 		void zombiesDeath();
 	};
 }

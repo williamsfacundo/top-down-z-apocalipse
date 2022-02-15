@@ -22,6 +22,7 @@ namespace Z_APOCALIPSE
 		setDirectionNumberMultiplyer(1);	
 		setShootingTimer(startingShootingTimer);
 		setDamage(initialDamage);
+		setInvulnerabilityTimer(0.0f);
 
 		for (short i = 0; i < maxBullets; i++)
 		{
@@ -43,6 +44,11 @@ namespace Z_APOCALIPSE
 	void Survivor::setLives(short lives) 
 	{
 		this->lives = lives;
+	}
+
+	void Survivor::subtractLive() 
+	{
+		lives -= 1;
 	}
 
 	void Survivor::setMoney(short money) 
@@ -108,6 +114,11 @@ namespace Z_APOCALIPSE
 	void Survivor::setDamage(float damage) 
 	{
 		this->damage = damage;
+	}
+
+	void Survivor::setInvulnerabilityTimer(float invulnerabilityTimer) 
+	{
+		this->invulnerabilityTimer = invulnerabilityTimer;
 	}
 
 	short Survivor::getLives() 
@@ -212,6 +223,11 @@ namespace Z_APOCALIPSE
 		return damage;
 	}
 
+	float Survivor::getInvulnerabilityTimer() 
+	{
+		return invulnerabilityTimer;
+	}
+
 	void Survivor::input() 
 	{
 		movementInput();
@@ -235,6 +251,7 @@ namespace Z_APOCALIPSE
 				
 		decreaseShootingTimer();
 		destroyBulletsOutsideMap(gameplayDimensions);
+		decreaseInvulnerabilityTimer();
 	}
 
 	void Survivor::movementUpdate()
@@ -441,5 +458,29 @@ namespace Z_APOCALIPSE
 			delete bullets[index];
 			bullets[index] = NULL;
 		}
+	}
+
+	void Survivor::hitByZombie() 
+	{
+		setInvulnerabilityTimer(invulnerabilityTime);
+		subtractLive();
+	}
+
+	void Survivor::decreaseInvulnerabilityTimer() 
+	{
+		if (getInvulnerabilityTimer() > 0.0f)
+		{
+			invulnerabilityTimer -= GetFrameTime();
+
+			if (getInvulnerabilityTimer() < 0.0f)
+			{
+				setInvulnerabilityTimer(0.0f);
+			}
+		}
+	}
+
+	bool Survivor::isSurvivorInvulnerable() 
+	{
+		return invulnerabilityTimer > 0.0f;
 	}
 }

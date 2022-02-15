@@ -1,5 +1,6 @@
 #include "gameplay.h"
 
+#include <iostream>
 #include <raylib.h>
 
 namespace Z_APOCALIPSE 
@@ -38,11 +39,14 @@ namespace Z_APOCALIPSE
 	}
 	
 	void Gameplay::update() 
-	{
+	{		
+		system("cls");
+		std::cout << "Lives: " << playerOne->getLives();
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		zombiesUpdate();
 		bulletsCollisionWithZombies();
 		zombiesDeath();
+		zombiesCollisionWithPlayer();
 	}
 	
 	void Gameplay::draw() 
@@ -126,6 +130,24 @@ namespace Z_APOCALIPSE
 				}
 			}
 		}
+	}
+
+	void Gameplay::zombiesCollisionWithPlayer() 
+	{
+		if (!playerOne->isSurvivorInvulnerable()) 
+		{
+			for (short i = 0; i < maxZombies; i++)
+			{
+				if (zombies[i] != NULL)
+				{
+					if (CheckCollisionCircles(zombies[i]->getPosition(), zombies[i]->getRadius(),
+						playerOne->getPosition(), playerOne->getRadius()))
+					{
+						playerOne->hitByZombie();
+					}
+				}
+			}
+		}		
 	}
 
 	void Gameplay::zombiesDeath() 
