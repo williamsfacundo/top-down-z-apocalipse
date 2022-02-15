@@ -162,6 +162,7 @@
     <ClCompile Include="src\gameplay\gameplay.cpp" />
     <ClCompile Include="src\gameplay\scene_manager.cpp" />
     <ClCompile Include="src\gameplay\survivor.cpp" />
+    <ClCompile Include="src\gameplay\zombie.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="src\gameplay\gameplay.h" />
     <ClInclude Include="src\gameplay\scene_manager.h" />
     <ClInclude Include="src\gameplay\survivor.h" />
+    <ClInclude Include="src\gameplay\zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

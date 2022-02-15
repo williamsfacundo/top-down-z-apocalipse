@@ -10,7 +10,7 @@ namespace Z_APOCALIPSE
 	class Bullet
 	{
 	private:
-		const float initialVelocity = 250.0f;
+		const float initialVelocity = 450.0f;
 		const Color gunTypeColor = BLACK;
 		const float gunTypeRadius = 3.5f;
 		

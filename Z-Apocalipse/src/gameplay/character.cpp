@@ -41,7 +41,7 @@ namespace Z_APOCALIPSE
 			}			
 		}
 
-		if (distance.y > 0) //Abajo
+		if (distance.y > 0) 
 		{
 			if (position.y + getRadius() + distance.y < getGameplayMap().height + getGameplayMap().y) 
 			{
