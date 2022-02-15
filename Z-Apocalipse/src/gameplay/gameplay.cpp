@@ -29,6 +29,11 @@ namespace Z_APOCALIPSE
 		this->timerToSpawnZombie = timer;
 	}
 
+	void Gameplay::setTimerToEndRound(float timer) 
+	{
+		this->timerToEndRound = timer;
+	}
+
 	float Gameplay::getTimerToSpawnZombie() 
 	{
 		return timerToSpawnZombie;
@@ -61,6 +66,11 @@ namespace Z_APOCALIPSE
 		return pos;
 	}
 
+	float Gameplay::getTimerToEndRound() 
+	{
+		return timerToEndRound;
+	}
+
 	void Gameplay::init()
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, playerOneRadius, 
@@ -73,6 +83,7 @@ namespace Z_APOCALIPSE
 
 		setZombiesSpawnsPositions();
 		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
+		setTimerToEndRound(timeToEndRound);
 	}
 	
 	void Gameplay::input() 
@@ -87,7 +98,8 @@ namespace Z_APOCALIPSE
 		zombiesUpdate();
 		bulletsCollisionWithZombies();
 		zombiesDeath();
-		zombiesCollisionWithPlayer();
+		zombiesCollisionWithPlayer();		
+		decreasTimerToEndRound();
 	}
 	
 	void Gameplay::draw() 
@@ -244,5 +256,28 @@ namespace Z_APOCALIPSE
 		}
 
 		return 0;
+	}
+
+	void Gameplay::decreasTimerToEndRound() 
+	{
+		if (timerToEndRound > 0.0f)
+		{
+			timerToEndRound -= GetFrameTime();
+
+			if (timerToEndRound < 0.0f)
+			{
+				timerToEndRound = 0.0f;
+			}
+		}	
+		else 
+		{
+			winRound();
+		}
+	}
+
+	void Gameplay::winRound() 
+	{
+		//Change scene 
+		//Restart game for now
 	}
 }
