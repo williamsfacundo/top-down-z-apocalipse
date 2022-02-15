@@ -11,6 +11,8 @@ namespace Z_APOCALIPSE
 		const float initialVelocity = 35.0f;
 		const float initialDamageTaken = 0.0f;
 		const float initialDamageToDie = 20.0f;
+		const float healthBarHeight = 10.0f;
+		const Color healthBarColor = YELLOW;
 
 		float damageTaken;
 		float damageToDie;
@@ -39,6 +41,8 @@ namespace Z_APOCALIPSE
 		void movementUpdate(Vector2 playerPosition);
 		void draw();
 		bool isZombieDead();
+		void drawZombieHealthBar();
+		float calculateHealthBarWidth();
 	};
 }
 

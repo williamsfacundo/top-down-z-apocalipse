@@ -98,11 +98,26 @@ namespace Z_APOCALIPSE
 	
 	void Zombie::draw() 
 	{
-		DrawCircleV(getPosition(), getRadius(), getCharacterColor());		
+		DrawCircleV(getPosition(), getRadius(), getCharacterColor());	
+		drawZombieHealthBar();
 	}
 
 	bool Zombie::isZombieDead() 
 	{
 		return (damageTaken >= damageToDie);
+	}
+
+	void Zombie::drawZombieHealthBar() 
+	{
+		DrawRectangleV({ getPosition().x - getRadius(), getPosition().y - getRadius() - healthBarHeight },
+			{ calculateHealthBarWidth(), healthBarHeight }, healthBarColor);
+	}
+
+	float Zombie::calculateHealthBarWidth() 
+	{
+		short maxWidth = getRadius() * 2;
+		float health = initialDamageToDie - damageTaken;
+		float width = (health * maxWidth) / initialDamageToDie;
+		return width;		
 	}
 }
