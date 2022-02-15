@@ -19,6 +19,17 @@ namespace Z_APOCALIPSE
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, playerOneRadius, 
 			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
+		
+		for (short i = 0; i < maxZombies; i++) 
+		{
+			zombies[i] = NULL;
+		}
+
+		for (short i = 0; i < maxZombies; i++) 
+		{ 
+			zombies[i] = new Zombie(zombiesColor, { GetScreenWidth() / 2.0f + 300, GetScreenHeight() / 2.0f }, zombiesRadius,
+				{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight }, 1);
+		}
 	}
 	
 	void Gameplay::input() 
@@ -38,6 +49,7 @@ namespace Z_APOCALIPSE
 
 		drawHudSpace();
 
+		drawZombies();
 		playerOne->draw();	
 
 		EndDrawing();
@@ -46,6 +58,15 @@ namespace Z_APOCALIPSE
 	void Gameplay::deinit() 
 	{
 		delete playerOne;
+
+		for (short i = 0; i < maxZombies; i++) 
+		{
+			if (zombies[i] != NULL)
+			{
+				delete zombies[i];
+				zombies[i] = NULL;
+			}
+		}
 	}
 
 	void Gameplay::drawHudSpace() 
@@ -57,5 +78,16 @@ namespace Z_APOCALIPSE
 	{
 		gameplaySpaceHeight = GetScreenHeight() - (GetScreenHeight() * hudHeightPercentage);
 		gameplaySpacePos.y = GetScreenHeight() * (hudHeightPercentage / 2.0f);
+	}
+
+	void Gameplay::drawZombies() 
+	{
+		for (short i = 0; i < maxZombies; i++) 
+		{
+			if (zombies[i] != NULL) 
+			{
+				zombies[i]->draw();
+			}
+		}
 	}
 }
