@@ -57,6 +57,9 @@ namespace Z_APOCALIPSE
 				gameplay->update();
 				gameplay->draw();
 				break;
+			case Scenes::MAIN_MENU:
+
+				break;
 			default:
 				break;
 			}			
