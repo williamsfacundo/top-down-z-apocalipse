@@ -30,9 +30,19 @@ namespace Z_APOCALIPSE
 	void Game::setMainMenuChangeScenes() 
 	{
 		mainMenuChangeScenes[0] = Scenes::GAMEPLAY;
-		mainMenuChangeScenes[1] = Scenes::GAMEPLAY;
-		mainMenuChangeScenes[2] = Scenes::GAMEPLAY;
-		mainMenuChangeScenes[3] = Scenes::GAMEPLAY;
+		mainMenuChangeScenes[1] = Scenes::OPTIONS;
+		mainMenuChangeScenes[2] = Scenes::CREDITS;
+		mainMenuChangeScenes[3] = Scenes::EXIT;
+	}
+
+	void Game::setRunning(bool running) 
+	{
+		this->running = running;
+	}
+
+	bool Game::getRunning() 
+	{
+		return running;
 	}
 
 	void Game::init()
@@ -44,6 +54,9 @@ namespace Z_APOCALIPSE
 		sceneManager = new SceneManager(initialScene);
 		gameplay = new Gameplay();
 		mainMenu = new MainMenu(mainMenuTexts);
+
+		setRunning(true);
+		setMainMenuChangeScenes();
 	}	
 
 	void Game::deinit()
@@ -57,7 +70,7 @@ namespace Z_APOCALIPSE
 
 	void Game::runGame()
 	{
-		while (!WindowShouldClose())
+		while (!WindowShouldClose() && getRunning())
 		{
 			switch (sceneManager->getCurrentScene())
 			{
@@ -72,9 +85,33 @@ namespace Z_APOCALIPSE
 				mainMenu->input(sceneManager, mainMenuChangeScenes);
 				mainMenu->draw();
 				break;
+			case Scenes::OPTIONS:
+
+				temporalUnuseScenes();
+				break;
+			case Scenes::CREDITS:
+
+				temporalUnuseScenes();
+				break;
+			case Scenes::EXIT:
+
+				setRunning(false);
+				break;
 			default:
 				break;
 			}			
 		}		
+	}
+
+	void Game::temporalUnuseScenes() 
+	{
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			sceneManager->setCurrentScene(Scenes::MAIN_MENU);
+		}
+
+		BeginDrawing();
+		ClearBackground(WHITE);
+		EndDrawing();
 	}
 }
