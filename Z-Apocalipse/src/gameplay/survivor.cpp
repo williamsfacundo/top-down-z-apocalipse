@@ -28,6 +28,7 @@ namespace Z_APOCALIPSE
 		setRemainingBullets(initialMaxBullets - maxBulletsInCharger);
 		setReloadKey(initialReloadKey);		
 		setBulletsToNull();
+		setReloadTimer(0.0f);
 	}
 
 	Survivor::~Survivor() 
@@ -126,6 +127,11 @@ namespace Z_APOCALIPSE
 	void Survivor::setInvulnerabilityTimer(float invulnerabilityTimer)
 	{
 		this->invulnerabilityTimer = invulnerabilityTimer;
+	}
+
+	void Survivor::setReloadTimer(float reloadTimer) 
+	{
+		this->reloadTimer = reloadTimer;
 	}
 
 	void Survivor::setMaxBulletsInCharger(short maxBulletsInCharger)
@@ -267,6 +273,11 @@ namespace Z_APOCALIPSE
 		return invulnerabilityTimer;
 	}
 
+	float Survivor::getReloadTimer() 
+	{
+		return reloadTimer;
+	}
+
 	short Survivor::getMaxBulletsInCharger()
 	{
 		return maxBulletsInCharger;
@@ -293,7 +304,7 @@ namespace Z_APOCALIPSE
 	
 	void Survivor::shootingInput() 
 	{		
-		if (IsMouseButtonPressed(getShootButton()) && bulletsInCharger > 0 && getShootingTimer() == 0.0f) 
+		if (IsMouseButtonPressed(getShootButton()) && bulletsInCharger > 0 && getShootingTimer() == 0.0f && getReloadTimer() == 0.0f) 
 		{
 			shootingTimer = startingShootingTimer;
 
@@ -310,6 +321,7 @@ namespace Z_APOCALIPSE
 		decreaseShootingTimer();
 		destroyBulletsOutsideMap(gameplayDimensions);
 		decreaseInvulnerabilityTimer();
+		decreaseReloadTimer();
 	}
 
 	void Survivor::movementUpdate()
@@ -530,6 +542,19 @@ namespace Z_APOCALIPSE
 		}
 	}
 
+	void Survivor::decreaseReloadTimer() 
+	{
+		if (getReloadTimer() > 0.0f)
+		{
+			reloadTimer -= GetFrameTime();
+
+			if (getReloadTimer() < 0.0f)
+			{
+				setReloadTimer(0.0f);
+			}
+		}
+	}
+
 	bool Survivor::isSurvivorInvulnerable() 
 	{
 		return invulnerabilityTimer > 0.0f;
@@ -549,6 +574,8 @@ namespace Z_APOCALIPSE
 
 		if (missingBullets != 0) 
 		{
+			setReloadTimer(reloadTime);
+
 			if (remainingBullets >= missingBullets)
 			{
 				bulletsInCharger += missingBullets;
