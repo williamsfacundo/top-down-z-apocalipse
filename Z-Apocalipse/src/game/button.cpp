@@ -1,11 +1,17 @@
 #include "button.h"
 
+#include "raylib.h"
+
+#include "..\gameplay\scene_manager.h"
+
 namespace Z_APOCALIPSE
 {
-	Button::Button(Rectangle shape, Color color)
+	Button::Button(Rectangle shape, Color colorOne, Color colorTwo, const char* text)
 	{
 		setShape(shape);
-		setColor(color);
+		setShapeColorOne(colorOne);
+		setShapeColorTwo(colorTwo);
+		setText(text);
 	}
 
 	void Button::setShape(Rectangle shape)
@@ -13,9 +19,14 @@ namespace Z_APOCALIPSE
 		this->shape = shape;
 	}
 
-	void Button::setColor(Color color) 
+	void Button::setShapeColorOne(Color color) 
 	{
-		this->shapeColor = color;
+		this->shapeColorOne = color;
+	}
+
+	void Button::setShapeColorTwo(Color color) 
+	{
+		this->shapeColorTwo = color;
 	}
 	
 	void Button::setText(const char* text) 
@@ -28,9 +39,14 @@ namespace Z_APOCALIPSE
 		return shape;
 	}
 
-	Color Button::getColor() 
+	Color Button::getShapeColorOne() 
 	{
-		return shapeColor;
+		return shapeColorOne;
+	}
+
+	Color Button::getShapeColorTwo()
+	{
+		return shapeColorTwo;
 	}
 
 	const char* Button::getText() 
@@ -40,12 +56,28 @@ namespace Z_APOCALIPSE
 
 	void Button::changeSceneWhenButtonPress(SceneManager* sceneManager, Scenes newScene)
 	{
-		sceneManager->setCurrentScene(newScene);
+		if (isMouseOnButton() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) 
+		{
+			sceneManager->setCurrentScene(newScene);
+		}		
 	}
 
 	void Button::draw()
 	{
-		DrawRectangleRec(getShape(), getColor());
-		DrawText(getText(), getShape().x, getShape().y - (getShape().y / 2.0f), textSize, textColor);
+		if (isMouseOnButton()) 
+		{
+			DrawRectangleRec(getShape(), getShapeColorOne());
+		}
+		else 
+		{
+			DrawRectangleRec(getShape(), getShapeColorTwo());
+		}
+		
+		DrawText(getText(), getShape().x, getShape().y, textSize, textColor);
+	}
+
+	bool Button::isMouseOnButton()
+	{
+		return CheckCollisionPointRec(GetMousePosition(), getShape());
 	}
 }

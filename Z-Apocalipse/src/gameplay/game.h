@@ -3,6 +3,7 @@
 
 #include "scene_manager.h"
 #include "gameplay.h"
+#include "..\game\main_menu.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -12,16 +13,21 @@ namespace Z_APOCALIPSE
 		int screenWidth;
 		int screenHeight;
 		const char* title = "Z-APOCALIPSE";
+		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
 		const short fps = 60;
+		const Scenes initialScene = Scenes::MAIN_MENU;	
 		
+		Scenes mainMenuChangeScenes[maxMainMenuButtons];
 		SceneManager* sceneManager;
 		Gameplay* gameplay;
+		MainMenu* mainMenu;
 	public:
 		Game(int screenWidth, int screenHeight);
 		~Game();
 
 		void setScreenWidth(int screenWidth);
 		void setScreenHeight(int screenHeight);
+		void setMainMenuChangeScenes();
 
 		void init();		
 		void deinit();

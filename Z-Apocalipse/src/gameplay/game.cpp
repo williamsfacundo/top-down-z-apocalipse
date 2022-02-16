@@ -14,7 +14,7 @@ namespace Z_APOCALIPSE
 
 	Game::~Game()
 	{
-		
+		deinit();
 	}
 
 	void Game::setScreenWidth(int screenWidth)
@@ -27,14 +27,23 @@ namespace Z_APOCALIPSE
 		this->screenHeight = screenHeight;
 	}
 
+	void Game::setMainMenuChangeScenes() 
+	{
+		mainMenuChangeScenes[0] = Scenes::GAMEPLAY;
+		mainMenuChangeScenes[1] = Scenes::GAMEPLAY;
+		mainMenuChangeScenes[2] = Scenes::GAMEPLAY;
+		mainMenuChangeScenes[3] = Scenes::GAMEPLAY;
+	}
+
 	void Game::init()
 	{
 		InitWindow(screenWidth, screenHeight, title);
 
 		SetTargetFPS(fps);
 
-		sceneManager = new SceneManager(Scenes::GAMEPLAY);
+		sceneManager = new SceneManager(initialScene);
 		gameplay = new Gameplay();
+		mainMenu = new MainMenu(mainMenuTexts);
 	}	
 
 	void Game::deinit()
@@ -43,6 +52,7 @@ namespace Z_APOCALIPSE
 
 		delete sceneManager;
 		delete gameplay;
+		delete mainMenu;
 	}
 
 	void Game::runGame()
@@ -59,12 +69,12 @@ namespace Z_APOCALIPSE
 				break;
 			case Scenes::MAIN_MENU:
 
+				mainMenu->input(sceneManager, mainMenuChangeScenes);
+				mainMenu->draw();
 				break;
 			default:
 				break;
 			}			
-		}
-
-		deinit();
+		}		
 	}
 }
