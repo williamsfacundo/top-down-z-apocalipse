@@ -70,6 +70,7 @@ namespace Z_APOCALIPSE
 		void drawVersion();
 		void drawLivesRemaining();
 		void drawInbulnerabilityTimer();
+		void drawPlayerBulletsUI();
 	};
 }
 

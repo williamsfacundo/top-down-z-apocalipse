@@ -109,13 +109,14 @@ namespace Z_APOCALIPSE
 		ClearBackground(backgroundColor);
 				
 		drawHudSpace();
+		drawZombies();
+		playerOne->draw();
 		drawTimer();
 		drawVersion();
 		drawLivesRemaining();
 		drawInbulnerabilityTimer();
-		drawZombies();
-		playerOne->draw();
-
+		drawPlayerBulletsUI();
+		
 		EndDrawing();
 	}
 	
@@ -316,5 +317,12 @@ namespace Z_APOCALIPSE
 		{
 			DrawText(TextFormat("Invulnerability"), uiSmallSize, static_cast<int>(gameplaySpacePos.y) + uiSmallSize, uiSmallSize, uiColor);
 		}
+	}
+
+	void Gameplay::drawPlayerBulletsUI() 
+	{
+		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), GetScreenWidth() - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+		DrawText("/", GetScreenWidth() - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), GetScreenWidth() - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
 	}
 }
