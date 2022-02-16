@@ -312,6 +312,9 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawInbulnerabilityTimer() 
 	{
-		
+		if (playerOne->getInvulnerabilityTimer() > 0.0f)
+		{
+			DrawText(TextFormat("Invulnerability"), uiSmallSize, static_cast<int>(gameplaySpacePos.y) + uiSmallSize, uiSmallSize, uiColor);
+		}
 	}
 }
