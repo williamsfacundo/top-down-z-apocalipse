@@ -23,11 +23,11 @@ namespace Z_APOCALIPSE
 		setShootingTimer(startingShootingTimer);
 		setDamage(initialDamage);
 		setInvulnerabilityTimer(0.0f);
-
-		for (short i = 0; i < maxBullets; i++)
-		{
-			bullets[i] = NULL;
-		}
+		setMaxBulletsInCharger(initialBulletsInCharger);
+		setBulletsInCharger(maxBulletsInCharger);
+		setRemainingBullets(initialMaxBullets - maxBulletsInCharger);
+		setReloadKey(initialReloadKey);		
+		setBulletsToNull();
 	}
 
 	Survivor::~Survivor() 
@@ -41,22 +41,24 @@ namespace Z_APOCALIPSE
 		}
 	}
 
-	void Survivor::setLives(short lives) 
+#pragma region SETTERS
+
+	void Survivor::setLives(short lives)
 	{
 		this->lives = lives;
 	}
 
-	void Survivor::subtractLive() 
+	void Survivor::subtractLive()
 	{
 		lives -= 1;
 	}
 
-	void Survivor::setMoney(short money) 
+	void Survivor::setMoney(short money)
 	{
 		this->money = money;
 	}
-	
-	void Survivor::setMovementStatus(MovementStatus movementStatus) 
+
+	void Survivor::setMovementStatus(MovementStatus movementStatus)
 	{
 		this->movementStatus = movementStatus;
 	}
@@ -66,77 +68,109 @@ namespace Z_APOCALIPSE
 		this->direction = direction;
 	}
 
-	void Survivor::setMoveUpKey(KeyboardKey key) 
+	void Survivor::setMoveUpKey(KeyboardKey key)
 	{
 		this->moveUpKey = key;
 	}
-		
+
 	void Survivor::setMoveDownKey(KeyboardKey key)
 	{
 		this->moveDownKey = key;
 	}
-	
-	void Survivor::setMoveRightKey(KeyboardKey key) 
+
+	void Survivor::setMoveRightKey(KeyboardKey key)
 	{
 		this->moveRightKey = key;
 	}
-	
-	void Survivor::setMoveLeftKey(KeyboardKey key) 
+
+	void Survivor::setMoveLeftKey(KeyboardKey key)
 	{
 		this->moveLeftKey = key;
 	}
 
-	void Survivor::setShootButton(MouseButton shootButton) 
+	void Survivor::setReloadKey(KeyboardKey key)
+	{
+		this->reloadKey = key;
+	}
+
+	void Survivor::setShootButton(MouseButton shootButton)
 	{
 		this->shootButton = shootButton;
 	}
 
-	void Survivor::setVelocity(float velocity) 
+	void Survivor::setVelocity(float velocity)
 	{
 		this->velocity = velocity;
 	}
-	
-	void Survivor::setAceleration(float aceleration) 
+
+	void Survivor::setAceleration(float aceleration)
 	{
 		this->aceleration = aceleration;
 	}
-	
-	void Survivor::setDirectionNumberMultiplyer(float directionNumberMultiplyer) 
+
+	void Survivor::setDirectionNumberMultiplyer(float directionNumberMultiplyer)
 	{
 		this->directionNumberMultiplyer = directionNumberMultiplyer;
 	}
 
-	void Survivor::setShootingTimer(float shootingTimer) 
+	void Survivor::setShootingTimer(float shootingTimer)
 	{
 		this->shootingTimer = shootingTimer;
 	}
 
-	void Survivor::setDamage(float damage) 
+	void Survivor::setDamage(float damage)
 	{
 		this->damage = damage;
 	}
 
-	void Survivor::setInvulnerabilityTimer(float invulnerabilityTimer) 
+	void Survivor::setInvulnerabilityTimer(float invulnerabilityTimer)
 	{
 		this->invulnerabilityTimer = invulnerabilityTimer;
 	}
 
-	short Survivor::getLives() 
+	void Survivor::setMaxBulletsInCharger(short maxBulletsInCharger)
+	{
+		this->maxBulletsInCharger = maxBulletsInCharger;
+	}
+
+	void Survivor::setBulletsInCharger(short bulletsInCharger)
+	{
+		this->bulletsInCharger = bulletsInCharger;
+	}
+
+	void Survivor::setRemainingBullets(short remainingBullets)
+	{
+		this->remainingBullets = remainingBullets;
+	}
+
+	void Survivor::setBulletsToNull()
+	{
+		for (short i = 0; i < maxBullets; i++)
+		{
+			bullets[i] = NULL;
+		}
+	}
+
+#pragma endregion
+
+#pragma region GETTERS
+
+	short Survivor::getLives()
 	{
 		return lives;
 	}
-	
-	short Survivor::getMoney() 
+
+	short Survivor::getMoney()
 	{
 		return money;
 	}
 
-	MovementStatus Survivor::getMovementStatus() 
+	MovementStatus Survivor::getMovementStatus()
 	{
 		return movementStatus;
 	}
 
-	MovementStatus Survivor::getDirection() 
+	MovementStatus Survivor::getDirection()
 	{
 		return direction;
 	}
@@ -145,49 +179,54 @@ namespace Z_APOCALIPSE
 	{
 		return moveUpKey;
 	}
-	
+
 	KeyboardKey Survivor::getMoveDownKey()
 	{
 		return moveDownKey;
 	}
-	
+
 	KeyboardKey Survivor::getMoveRightKey()
 	{
 		return moveRightKey;
 	}
-	
+
 	KeyboardKey Survivor::getMoveLeftKey()
 	{
 		return moveLeftKey;
 	}
 
-	MouseButton Survivor::getShootButton() 
+	KeyboardKey Survivor::getReloadKey()
+	{
+		return reloadKey;
+	}
+
+	MouseButton Survivor::getShootButton()
 	{
 		return shootButton;
 	}
 
-	float Survivor::getVelocity() 
+	float Survivor::getVelocity()
 	{
 		return velocity;
 	}
 
-	float Survivor::getAceleration() 
+	float Survivor::getAceleration()
 	{
 		return aceleration;
 	}
 
-	float Survivor::getDirectionNumberMultiplyer() 
+	float Survivor::getDirectionNumberMultiplyer()
 	{
 		return directionNumberMultiplyer;
 	}
 
-	short Survivor::getEmptyBulletIndex() 
+	short Survivor::getEmptyBulletIndex()
 	{
 		short index = maxBullets + 1;
 
-		for (short i = 0; i < maxBullets; i++) 
+		for (short i = 0; i < maxBullets; i++)
 		{
-			if(bullets[i] == NULL)
+			if (bullets[i] == NULL)
 			{
 				index = i;
 			}
@@ -196,7 +235,7 @@ namespace Z_APOCALIPSE
 		return index;
 	}
 
-	Vector2 Survivor::getBulletDirection() 
+	Vector2 Survivor::getBulletDirection()
 	{
 		float distanceX = GetMousePosition().x - getPosition().x;
 		float distanceY = GetMousePosition().y - getPosition().y;
@@ -204,43 +243,62 @@ namespace Z_APOCALIPSE
 		distanceX /= static_cast<float>(module);
 		distanceY /= static_cast<float>(module);
 		Vector2 direction = { distanceX, distanceY };
-		
+
 		return direction;
 	}
 
-	float Survivor::getShootingTimer() 
+	float Survivor::getShootingTimer()
 	{
 		return shootingTimer;
 	}
 
-	short Survivor::getMaxBullets() 
+	short Survivor::getMaxBullets()
 	{
 		return maxBullets;
 	}
 
-	float Survivor::getDamage() 
+	float Survivor::getDamage()
 	{
 		return damage;
 	}
 
-	float Survivor::getInvulnerabilityTimer() 
+	float Survivor::getInvulnerabilityTimer()
 	{
 		return invulnerabilityTimer;
 	}
 
+	short Survivor::getMaxBulletsInCharger()
+	{
+		return maxBulletsInCharger;
+	}
+
+	short Survivor::getBulletsInCharger()
+	{
+		return bulletsInCharger;
+	}
+
+	short Survivor::getRemainingBullets()
+	{
+		return remainingBullets;
+	}
+
+#pragma endregion
+	
 	void Survivor::input() 
 	{
 		movementInput();
-		inputShooting();
+		shootingInput();
+		reloadInput();
 	}
 	
-	void Survivor::inputShooting() 
+	void Survivor::shootingInput() 
 	{		
-		if (IsMouseButtonPressed(getShootButton()) && Bullet::getBulletsCreated() < maxBullets && getShootingTimer() == 0.0f) 
+		if (IsMouseButtonPressed(getShootButton()) && bulletsInCharger > 0 && getShootingTimer() == 0.0f) 
 		{
 			shootingTimer = startingShootingTimer;
 
 			bullets[getEmptyBulletIndex()] = new Bullet(getPosition(), getBulletDirection(), BulletsType::GUN);
+			bulletsInCharger -= 1;
 		}
 	}
 
@@ -300,15 +358,8 @@ namespace Z_APOCALIPSE
 
 	void Survivor::draw() 
 	{
-		DrawCircleV(getPosition(), getRadius(), getCharacterColor());
-
-		for (short i = 0; i < maxBullets; i++) 
-		{
-			if (bullets[i] != NULL) 
-			{
-				bullets[i]->draw();
-			}
-		}
+		drawSurvivor();
+		drawBullets();
 	}
 
 	void Survivor::movementInput() 
@@ -482,5 +533,48 @@ namespace Z_APOCALIPSE
 	bool Survivor::isSurvivorInvulnerable() 
 	{
 		return invulnerabilityTimer > 0.0f;
+	}
+
+	void Survivor::reloadInput() 
+	{
+		if (IsKeyPressed(reloadKey)) 
+		{
+			reload();
+		}
+	}
+
+	void Survivor::reload() 
+	{
+		short missingBullets = maxBulletsInCharger - bulletsInCharger;
+
+		if (missingBullets != 0) 
+		{
+			if (remainingBullets >= missingBullets)
+			{
+				bulletsInCharger += missingBullets;
+				remainingBullets -= missingBullets;
+			}
+			else if (remainingBullets > 0)
+			{
+				bulletsInCharger += remainingBullets;
+				remainingBullets = 0;
+			}
+		}		
+	}
+
+	void Survivor::drawSurvivor() 
+	{
+		DrawCircleV(getPosition(), getRadius(), getCharacterColor());		
+	}
+
+	void Survivor::drawBullets() 
+	{
+		for (short i = 0; i < maxBullets; i++)
+		{
+			if (bullets[i] != NULL)
+			{
+				bullets[i]->draw();
+			}
+		}
 	}
 }

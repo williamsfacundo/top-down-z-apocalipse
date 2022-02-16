@@ -10,21 +10,24 @@ namespace Z_APOCALIPSE
 
 	class Survivor : public Character
 	{
-	private:
-		const short initialLives = 3;
-		const short initialMoney = 200;		
+	private:			
 		const KeyboardKey initialMoveUpKey = KEY_W;
 		const KeyboardKey initialMoveDownKey = KEY_S;
 		const KeyboardKey initialMoveRightKey = KEY_D;
 		const KeyboardKey initialMoveLeftKey = KEY_A;
+		const KeyboardKey initialReloadKey = KEY_R;
 		const MouseButton initialShootButton = MOUSE_BUTTON_LEFT;
+		const short initialLives = 3;
+		const short initialMoney = 200;
 		const short acelerationMultiplyer = 40.0f;
 		const short maxAceleration = 200.0f;
 		const short secondsForAcelerationDecrease = 3;
-		static const short maxBullets = 3;
+		const short initialBulletsInCharger = 6;
+		const short initialMaxBullets = initialBulletsInCharger * 6;
 		const float startingShootingTimer = 1.15f;
 		const float initialDamage = 10.0f;
 		const float invulnerabilityTime = 1.8f;
+		static const short maxBullets = 30;
 
 		short lives;
 		short money;
@@ -35,13 +38,16 @@ namespace Z_APOCALIPSE
 		KeyboardKey moveDownKey;
 		KeyboardKey moveRightKey;
 		KeyboardKey moveLeftKey;
+		KeyboardKey reloadKey;
 		MouseButton shootButton;
 		float velocity;
 		float aceleration;
 		float shootingTimer;
 		float damage;
-		float invulnerabilityTimer;
-
+		float invulnerabilityTimer;		
+		short maxBulletsInCharger;
+		short bulletsInCharger;
+		short remainingBullets;		
 		Bullet* bullets[maxBullets];
 		Rectangle gameplayMap;
 	public:
@@ -57,6 +63,7 @@ namespace Z_APOCALIPSE
 		void setMoveDownKey(KeyboardKey key);
 		void setMoveRightKey(KeyboardKey key);
 		void setMoveLeftKey(KeyboardKey key);
+		void setReloadKey(KeyboardKey key);
 		void setShootButton(MouseButton shootButton);
 		void setVelocity(float velocity);
 		void setAceleration(float aceleration);
@@ -64,7 +71,11 @@ namespace Z_APOCALIPSE
 		void setShootingTimer(float shootingTimer);
 		void setDamage(float damage);
 		void setInvulnerabilityTimer(float invulnerabilityTimer);
-
+		void setMaxBulletsInCharger(short maxBulletsInCharger);
+		void setBulletsInCharger(short bulletsInCharger);
+		void setRemainingBullets(short remainingBullets);
+		void setBulletsToNull();
+		
 		short getLives();
 		short getMoney();
 		MovementStatus getMovementStatus();
@@ -73,6 +84,7 @@ namespace Z_APOCALIPSE
 		KeyboardKey getMoveDownKey();
 		KeyboardKey getMoveRightKey();
 		KeyboardKey getMoveLeftKey();
+		KeyboardKey getReloadKey();
 		MouseButton getShootButton();
 		float getVelocity();
 		float getAceleration();
@@ -83,9 +95,13 @@ namespace Z_APOCALIPSE
 		short getMaxBullets();
 		float getDamage();
 		float getInvulnerabilityTimer();
+		short getMaxBulletsInCharger();
+		short getBulletsInCharger();
+		short getRemainingBullets();
 
 		void input();
-		void inputShooting();
+		void shootingInput();
+
 		void update(Rectangle gameplayDimensions);
 		void movementUpdate();
 		void updateBullets();
@@ -103,6 +119,10 @@ namespace Z_APOCALIPSE
 		void hitByZombie();
 		void decreaseInvulnerabilityTimer();
 		bool isSurvivorInvulnerable();
+		void reloadInput();
+		void reload();
+		void drawSurvivor();
+		void drawBullets();		
 	};
 }
 
