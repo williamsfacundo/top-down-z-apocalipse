@@ -110,6 +110,9 @@ namespace Z_APOCALIPSE
 				
 		drawHudSpace();
 		drawTimer();
+		drawVersion();
+		drawLivesRemaining();
+		drawInbulnerabilityTimer();
 		drawZombies();
 		playerOne->draw();
 
@@ -279,7 +282,8 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::winRound() 
 	{
-		//Advance to next round
+		deinit();
+		init();
 	}
 
 	void Gameplay::defeatCondition() 
@@ -292,7 +296,22 @@ namespace Z_APOCALIPSE
 	}
 
 	void Gameplay::drawTimer() 
-	{			
-		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - timerSize, static_cast<int>(gameplaySpacePos.y), timerSize, roundtimerColor);
+	{					
+		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - uiSmallSize, static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+	}
+
+	void Gameplay::drawVersion() 
+	{
+		DrawText("v 0.1", GetScreenWidth() - ((uiBigSize / 2) * 5), GetScreenHeight() - uiBigSize, uiBigSize, uiColor);
+	}
+
+	void Gameplay::drawLivesRemaining() 
+	{
+		DrawText(TextFormat("Lives: %i", playerOne->getLives()), uiSmallSize, static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+	}
+
+	void Gameplay::drawInbulnerabilityTimer() 
+	{
+		
 	}
 }
