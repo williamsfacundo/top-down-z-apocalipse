@@ -107,10 +107,11 @@ namespace Z_APOCALIPSE
 	{
 		BeginDrawing();
 		ClearBackground(backgroundColor);
-
+				
 		drawHudSpace();
+		drawTimer();
 		drawZombies();
-		playerOne->draw();	
+		playerOne->draw();
 
 		EndDrawing();
 	}
@@ -288,5 +289,10 @@ namespace Z_APOCALIPSE
 			deinit();
 			init();
 		}
+	}
+
+	void Gameplay::drawTimer() 
+	{			
+		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - timerSize, static_cast<int>(gameplaySpacePos.y), timerSize, roundtimerColor);
 	}
 }

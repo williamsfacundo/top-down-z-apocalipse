@@ -15,14 +15,16 @@ namespace Z_APOCALIPSE
 		const Color gameplaySpaceColor = GRAY;
 		const Color playerOneColor = RED;
 		const Color zombiesColor = GREEN;
+		const Color roundtimerColor = BLACK;
 		const float hudHeightPercentage = 0.36f;		
 		const float playerOneRadius = 30.0f;
 		const float zombiesRadius = 22.5f;
 		const float initialtimeToSpawnZombie = 2.0f;
 		const float timeToEndRound = 60.0f;
+		const int timerSize = 30;
 		static const short maxZombies = 5;
-		static const short maxSpawners = 4;	
-
+		static const short maxSpawners = 4;
+		
 		Vector2 gameplaySpacePos;
 		Vector2 zombiesSpawnsPositions[maxSpawners];
 		float gameplaySpaceHeight;	
@@ -63,6 +65,7 @@ namespace Z_APOCALIPSE
 		void decreasTimerToEndRound();
 		void winRound();
 		void defeatCondition();
+		void drawTimer();
 	};
 }
 
