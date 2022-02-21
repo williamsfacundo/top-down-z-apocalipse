@@ -166,6 +166,7 @@
     <ClCompile Include="src\game\button.cpp" />
     <ClCompile Include="src\game\credits.cpp" />
     <ClCompile Include="src\game\main_menu.cpp" />
+    <ClCompile Include="src\game\options.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="src\game\button.h" />
     <ClInclude Include="src\game\credits.h" />
     <ClInclude Include="src\game\main_menu.h" />
+    <ClInclude Include="src\game\options.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
