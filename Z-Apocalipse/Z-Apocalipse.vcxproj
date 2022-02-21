@@ -164,6 +164,7 @@
     <ClCompile Include="src\gameplay\survivor.cpp" />
     <ClCompile Include="src\gameplay\zombie.cpp" />
     <ClCompile Include="src\game\button.cpp" />
+    <ClCompile Include="src\game\credits.cpp" />
     <ClCompile Include="src\game\main_menu.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -176,6 +177,7 @@
     <ClInclude Include="src\gameplay\survivor.h" />
     <ClInclude Include="src\gameplay\zombie.h" />
     <ClInclude Include="src\game\button.h" />
+    <ClInclude Include="src\game\credits.h" />
     <ClInclude Include="src\game\main_menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
