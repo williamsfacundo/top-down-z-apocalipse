@@ -31,7 +31,7 @@ namespace Z_APOCALIPSE
 		static const short maxBullets = 30;
 
 		short lives;
-		short money;
+		int money;
 		short directionNumberMultiplyer;
 		MovementStatus movementStatus;
 		MovementStatus direction;
@@ -49,7 +49,7 @@ namespace Z_APOCALIPSE
 		float reloadTimer;
 		short maxBulletsInCharger;
 		short bulletsInCharger;
-		short remainingBullets;		
+		short remainingBullets;				
 		Bullet* bullets[maxBullets];
 		Rectangle gameplayMap;
 	public:
@@ -58,7 +58,7 @@ namespace Z_APOCALIPSE
 
 		void setLives(short lives);
 		void subtractLive();
-		void setMoney(short money);
+		void setMoney(int money);
 		void setMovementStatus(MovementStatus movementStatus);
 		void setDirection(MovementStatus direction);
 		void setMoveUpKey(KeyboardKey key);
@@ -76,11 +76,11 @@ namespace Z_APOCALIPSE
 		void setReloadTimer(float reloadTimer);
 		void setMaxBulletsInCharger(short maxBulletsInCharger);
 		void setBulletsInCharger(short bulletsInCharger);
-		void setRemainingBullets(short remainingBullets);
+		void setRemainingBullets(short remainingBullets);		
 		void setBulletsToNull();
 		
 		short getLives();
-		short getMoney();
+		int getMoney();
 		MovementStatus getMovementStatus();
 		MovementStatus getDirection();
 		KeyboardKey getMoveUpKey();
@@ -100,7 +100,7 @@ namespace Z_APOCALIPSE
 		float getInvulnerabilityTimer();
 		float getReloadTimer();
 		short getMaxBulletsInCharger();
-		short getBulletsInCharger();
+		short getBulletsInCharger();		
 		short getRemainingBullets();
 
 		void input();

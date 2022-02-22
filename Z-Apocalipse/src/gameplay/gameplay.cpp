@@ -304,11 +304,12 @@ namespace Z_APOCALIPSE
 	void Gameplay::drawHud() 
 	{
 		drawTimer();
-		drawVersion();
+		//drawVersion();
 		drawLivesRemaining();
 		drawInbulnerabilityTimer();
 		drawPlayerBulletsUI();
 		drawRoundHud();
+		drawPlayerMoney();
 	}
 
 	void Gameplay::drawTimer() 
@@ -344,6 +345,11 @@ namespace Z_APOCALIPSE
 	void Gameplay::drawRoundHud() 
 	{
 		DrawText(TextFormat("Round %i", getRound()), uiSmallSize, static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+	}
+
+	void Gameplay::drawPlayerMoney() 
+	{
+		DrawText(TextFormat("$ %i", playerOne->getMoney()), GetScreenWidth() - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawGameplay() 

@@ -54,7 +54,7 @@ namespace Z_APOCALIPSE
 		lives -= 1;
 	}
 
-	void Survivor::setMoney(short money)
+	void Survivor::setMoney(int money)
 	{
 		this->money = money;
 	}
@@ -147,7 +147,7 @@ namespace Z_APOCALIPSE
 	void Survivor::setRemainingBullets(short remainingBullets)
 	{
 		this->remainingBullets = remainingBullets;
-	}
+	}	
 
 	void Survivor::setBulletsToNull()
 	{
@@ -166,7 +166,7 @@ namespace Z_APOCALIPSE
 		return lives;
 	}
 
-	short Survivor::getMoney()
+	int Survivor::getMoney()
 	{
 		return money;
 	}
