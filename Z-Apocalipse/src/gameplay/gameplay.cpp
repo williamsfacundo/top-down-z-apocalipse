@@ -321,8 +321,8 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawPlayerBulletsUI() 
 	{
-		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), GetScreenWidth() - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
-		DrawText("/", GetScreenWidth() - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
-		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), GetScreenWidth() - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+		DrawText("/", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
 	}
 }

@@ -16,7 +16,7 @@ namespace Z_APOCALIPSE
 		const Color playerOneColor = RED;
 		const Color zombiesColor = GREEN;
 		const Color uiColor = BLACK;
-		const float hudHeightPercentage = 0.36f;		
+		const float hudHeightPercentage = 0.26f;		
 		const float playerOneRadius = 30.0f;
 		const float zombiesRadius = 22.5f;
 		const float initialtimeToSpawnZombie = 2.0f;
