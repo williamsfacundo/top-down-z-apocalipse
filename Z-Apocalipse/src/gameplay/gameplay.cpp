@@ -34,6 +34,11 @@ namespace Z_APOCALIPSE
 		this->timerToEndRound = timer;
 	}
 
+	void Gameplay::setRound(short round)
+	{
+		this->round = round;
+	}
+
 	float Gameplay::getTimerToSpawnZombie() 
 	{
 		return timerToSpawnZombie;
@@ -71,6 +76,11 @@ namespace Z_APOCALIPSE
 		return timerToEndRound;
 	}
 
+	short Gameplay::getRound() 
+	{
+		return round;
+	}
+
 	void Gameplay::init()
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, playerOneRadius, 
@@ -84,6 +94,7 @@ namespace Z_APOCALIPSE
 		setZombiesSpawnsPositions();
 		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
 		setTimerToEndRound(timeToEndRound);
+		setRound(initialRound);
 	}
 	
 	void Gameplay::input() 
@@ -108,14 +119,8 @@ namespace Z_APOCALIPSE
 		BeginDrawing();
 		ClearBackground(backgroundColor);
 				
-		drawHudSpace();
-		drawZombies();
-		playerOne->draw();
-		drawTimer();
-		drawVersion();
-		drawLivesRemaining();
-		drawInbulnerabilityTimer();
-		drawPlayerBulletsUI();
+		drawGameplay();
+		drawHud();
 		
 		EndDrawing();
 	}
@@ -134,7 +139,7 @@ namespace Z_APOCALIPSE
 		}
 	}
 
-	void Gameplay::drawHudSpace() 
+	void Gameplay::drawGameplayRectangle() 
 	{
 		DrawRectangleV(gameplaySpacePos, {static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight}, gameplaySpaceColor);
 	}
@@ -296,6 +301,16 @@ namespace Z_APOCALIPSE
 		}
 	}
 
+	void Gameplay::drawHud() 
+	{
+		drawTimer();
+		drawVersion();
+		drawLivesRemaining();
+		drawInbulnerabilityTimer();
+		drawPlayerBulletsUI();
+		drawRoundHud();
+	}
+
 	void Gameplay::drawTimer() 
 	{					
 		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2), uiSmallSize, uiColor);
@@ -324,5 +339,17 @@ namespace Z_APOCALIPSE
 		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
 		DrawText("/", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
 		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+	}
+
+	void Gameplay::drawRoundHud() 
+	{
+		DrawText(TextFormat("Round %i", getRound()), uiSmallSize, static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+	}
+
+	void Gameplay::drawGameplay() 
+	{
+		drawGameplayRectangle();
+		drawZombies();
+		playerOne->draw();
 	}
 }

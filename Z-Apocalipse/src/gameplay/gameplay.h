@@ -23,6 +23,7 @@ namespace Z_APOCALIPSE
 		const float timeToEndRound = 60.0f;
 		const int uiSmallSize = 30;
 		const int uiBigSize = 40;		
+		const short initialRound = 1;
 		static const short maxZombies = 5;
 		static const short maxSpawners = 4;
 		
@@ -31,6 +32,7 @@ namespace Z_APOCALIPSE
 		float gameplaySpaceHeight;	
 		float timerToSpawnZombie;
 		float timerToEndRound;
+		short round;
 
 		Survivor* playerOne;
 		Zombie* zombies[maxZombies];
@@ -41,10 +43,12 @@ namespace Z_APOCALIPSE
 		void setZombiesSpawnsPositions();
 		void setTimerToSpawnZombie(float timer);
 		void setTimerToEndRound(float timer);
+		void setRound(short round);
 
 		float getTimerToSpawnZombie();
 		Vector2 getRandomZombieSpawnPosition();
 		float getTimerToEndRound();
+		short getRound();
 
 		void init();
 		void input();
@@ -52,7 +56,7 @@ namespace Z_APOCALIPSE
 		void draw();
 		void deinit();
 
-		void drawHudSpace();
+		void drawGameplayRectangle();
 		void updateHudSpace();
 		void drawZombies();
 
@@ -66,11 +70,14 @@ namespace Z_APOCALIPSE
 		void decreasTimerToEndRound();
 		void winRound();
 		void defeatCondition();
+		void drawHud();
 		void drawTimer();
 		void drawVersion();
 		void drawLivesRemaining();
 		void drawInbulnerabilityTimer();
 		void drawPlayerBulletsUI();
+		void drawRoundHud();
+		void drawGameplay();
 	};
 }
 
