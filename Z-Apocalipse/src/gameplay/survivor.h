@@ -47,12 +47,12 @@ namespace Z_APOCALIPSE
 		float shootingTimer;
 		float damage;
 		float invulnerabilityTimer;		
-		float reloadTimer;
+		float reloadTimer;		
 		short maxBulletsInCharger;
 		short bulletsInCharger;
 		short remainingBullets;				
 		Bullet* bullets[maxBullets];
-		Rectangle gameplayMap;
+		Rectangle gameplayMap;		
 	public:
 		Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap);
 		~Survivor();
@@ -75,11 +75,11 @@ namespace Z_APOCALIPSE
 		void setShootingTimer(float shootingTimer);
 		void setDamage(float damage);
 		void setInvulnerabilityTimer(float invulnerabilityTimer);
-		void setReloadTimer(float reloadTimer);
+		void setReloadTimer(float reloadTimer);		
 		void setMaxBulletsInCharger(short maxBulletsInCharger);
 		void setBulletsInCharger(short bulletsInCharger);
 		void setRemainingBullets(short remainingBullets);		
-		void setBulletsToNull();
+		void setBulletsToNull();		
 		
 		short getLives();
 		int getMoney();
@@ -100,10 +100,10 @@ namespace Z_APOCALIPSE
 		short getMaxBullets();
 		float getDamage();
 		float getInvulnerabilityTimer();
-		float getReloadTimer();
+		float getReloadTimer();		
 		short getMaxBulletsInCharger();
 		short getBulletsInCharger();		
-		short getRemainingBullets();
+		short getRemainingBullets();		
 
 		void input();
 		void shootingInput();

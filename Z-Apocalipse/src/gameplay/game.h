@@ -16,6 +16,8 @@ namespace Z_APOCALIPSE
 		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
 		const short fps = 60;
 		const Scenes initialScene = Scenes::MAIN_MENU;	
+		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY;
+		const MouseButton pauseMenuInputButton = MouseButton::MOUSE_BUTTON_LEFT;
 				
 		Scenes mainMenuChangeScenes[maxMainMenuButtons];
 		SceneManager* sceneManager;
@@ -38,6 +40,8 @@ namespace Z_APOCALIPSE
 
 		void runGame();
 		void temporalUnuseScenes();
+
+		void pauseInput(Vector2 pauseCirclePosition,float pauseCircleRadius);
 	};
 }
 

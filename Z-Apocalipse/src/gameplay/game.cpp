@@ -76,7 +76,7 @@ namespace Z_APOCALIPSE
 			{
 			case Scenes::GAMEPLAY:
 				
-				gameplay->input();
+				gameplay->input(sceneManager);
 				gameplay->update();
 				gameplay->draw();
 				break;
@@ -97,6 +97,12 @@ namespace Z_APOCALIPSE
 
 				setRunning(false);
 				break;
+			case Scenes::PAUSE:
+
+				pauseInput(gameplay->getPauseButtonPosition(), gameplay->getPauseButtonRadius());
+
+				gameplay->draw();
+				break;
 			default:
 				break;
 			}			
@@ -113,5 +119,14 @@ namespace Z_APOCALIPSE
 		BeginDrawing();
 		ClearBackground(WHITE);
 		EndDrawing();
+	}
+
+	void Game::pauseInput(Vector2 pauseCirclePosition, float pauseCircleRadius) 
+	{
+		if (CheckCollisionPointCircle(GetMousePosition(), pauseCirclePosition, pauseCircleRadius)
+			&& IsMouseButtonPressed(pauseMenuInputButton))
+		{
+			sceneManager->setCurrentScene(pauseMenuChangeScene);
+		}
 	}
 }

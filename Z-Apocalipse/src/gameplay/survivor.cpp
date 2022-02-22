@@ -137,7 +137,7 @@ namespace Z_APOCALIPSE
 	void Survivor::setReloadTimer(float reloadTimer) 
 	{
 		this->reloadTimer = reloadTimer;
-	}
+	}	
 
 	void Survivor::setMaxBulletsInCharger(short maxBulletsInCharger)
 	{
@@ -160,7 +160,7 @@ namespace Z_APOCALIPSE
 		{
 			bullets[i] = NULL;
 		}
-	}
+	}	
 
 #pragma endregion
 
@@ -282,7 +282,7 @@ namespace Z_APOCALIPSE
 	{
 		return reloadTimer;
 	}
-
+	
 	short Survivor::getMaxBulletsInCharger()
 	{
 		return maxBulletsInCharger;

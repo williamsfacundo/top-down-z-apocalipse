@@ -28,6 +28,11 @@ namespace Z_APOCALIPSE
 		zombiesSpawnsPositions[3] = { static_cast<float>(GetScreenWidth()) - (zombiesRadius / 2.0f), gameplaySpacePos.y + gameplaySpaceHeight - (zombiesRadius / 2.0f) };
 	}
 
+	void Gameplay::setPauseButtonPosition(Vector2 pauseButtonPosition)
+	{
+		this->pauseButtonPosition = pauseButtonPosition;
+	}
+
 	void Gameplay::setTimerToSpawnZombie(float timer) 
 	{
 		this->timerToSpawnZombie = timer;
@@ -38,9 +43,19 @@ namespace Z_APOCALIPSE
 		this->timerToEndRound = timer;
 	}
 
+	void Gameplay::setPauseButtonRadius(float pauseButtonRadius)
+	{
+		this->pauseButtonRadius = pauseButtonRadius;
+	}
+
 	void Gameplay::setRound(short round)
 	{
 		this->round = round;
+	}
+
+	Vector2 Gameplay::getPauseButtonPosition()
+	{
+		return pauseButtonPosition;
 	}
 
 	float Gameplay::getTimerToSpawnZombie() 
@@ -80,6 +95,11 @@ namespace Z_APOCALIPSE
 		return timerToEndRound;
 	}
 
+	float Gameplay::getPauseButtonRadius()
+	{
+		return pauseButtonRadius;
+	}
+
 	short Gameplay::getRound() 
 	{
 		return round;
@@ -105,14 +125,18 @@ namespace Z_APOCALIPSE
 		}
 
 		setZombiesSpawnsPositions();
+		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
+		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() - (GetScreenWidth() / 15)), getPauseButtonRadius() * 1.4f});
 		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
-		setTimerToEndRound(timeToEndRound);
-		setRound(initialRound);
+		setTimerToEndRound(timeToEndRound);		
+		setRound(initialRound);		
 	}
 	
-	void Gameplay::input() 
+	void Gameplay::input(SceneManager* sceneManager)
 	{
 		playerOne->input();
+
+		pauseGameInput(sceneManager);
 	}
 	
 	void Gameplay::update() 
@@ -324,6 +348,7 @@ namespace Z_APOCALIPSE
 		drawPlayerBulletsUI();
 		drawRoundHud();
 		drawPlayerMoney();
+		drawPauseButton();
 	}
 
 	void Gameplay::drawTimer() 
@@ -371,5 +396,19 @@ namespace Z_APOCALIPSE
 		drawGameplayRectangle();
 		drawZombies();
 		playerOne->draw();
+	}
+
+	void Gameplay::drawPauseButton() 
+	{
+		DrawCircleV(getPauseButtonPosition(), getPauseButtonRadius(), pauseButtonColor);
+	}
+
+	void Gameplay::pauseGameInput(SceneManager* sceneManager)
+	{
+		if (CheckCollisionPointCircle(GetMousePosition(), getPauseButtonPosition(), getPauseButtonRadius())
+			&& IsMouseButtonPressed(pauseGameInputButton))
+		{
+			sceneManager->setCurrentScene(pauseMenuScene);
+		}
 	}
 }
