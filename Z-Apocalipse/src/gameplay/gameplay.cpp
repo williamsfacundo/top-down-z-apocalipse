@@ -298,7 +298,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawTimer() 
 	{					
-		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - uiSmallSize, static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawVersion() 
@@ -315,7 +315,7 @@ namespace Z_APOCALIPSE
 	{
 		if (playerOne->getInvulnerabilityTimer() > 0.0f)
 		{
-			DrawText(TextFormat("Invulnerability"), uiSmallSize, static_cast<int>(gameplaySpacePos.y) + uiSmallSize, uiSmallSize, uiColor);
+			DrawText(TextFormat("Invulnerability"), uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2) + uiSmallSize, uiSmallSize, uiColor);
 		}
 	}
 
