@@ -300,16 +300,16 @@ namespace Z_APOCALIPSE
 
 #pragma endregion
 	
-	void Survivor::input() 
+	void Survivor::input(bool mouseOnGameplay)
 	{
 		movementInput();
-		shootingInput();
+		shootingInput(mouseOnGameplay);
 		reloadInput();
 	}
 	
-	void Survivor::shootingInput() 
+	void Survivor::shootingInput(bool mouseOnGameplay)
 	{		
-		if (IsMouseButtonPressed(getShootButton()) && bulletsInCharger > 0 && getShootingTimer() == 0.0f && getReloadTimer() == 0.0f) 
+		if (IsMouseButtonPressed(getShootButton()) && bulletsInCharger > 0 && getShootingTimer() == 0.0f && getReloadTimer() == 0.0f && mouseOnGameplay) 
 		{
 			shootingTimer = startingShootingTimer;
 

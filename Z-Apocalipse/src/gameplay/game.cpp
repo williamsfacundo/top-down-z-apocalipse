@@ -119,7 +119,7 @@ namespace Z_APOCALIPSE
 		BeginDrawing();
 		ClearBackground(WHITE);
 		EndDrawing();
-	}
+	}	
 
 	void Game::pauseInput(Vector2 pauseCirclePosition, float pauseCircleRadius) 
 	{

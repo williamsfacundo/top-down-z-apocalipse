@@ -52,7 +52,7 @@ namespace Z_APOCALIPSE
 		void setTimerToEndRound(float timer);
 		void setPauseButtonRadius(float pauseButtonRadius);
 		void setRound(short round);
-
+		
 		Vector2 getPauseButtonPosition();
 		float getTimerToSpawnZombie();
 		Vector2 getRandomZombieSpawnPosition();
@@ -92,6 +92,7 @@ namespace Z_APOCALIPSE
 		void drawGameplay();		
 		void drawPauseButton();
 		void pauseGameInput(SceneManager* sceneManager);
+		bool isMouseOnGameplaySpace();
 	};
 }
 

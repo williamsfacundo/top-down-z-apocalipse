@@ -39,7 +39,7 @@ namespace Z_APOCALIPSE
 		void deinit();
 
 		void runGame();
-		void temporalUnuseScenes();
+		void temporalUnuseScenes();		
 
 		void pauseInput(Vector2 pauseCirclePosition,float pauseCircleRadius);
 	};

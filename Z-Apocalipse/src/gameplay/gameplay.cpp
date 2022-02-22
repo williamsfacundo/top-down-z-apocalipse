@@ -134,7 +134,7 @@ namespace Z_APOCALIPSE
 	
 	void Gameplay::input(SceneManager* sceneManager)
 	{
-		playerOne->input();
+		playerOne->input(isMouseOnGameplaySpace());
 
 		pauseGameInput(sceneManager);
 	}
@@ -410,5 +410,13 @@ namespace Z_APOCALIPSE
 		{
 			sceneManager->setCurrentScene(pauseMenuScene);
 		}
+	}
+
+	bool Gameplay::isMouseOnGameplaySpace()
+	{		
+		float y = GetScreenHeight() * (hudHeightPercentage / 2.0f);
+		float height = GetScreenHeight() - (GetScreenHeight() * hudHeightPercentage);
+
+		return CheckCollisionPointRec(GetMousePosition(), { 0.0f, y, static_cast<float>(GetScreenWidth()), height });
 	}
 }

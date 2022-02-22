@@ -105,8 +105,8 @@ namespace Z_APOCALIPSE
 		short getBulletsInCharger();		
 		short getRemainingBullets();		
 
-		void input();
-		void shootingInput();
+		void input(bool mouseOnGameplay);
+		void shootingInput(bool mouseOnGameplay);
 		void update(Rectangle gameplayDimensions);
 		void movementUpdate();
 		void updateBullets();
