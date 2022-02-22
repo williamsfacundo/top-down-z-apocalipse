@@ -235,6 +235,8 @@ namespace Z_APOCALIPSE
 			{
 				if (zombies[i]->isZombieDead()) 
 				{
+					playerOne->addMoney(moneyForKillingZombie);
+
 					delete zombies[i];
 					zombies[i] = NULL;
 				}
@@ -316,8 +318,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawHud() 
 	{
-		drawTimer();
-		//drawVersion();
+		drawTimer();		
 		drawLivesRemaining();
 		drawInbulnerabilityTimer();
 		drawPlayerBulletsUI();

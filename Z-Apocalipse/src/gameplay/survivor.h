@@ -60,6 +60,7 @@ namespace Z_APOCALIPSE
 		void setLives(short lives);
 		void subtractLive();
 		void setMoney(int money);
+		void addMoney(float money);
 		void setMovementStatus(MovementStatus movementStatus);
 		void setDirection(MovementStatus direction);
 		void setMoveUpKey(KeyboardKey key);

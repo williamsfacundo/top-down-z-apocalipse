@@ -17,9 +17,10 @@ namespace Z_APOCALIPSE
 		const Color zombiesColor = GREEN;
 		const Color uiColor = BLACK;
 		const float hudHeightPercentage = 0.26f;		
-		const float charactersSizeDivider = 25;		
+		const float charactersSizeDivider = 24.0f;		
 		const float initialtimeToSpawnZombie = 2.0f;
 		const float timeToEndRound = 60.0f;
+		const float moneyForKillingZombie = 20;
 		const int uiSmallSize = 30;
 		const int uiBigSize = 40;		
 		const short initialRound = 1;

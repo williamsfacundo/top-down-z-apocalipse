@@ -59,6 +59,11 @@ namespace Z_APOCALIPSE
 		this->money = money;
 	}
 
+	void Survivor::addMoney(float money) 
+	{
+		this->money += money;
+	}
+
 	void Survivor::setMovementStatus(MovementStatus movementStatus)
 	{
 		this->movementStatus = movementStatus;
