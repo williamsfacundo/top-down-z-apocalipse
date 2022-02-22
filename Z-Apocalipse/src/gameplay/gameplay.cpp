@@ -308,7 +308,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawLivesRemaining() 
 	{
-		DrawText(TextFormat("Lives: %i", playerOne->getLives()), uiSmallSize, static_cast<int>(gameplaySpacePos.y), uiSmallSize, uiColor);
+		DrawText(TextFormat("Lives: %i", playerOne->getLives()), uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawInbulnerabilityTimer() 
