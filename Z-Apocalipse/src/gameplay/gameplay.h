@@ -87,6 +87,7 @@ namespace Z_APOCALIPSE
 		void drawLivesRemaining();
 		void drawInbulnerabilityTimer();
 		void drawPlayerBulletsUI();
+		void drawReloadingText();
 		void drawRoundHud();
 		void drawPlayerMoney();
 		void drawGameplay();		

@@ -346,9 +346,10 @@ namespace Z_APOCALIPSE
 		drawLivesRemaining();
 		drawInbulnerabilityTimer();
 		drawPlayerBulletsUI();
+		drawReloadingText();
 		drawRoundHud();
 		drawPlayerMoney();
-		drawPauseButton();
+		drawPauseButton();		
 	}
 
 	void Gameplay::drawTimer() 
@@ -370,7 +371,7 @@ namespace Z_APOCALIPSE
 	{
 		if (playerOne->getInvulnerabilityTimer() > 0.0f)
 		{
-			DrawText(TextFormat("Invulnerability"), uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2) + uiSmallSize, uiSmallSize, uiColor);
+			DrawText(TextFormat("(INVULNERABILITY)"), uiSmallSize * 5, static_cast<int>(gameplaySpacePos.y / 2), static_cast<int>(uiSmallSize * 0.55f), uiColor);
 		}
 	}
 
@@ -379,6 +380,16 @@ namespace Z_APOCALIPSE
 		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
 		DrawText("/", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
 		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+	}
+
+	void Gameplay::drawReloadingText() 
+	{
+		if(playerOne->getReloadTimer() > 0.0f)
+		{
+			DrawText("(RELOADING)", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4),
+				static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + uiSmallSize),
+				static_cast<int>(uiSmallSize * 0.55f), uiColor);
+		}		
 	}
 
 	void Gameplay::drawRoundHud() 
