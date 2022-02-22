@@ -28,6 +28,7 @@ namespace Z_APOCALIPSE
 		const float initialDamage = 10.0f;
 		const float invulnerabilityTime = 1.8f;
 		const float reloadTime = 2.2f;
+		const float bulletsSizeDivider = 3.0f;
 		static const short maxBullets = 30;
 
 		short lives;

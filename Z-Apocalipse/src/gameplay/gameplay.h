@@ -17,8 +17,7 @@ namespace Z_APOCALIPSE
 		const Color zombiesColor = GREEN;
 		const Color uiColor = BLACK;
 		const float hudHeightPercentage = 0.26f;		
-		const float playerOneRadius = 30.0f;
-		const float zombiesRadius = 22.5f;
+		const float charactersSizeDivider = 25;		
 		const float initialtimeToSpawnZombie = 2.0f;
 		const float timeToEndRound = 60.0f;
 		const int uiSmallSize = 30;
@@ -49,6 +48,7 @@ namespace Z_APOCALIPSE
 		Vector2 getRandomZombieSpawnPosition();
 		float getTimerToEndRound();
 		short getRound();
+		float getGameplaySize();
 
 		void init();
 		void input();
@@ -78,7 +78,7 @@ namespace Z_APOCALIPSE
 		void drawPlayerBulletsUI();
 		void drawRoundHud();
 		void drawPlayerMoney();
-		void drawGameplay();
+		void drawGameplay();		
 	};
 }
 

@@ -6,7 +6,7 @@ namespace Z_APOCALIPSE
 {
 	short Bullet::bulletsCreated = 0;
 
-	Bullet::Bullet(Vector2 position, Vector2 direction, BulletsType type)
+	Bullet::Bullet(Vector2 position, Vector2 direction, BulletsType type, float radius)
 	{
 		setPosition(position);
 		setDirection(direction);
@@ -18,7 +18,7 @@ namespace Z_APOCALIPSE
 		case BulletsType::GUN:
 
 			setColor(gunTypeColor);
-			setRadius(gunTypeRadius);
+			setRadius(radius);
 			break;
 		default:
 			break;

@@ -1,6 +1,8 @@
 #include "gameplay.h"
 
 #include <iostream>
+#include <cmath>
+
 #include <raylib.h>
 
 namespace Z_APOCALIPSE 
@@ -18,6 +20,8 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::setZombiesSpawnsPositions()
 	{
+		float zombiesRadius = getGameplaySize() / charactersSizeDivider;
+		
 		zombiesSpawnsPositions[0] = { zombiesRadius / 2.0f, gameplaySpacePos.y + (zombiesRadius / 2.0f) };
 		zombiesSpawnsPositions[1] = { static_cast<float>(GetScreenWidth()) - (zombiesRadius / 2.0f), gameplaySpacePos.y + (zombiesRadius / 2.0f) };
 		zombiesSpawnsPositions[2] = { zombiesRadius / 2.0f, gameplaySpacePos.y + gameplaySpaceHeight - (zombiesRadius / 2.0f) };
@@ -81,9 +85,18 @@ namespace Z_APOCALIPSE
 		return round;
 	}
 
+	float Gameplay::getGameplaySize() 
+	{
+		float width = GetScreenWidth();
+		float height = GetScreenHeight() - (GetScreenHeight() * hudHeightPercentage);
+		float h = sqrtf(powf(width, 2) + powf(height, 2));
+
+		return h;
+	}
+
 	void Gameplay::init()
 	{		
-		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, playerOneRadius, 
+		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, (getGameplaySize() / charactersSizeDivider) / 2.0f,
 			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		
 		for (short i = 0; i < maxZombies; i++) 
@@ -251,7 +264,7 @@ namespace Z_APOCALIPSE
 	{
 		if (Zombie::getZombiesCreated() < maxZombies) 
 		{			
-			zombies[findEmptyZombieIndex()] = new Zombie(zombiesColor, getRandomZombieSpawnPosition(), zombiesRadius,
+			zombies[findEmptyZombieIndex()] = new Zombie(zombiesColor, getRandomZombieSpawnPosition(), (getGameplaySize() / charactersSizeDivider) / 2.0f,
 				{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight }, 1);
 		}		
 	}

@@ -11,8 +11,7 @@ namespace Z_APOCALIPSE
 	{
 	private:
 		const float initialVelocity = 450.0f;
-		const Color gunTypeColor = BLACK;
-		const float gunTypeRadius = 3.5f;
+		const Color gunTypeColor = BLACK;		
 		
 		BulletsType type;
 		Vector2 position;		
@@ -23,7 +22,7 @@ namespace Z_APOCALIPSE
 
 		static short bulletsCreated;
 	public:
-		Bullet(Vector2 position, Vector2 direction, BulletsType type);
+		Bullet(Vector2 position, Vector2 direction, BulletsType type, float radius);
 		~Bullet();
 
 		void setType(BulletsType type);
