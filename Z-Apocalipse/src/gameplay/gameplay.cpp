@@ -38,9 +38,19 @@ namespace Z_APOCALIPSE
 		this->timerToSpawnZombie = timer;
 	}
 
+	void Gameplay::setRoundStartingTimerToSpawnZombie(float roundStartingTimerToSpawnZombie) 
+	{
+		this->roundStartingTimerToSpawnZombie = roundStartingTimerToSpawnZombie;
+	}
+
 	void Gameplay::setTimerToEndRound(float timer) 
 	{
 		this->timerToEndRound = timer;
+	}
+
+	void Gameplay::setRoundStartingTimerToEndRound(float roundStartingTimerToEndRound) 
+	{
+		this->roundStartingTimerToEndRound = roundStartingTimerToEndRound;
 	}
 
 	void Gameplay::setPauseButtonRadius(float pauseButtonRadius)
@@ -48,9 +58,59 @@ namespace Z_APOCALIPSE
 		this->pauseButtonRadius = pauseButtonRadius;
 	}
 
+	void Gameplay::setZombieVelocity(float zombieVelocity)
+	{
+		this->zombieVelocity = zombieVelocity;
+	}
+
+	void Gameplay::setZombieDamageToDie(float zombieDamageToDie)
+	{
+		this->zombieDamageToDie = zombieDamageToDie;
+	}
+
 	void Gameplay::setRound(short round)
 	{
 		this->round = round;
+	}		
+
+	void Gameplay::nextRound() 
+	{
+		round += 1;
+	}
+
+	void Gameplay::setMoneyForKillingZombie(short moneyForKillingZombie) 
+	{
+		this->moneyForKillingZombie = moneyForKillingZombie;
+	}
+
+	void Gameplay::addTimeToSpawnZombie(float value) 
+	{
+		timerToSpawnZombie += value;
+	}
+
+	void Gameplay::addTimeToEndRound(float value) 
+	{
+		timerToEndRound += value;
+	}
+
+	void Gameplay::addMoneyForKillingZombie(float value)
+	{
+		this->moneyForKillingZombie += value;
+	}
+
+	void Gameplay::addMaxZombiesInRound(short value) 
+	{
+		this->maxZombiesInRound += value;
+	}
+
+	void Gameplay::addZombieVelocity(float value) 
+	{
+		this->zombieVelocity += value;
+	}
+
+	void Gameplay::addZombieDamageToDie(float value) 
+	{
+		this->zombieDamageToDie += value;
 	}
 
 	Vector2 Gameplay::getPauseButtonPosition()
@@ -61,6 +121,11 @@ namespace Z_APOCALIPSE
 	float Gameplay::getTimerToSpawnZombie() 
 	{
 		return timerToSpawnZombie;
+	}
+
+	float Gameplay::getRoundStartingTimerToSpawnZombie() 
+	{
+		return roundStartingTimerToSpawnZombie;
 	}
 
 	Vector2 Gameplay::getRandomZombieSpawnPosition() 
@@ -95,9 +160,24 @@ namespace Z_APOCALIPSE
 		return timerToEndRound;
 	}
 
+	float Gameplay::getRoundStartingTimerToEndRound() 
+	{
+		return roundStartingTimerToEndRound;
+	}
+
 	float Gameplay::getPauseButtonRadius()
 	{
 		return pauseButtonRadius;
+	}
+
+	float Gameplay::getZombieVelocity() 
+	{
+		return zombieVelocity;
+	}
+
+	float Gameplay::getZombieDamageToDie() 
+	{
+		return zombieDamageToDie;
 	}
 
 	short Gameplay::getRound() 
@@ -114,12 +194,17 @@ namespace Z_APOCALIPSE
 		return h;
 	}
 
+	short Gameplay::getMoneyForKillingZombie() 
+	{
+		return moneyForKillingZombie;
+	}
+
 	void Gameplay::init()
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, (getGameplaySize() / charactersSizeDivider) / 2.0f,
 			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		
-		for (short i = 0; i < maxZombies; i++) 
+		for (short i = 0; i < maxZombiesInRound; i++) 
 		{
 			zombies[i] = NULL;
 		}
@@ -128,8 +213,13 @@ namespace Z_APOCALIPSE
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
 		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() - (GetScreenWidth() / 15)), getPauseButtonRadius() * 1.4f});
 		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
-		setTimerToEndRound(timeToEndRound);		
+		setTimerToEndRound(initialTimeToEndRound);		
+		setZombieVelocity(zombieInitialVelocity);
+		setZombieDamageToDie(zombieInitialDamageToDie);
 		setRound(initialRound);		
+		setMoneyForKillingZombie(initialMoneyForKillingZombie);
+		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
+		setRoundStartingTimerToEndRound(initialTimeToEndRound);
 	}
 	
 	void Gameplay::input(SceneManager* sceneManager)
@@ -166,7 +256,7 @@ namespace Z_APOCALIPSE
 	{
 		delete playerOne;
 
-		for (short i = 0; i < maxZombies; i++) 
+		for (short i = 0; i < maxZombiesInRound; i++) 
 		{
 			if (zombies[i] != NULL)
 			{
@@ -189,7 +279,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawZombies() 
 	{
-		for (short i = 0; i < maxZombies; i++) 
+		for (short i = 0; i < maxZombiesInRound; i++) 
 		{
 			if (zombies[i] != NULL) 
 			{
@@ -200,7 +290,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::zombiesUpdate() 
 	{
-		for (short i = 0; i < maxZombies; i++)
+		for (short i = 0; i < maxZombiesInRound; i++)
 		{
 			if (zombies[i] != NULL)
 			{
@@ -215,7 +305,7 @@ namespace Z_APOCALIPSE
 		{
 			if (!playerOne->isBulletNull(i)) 
 			{
-				for (short v = 0; v < maxZombies; v++) 
+				for (short v = 0; v < maxZombiesInRound; v++) 
 				{
 					if (zombies[v] != NULL) 
 					{
@@ -225,7 +315,7 @@ namespace Z_APOCALIPSE
 							zombies[v]->addDamageTaken(playerOne->getDamage());							
 
 							playerOne->destroyBullet(i);
-							v = maxZombies;
+							v = maxZombiesInRound;
 						}
 					}
 				}
@@ -237,7 +327,7 @@ namespace Z_APOCALIPSE
 	{
 		if (!playerOne->isSurvivorInvulnerable()) 
 		{
-			for (short i = 0; i < maxZombies; i++)
+			for (short i = 0; i < maxZombiesInRound; i++)
 			{
 				if (zombies[i] != NULL)
 				{
@@ -253,7 +343,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::zombiesDeath() 
 	{
-		for(short i = 0; i < maxZombies; i++)
+		for(short i = 0; i < maxZombiesInRound; i++)
 		{
 			if (zombies[i] != NULL) 
 			{
@@ -264,6 +354,18 @@ namespace Z_APOCALIPSE
 					delete zombies[i];
 					zombies[i] = NULL;
 				}
+			}
+		}
+	}
+
+	void Gameplay::destroyZombies() 
+	{
+		for (short i = 0; i < maxZombies; i++)
+		{
+			if (zombies[i] != NULL)
+			{
+				delete zombies[i];
+				zombies[i] = NULL;
 			}
 		}
 	}
@@ -288,16 +390,16 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::createZombie() 
 	{
-		if (Zombie::getZombiesCreated() < maxZombies) 
+		if (Zombie::getZombiesCreated() < maxZombiesInRound) 
 		{			
 			zombies[findEmptyZombieIndex()] = new Zombie(zombiesColor, getRandomZombieSpawnPosition(), (getGameplaySize() / charactersSizeDivider) / 2.0f,
-				{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight }, 1);
+				{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight }, getZombieDamageToDie(), getZombieVelocity());
 		}		
 	}
 
 	short Gameplay::findEmptyZombieIndex() 
 	{
-		for (short i = 0; i < maxZombies; i++) 
+		for (short i = 0; i < maxZombiesInRound; i++) 
 		{
 			if (zombies[i] == NULL) 
 			{
@@ -327,16 +429,16 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::winRound() 
 	{
-		deinit();
-		init();
+		nextRound();
+		increaseStatsForNextRound();
+		resetGameplay();
 	}
 
 	void Gameplay::defeatCondition() 
 	{
 		if (playerOne->getLives() <= 0) 
 		{			
-			deinit();
-			init();
+			resetGameplay();
 		}
 	}
 
@@ -429,5 +531,27 @@ namespace Z_APOCALIPSE
 		float height = GetScreenHeight() - (GetScreenHeight() * hudHeightPercentage);
 
 		return CheckCollisionPointRec(GetMousePosition(), { 0.0f, y, static_cast<float>(GetScreenWidth()), height });
+	}
+
+	void Gameplay::increaseStatsForNextRound()
+	{
+		addTimeToSpawnZombie(getRoundStartingTimerToSpawnZombie() * decreasZombieSpawnerPercentage);
+		addTimeToEndRound(getRoundStartingTimerToEndRound() * addEndRoundTimePercentage);
+		addMoneyForKillingZombie(getMoneyForKillingZombie() * addMoneyRewardPercentage);
+		addMaxZombiesInRound(zombiesAdditionNextRound);
+		addZombieVelocity(getZombieVelocity() * increasedZombiesVelocity);
+		addZombieDamageToDie(getZombieDamageToDie() * increasedZombiesDamageToDie);
+		setRoundStartingTimerToSpawnZombie(getTimerToSpawnZombie());
+		setRoundStartingTimerToEndRound(getTimerToEndRound());		
+	}
+
+	void Gameplay::resetGameplay() 
+	{
+		setTimerToSpawnZombie(getRoundStartingTimerToSpawnZombie());
+		setTimerToEndRound(getRoundStartingTimerToEndRound());
+				
+		destroyZombies();
+
+		playerOne->resetSurvivor({ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
 	}
 }

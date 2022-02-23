@@ -28,7 +28,7 @@ namespace Z_APOCALIPSE
 		setRemainingBullets(initialMaxBullets - maxBulletsInCharger);
 		setReloadKey(initialReloadKey);		
 		setBulletsToNull();
-		setReloadTimer(0.0f);
+		setReloadTimer(0.0f);		
 	}
 
 	Survivor::~Survivor() 
@@ -296,6 +296,11 @@ namespace Z_APOCALIPSE
 	short Survivor::getRemainingBullets()
 	{
 		return remainingBullets;
+	}
+
+	short Survivor::getInitialLives() 
+	{
+		return initialLives;
 	}
 
 #pragma endregion
@@ -608,5 +613,33 @@ namespace Z_APOCALIPSE
 				bullets[i]->draw();
 			}
 		}
+	}
+
+	void Survivor::destroyBullets() 
+	{
+		for (short i = 0; i < maxBullets; i++) 
+		{
+			if (bullets[i] != NULL) 
+			{
+				delete bullets[i];
+				bullets[i] = NULL;
+			}
+		}
+	}
+
+	void Survivor::resetSurvivor(Vector2 position) 
+	{
+		setMoney(initialMoney);
+		setMovementStatus(MovementStatus::NONE);
+		setDirection(MovementStatus::UP);
+		setBulletsInCharger(maxBulletsInCharger);
+		setRemainingBullets(initialMaxBullets - maxBulletsInCharger);
+		setPosition(position);
+		setAceleration(0.0f);
+		setReloadTimer(0.0f);
+		setInvulnerabilityTimer(0.0f);
+		setShootingTimer(0.0f);
+		destroyBullets();
+		setLives(getInitialLives());
 	}
 }

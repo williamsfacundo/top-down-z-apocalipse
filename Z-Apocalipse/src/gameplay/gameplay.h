@@ -21,24 +21,38 @@ namespace Z_APOCALIPSE
 		const float hudHeightPercentage = 0.26f;		
 		const float charactersSizeDivider = 24.0f;		
 		const float initialtimeToSpawnZombie = 2.0f;
-		const float timeToEndRound = 60.0f;
-		const float moneyForKillingZombie = 20;
+		const float initialTimeToEndRound = 60.0f;		
+		const float zombieInitialVelocity = 35.0f;
+		const float zombieInitialDamageToDie = 20.0f;
+		const float decreasZombieSpawnerPercentage = 0.11f;
+		const float addEndRoundTimePercentage = 0.3f;
+		const float addMoneyRewardPercentage = 0.5f;
+		const float increasedZombiesVelocity = 0.15f;
+		const float increasedZombiesDamageToDie = 0.65f;
 		const int uiSmallSize = 30;
 		const int uiBigSize = 40;		
 		const short initialRound = 1;
-		static const short maxZombies = 5;
+		const short zombiesAdditionNextRound = 1;
+		const short initialMoneyForKillingZombie = 20;
+		static const short maxZombies = 10;
 		static const short maxSpawners = 4;
 		const Scenes pauseMenuScene = Scenes::PAUSE;
-		const MouseButton pauseGameInputButton = MouseButton::MOUSE_BUTTON_LEFT;
-		
+		const MouseButton pauseGameInputButton = MouseButton::MOUSE_BUTTON_LEFT;	
+			
 		Vector2 gameplaySpacePos;
 		Vector2 zombiesSpawnsPositions[maxSpawners];
 		Vector2 pauseButtonPosition;
 		float gameplaySpaceHeight;	
 		float timerToSpawnZombie;
+		float roundStartingTimerToSpawnZombie;
 		float timerToEndRound;
-		float pauseButtonRadius;
+		float roundStartingTimerToEndRound;
+		float pauseButtonRadius;		
+		float zombieVelocity;
+		float zombieDamageToDie;
 		short round;
+		short maxZombiesInRound = 5;
+		short moneyForKillingZombie;
 
 		Survivor* playerOne;
 		Zombie* zombies[maxZombies];
@@ -49,17 +63,35 @@ namespace Z_APOCALIPSE
 		void setZombiesSpawnsPositions();
 		void setPauseButtonPosition(Vector2 pauseButtonPosition);
 		void setTimerToSpawnZombie(float timer);
+		void setRoundStartingTimerToSpawnZombie(float roundStartingTimerToSpawnZombie);
 		void setTimerToEndRound(float timer);
+		void setRoundStartingTimerToEndRound(float roundStartingTimerToEndRound);
 		void setPauseButtonRadius(float pauseButtonRadius);
-		void setRound(short round);
+		void setZombieVelocity(float zombieVelocity);
+		void setZombieDamageToDie(float zombieDamageToDie);
+		void setRound(short round);	
+		void nextRound();
+		void setMoneyForKillingZombie(short moneyForKillingZombie);
+
+		void addTimeToSpawnZombie(float value);
+		void addTimeToEndRound(float value);
+		void addMoneyForKillingZombie(float value);
+		void addMaxZombiesInRound(short value);
+		void addZombieVelocity(float value);
+		void addZombieDamageToDie(float value);
 		
 		Vector2 getPauseButtonPosition();
 		float getTimerToSpawnZombie();
+		float getRoundStartingTimerToSpawnZombie();
 		Vector2 getRandomZombieSpawnPosition();
 		float getTimerToEndRound();
+		float getRoundStartingTimerToEndRound();
 		float getPauseButtonRadius();
+		float getZombieVelocity();
+		float getZombieDamageToDie();
 		short getRound();
 		float getGameplaySize();
+		short getMoneyForKillingZombie();
 
 		void init();
 		void input(SceneManager* sceneManager);
@@ -75,6 +107,7 @@ namespace Z_APOCALIPSE
 		void bulletsCollisionWithZombies();
 		void zombiesCollisionWithPlayer();
 		void zombiesDeath();
+		void destroyZombies();
 		void updateZombieSpawnTimer();
 		void createZombie();
 		short findEmptyZombieIndex();
@@ -94,6 +127,8 @@ namespace Z_APOCALIPSE
 		void drawPauseButton();
 		void pauseGameInput(SceneManager* sceneManager);
 		bool isMouseOnGameplaySpace();
+		void increaseStatsForNextRound();
+		void resetGameplay();
 	};
 }
 

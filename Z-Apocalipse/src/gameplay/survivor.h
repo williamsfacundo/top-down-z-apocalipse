@@ -103,7 +103,8 @@ namespace Z_APOCALIPSE
 		float getReloadTimer();		
 		short getMaxBulletsInCharger();
 		short getBulletsInCharger();		
-		short getRemainingBullets();		
+		short getRemainingBullets();	
+		short getInitialLives();
 
 		void input(bool mouseOnGameplay);
 		void shootingInput(bool mouseOnGameplay);
@@ -129,6 +130,8 @@ namespace Z_APOCALIPSE
 		void reload();
 		void drawSurvivor();
 		void drawBullets();
+		void destroyBullets();
+		void resetSurvivor(Vector2 position);
 	};
 }
 

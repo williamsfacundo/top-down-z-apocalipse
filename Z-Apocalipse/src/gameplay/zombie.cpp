@@ -8,12 +8,11 @@ namespace Z_APOCALIPSE
 {
 	short Zombie::zombiesCreated = 0;
 
-	Zombie::Zombie(Color characterColor, Vector2 position, float radius, Rectangle gameplayMap, short level) : Character(characterColor, position, radius, gameplayMap)
+	Zombie::Zombie(Color characterColor, Vector2 position, float radius, Rectangle gameplayMap, float damageToDie, float velocity) : Character(characterColor, position, radius, gameplayMap)
 	{
 		setDamageTaken(initialDamageTaken);
-		setDamageToDie(initialDamageToDie);
-		setVelocity(initialVelocity);
-		setLevel(level);
+		setDamageToDie(damageToDie);
+		setVelocity(velocity);		
 
 		zombiesCreated += 1;
 	}	
@@ -41,12 +40,7 @@ namespace Z_APOCALIPSE
 	void Zombie::setVelocity(float velocity) 
 	{
 		this->velocity = velocity;
-	}
-
-	void Zombie::setLevel(short level) 
-	{
-		this->level = level;
-	}
+	}	
 
 	float Zombie::getDamageTaken()
 	{
@@ -61,12 +55,7 @@ namespace Z_APOCALIPSE
 	float Zombie::getVelocity()
 	{
 		return velocity;
-	}
-
-	short Zombie::getLevel() 
-	{
-		return level;
-	}
+	}	
 
 	Vector2 Zombie::getZombieDirection(Vector2 playerPosition) 
 	{
@@ -116,8 +105,8 @@ namespace Z_APOCALIPSE
 	float Zombie::calculateHealthBarWidth() 
 	{
 		short maxWidth = getRadius() * 2;
-		float health = initialDamageToDie - damageTaken;
-		float width = (health * maxWidth) / initialDamageToDie;
+		float health = getDamageToDie() - damageTaken;
+		float width = (health * maxWidth) / getDamageToDie();
 		return width;		
 	}
 }
