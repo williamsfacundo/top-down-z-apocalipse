@@ -10,6 +10,7 @@ namespace Z_APOCALIPSE
 	{
 		setLives(initialLives);
 		setMoney(initialMoney);
+		setInitialRoundMoney(initialMoney);
 		setMovementStatus(MovementStatus::NONE);
 		setDirection(MovementStatus::UP);
 		setMoveUpKey(initialMoveUpKey);
@@ -63,6 +64,11 @@ namespace Z_APOCALIPSE
 	{
 		this->money += money;
 	}
+
+	void Survivor::setInitialRoundMoney(float initialRoundMoney) 
+	{
+		this->initialRoundMoney = initialRoundMoney;
+	}	
 
 	void Survivor::setMovementStatus(MovementStatus movementStatus)
 	{
@@ -629,7 +635,7 @@ namespace Z_APOCALIPSE
 
 	void Survivor::resetSurvivor(Vector2 position) 
 	{
-		setMoney(initialMoney);
+		setMoney(initialRoundMoney);
 		setMovementStatus(MovementStatus::NONE);
 		setDirection(MovementStatus::UP);
 		setBulletsInCharger(maxBulletsInCharger);

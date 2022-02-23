@@ -33,6 +33,7 @@ namespace Z_APOCALIPSE
 
 		short lives;
 		int money;
+		int initialRoundMoney;
 		short directionNumberMultiplyer;
 		MovementStatus movementStatus;
 		MovementStatus direction;
@@ -61,6 +62,7 @@ namespace Z_APOCALIPSE
 		void subtractLive();
 		void setMoney(int money);
 		void addMoney(float money);
+		void setInitialRoundMoney(float initialRoundMoney);
 		void setMovementStatus(MovementStatus movementStatus);
 		void setDirection(MovementStatus direction);
 		void setMoveUpKey(KeyboardKey key);

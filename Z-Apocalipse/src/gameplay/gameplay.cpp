@@ -430,6 +430,7 @@ namespace Z_APOCALIPSE
 	void Gameplay::winRound() 
 	{
 		nextRound();
+		playerOne->setInitialRoundMoney(playerOne->getMoney());
 		increaseStatsForNextRound();
 		resetGameplay();
 	}
@@ -535,14 +536,18 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::increaseStatsForNextRound()
 	{
-		addTimeToSpawnZombie(getRoundStartingTimerToSpawnZombie() * decreasZombieSpawnerPercentage);
+		setTimerToSpawnZombie(getRoundStartingTimerToSpawnZombie());
+		setTimerToEndRound(getRoundStartingTimerToEndRound());
+		addTimeToSpawnZombie(-(getRoundStartingTimerToSpawnZombie() * decreasZombieSpawnerPercentage));
 		addTimeToEndRound(getRoundStartingTimerToEndRound() * addEndRoundTimePercentage);
+		setRoundStartingTimerToSpawnZombie(getTimerToSpawnZombie());
+		setRoundStartingTimerToEndRound(getTimerToEndRound());
+		
 		addMoneyForKillingZombie(getMoneyForKillingZombie() * addMoneyRewardPercentage);
 		addMaxZombiesInRound(zombiesAdditionNextRound);
 		addZombieVelocity(getZombieVelocity() * increasedZombiesVelocity);
 		addZombieDamageToDie(getZombieDamageToDie() * increasedZombiesDamageToDie);
-		setRoundStartingTimerToSpawnZombie(getTimerToSpawnZombie());
-		setRoundStartingTimerToEndRound(getTimerToEndRound());		
+				
 	}
 
 	void Gameplay::resetGameplay() 
