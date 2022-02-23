@@ -1,6 +1,6 @@
 #include "options.h"
 
-namespace Z_APOCALIPS 
+namespace Z_APOCALIPSE
 {
 	Options::Options() 
 	{

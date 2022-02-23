@@ -54,6 +54,7 @@ namespace Z_APOCALIPSE
 		sceneManager = new SceneManager(initialScene);
 		gameplay = new Gameplay();
 		mainMenu = new MainMenu(mainMenuTexts);
+		credits = new Credits();
 
 		setRunning(true);
 		setMainMenuChangeScenes();
@@ -66,6 +67,7 @@ namespace Z_APOCALIPSE
 		delete sceneManager;
 		delete gameplay;
 		delete mainMenu;
+		delete credits;
 	}
 
 	void Game::runGame()
@@ -91,7 +93,9 @@ namespace Z_APOCALIPSE
 				break;
 			case Scenes::CREDITS:
 
-				temporalUnuseScenes();
+				credits->input(sceneManager);
+
+				credits->draw(mainMenu);
 				break;
 			case Scenes::EXIT:
 
@@ -118,6 +122,8 @@ namespace Z_APOCALIPSE
 
 		BeginDrawing();
 		ClearBackground(WHITE);
+
+		DrawText("PRESS 'SPACE' TO GO BACK", 1, 1, 50, BLACK);
 		EndDrawing();
 	}	
 

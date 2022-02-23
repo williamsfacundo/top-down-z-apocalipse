@@ -4,6 +4,7 @@
 #include "scene_manager.h"
 #include "gameplay.h"
 #include "..\game\main_menu.h"
+#include "..\game\credits.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -23,6 +24,8 @@ namespace Z_APOCALIPSE
 		SceneManager* sceneManager;
 		Gameplay* gameplay;
 		MainMenu* mainMenu;
+		Credits* credits;
+
 		bool running;
 	public:
 		Game(int screenWidth, int screenHeight);

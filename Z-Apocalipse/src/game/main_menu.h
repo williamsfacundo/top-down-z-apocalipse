@@ -29,6 +29,7 @@ namespace Z_APOCALIPSE
 				
 		void input(SceneManager* sceneManager, Scenes newScene[maxMainMenuButtons]);	
 		void draw();
+		void drawTitle();
 
 		void createButtons(const char* texts[maxMainMenuButtons]);
 	};

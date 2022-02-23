@@ -1,7 +1,7 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
-namespace Z_APOCALIPS 
+namespace Z_APOCALIPSE 
 {
 	class Options
 	{

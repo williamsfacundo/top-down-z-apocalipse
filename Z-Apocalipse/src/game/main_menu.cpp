@@ -28,14 +28,18 @@ namespace Z_APOCALIPSE
 		BeginDrawing();
 		ClearBackground(backgroundColor);
 
-		DrawText(titleText, (GetScreenWidth() / 2) - (4 * titleTextSize), static_cast<int>(GetScreenHeight() * (tittlePercentage / 2)), titleTextSize, titleTextColor );
-
+		drawTitle();
 		for (short i = 0; i < maxMainMenuButtons; i++) 
 		{
 			button[i]->draw();	
 		}
 
 		EndDrawing();
+	}
+
+	void MainMenu::drawTitle()
+	{
+		DrawText(titleText, (GetScreenWidth() / 2) - (4 * titleTextSize), static_cast<int>(GetScreenHeight() * (tittlePercentage / 2)), titleTextSize, titleTextColor);
 	}
 
 	void MainMenu::createButtons(const char* texts[maxMainMenuButtons])
