@@ -4,9 +4,12 @@
 #include <cmath>
 
 #include <raylib.h>
+#include "..\math\math.h"
 
 namespace Z_APOCALIPSE 
 {
+	using namespace vectorMath;
+
 	Gameplay::Gameplay()
 	{
 		updateHudSpace();
@@ -236,7 +239,8 @@ namespace Z_APOCALIPSE
 		zombiesUpdate();
 		bulletsCollisionWithZombies();
 		zombiesDeath();
-		zombiesCollisionWithPlayer();		
+		zombiesCollisionWithPlayer();	
+		zombiesCollisionWithEachOther();
 		decreasTimerToEndRound();
 		defeatCondition();
 	}
@@ -339,6 +343,32 @@ namespace Z_APOCALIPSE
 				}
 			}
 		}		
+	}
+
+	void Gameplay::zombiesCollisionWithEachOther() 
+	{
+		Vector2 normal;
+		float depth;
+
+		for (short i = 0; i < maxZombiesInRound; i++) 
+		{
+			if (zombies[i] != NULL) 
+			{
+				for (short v = 0; v < maxZombiesInRound; v++) 
+				{
+					if (zombies[v] != NULL) 
+					{
+						if (circlesCollision(zombies[i]->getPosition(), zombies[i]->getRadius(), zombies[v]->getPosition(), zombies[v]->getRadius(), normal, depth))
+						{
+							normal = { normal.x * (depth / 2), normal.y * (depth / 2) };							
+							zombies[i]->move(normal);
+							normal = { normal.x * -1, normal.y * -1 };
+							zombies[v]->move(normal);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void Gameplay::zombiesDeath() 

@@ -106,6 +106,7 @@ namespace Z_APOCALIPSE
 		void zombiesUpdate();
 		void bulletsCollisionWithZombies();
 		void zombiesCollisionWithPlayer();
+		void zombiesCollisionWithEachOther();
 		void zombiesDeath();
 		void destroyZombies();
 		void updateZombieSpawnTimer();
