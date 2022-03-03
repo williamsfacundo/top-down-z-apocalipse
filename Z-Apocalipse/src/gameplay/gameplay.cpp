@@ -93,7 +93,10 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::addTimeToEndRound(float value) 
 	{
-		timerToEndRound += value;
+		if (getTimerToEndRound() + value < maxTimeToEndRound) 
+		{
+			timerToEndRound += value;
+		}		
 	}
 
 	void Gameplay::addMoneyForKillingZombie(float value)

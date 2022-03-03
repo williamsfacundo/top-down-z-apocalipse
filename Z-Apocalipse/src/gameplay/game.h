@@ -17,7 +17,7 @@ namespace Z_APOCALIPSE
 		const char* title = "Z-APOCALIPSE";
 		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
 		const short fps = 60;
-		const Scenes initialScene = Scenes::UPGRADER; 	
+		const Scenes initialScene = Scenes::MAIN_MENU; 	
 		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY; 
 		const MouseButton pauseMenuInputButton = MouseButton::MOUSE_BUTTON_LEFT;
 				

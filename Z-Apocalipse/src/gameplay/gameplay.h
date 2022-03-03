@@ -34,6 +34,7 @@ namespace Z_APOCALIPSE
 		const short initialRound = 1;
 		const short zombiesAdditionNextRound = 1;
 		const short initialMoneyForKillingZombie = 20;
+		const short maxTimeToEndRound = 300;
 		static const short maxZombies = 10;
 		static const short maxSpawners = 4;
 		const Scenes pauseMenuScene = Scenes::PAUSE;
