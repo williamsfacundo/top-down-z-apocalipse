@@ -128,7 +128,7 @@ namespace Z_APOCALIPSE
 	}
 
 	
-	void Upgrader::draw() 
+	void Upgrader::draw(Survivor* survivor)
 	{
 		BeginDrawing();
 		ClearBackground(backGroundColor);
@@ -172,6 +172,9 @@ namespace Z_APOCALIPSE
 		DrawText(TextFormat("$ %i", getPrice(7)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 12.0f, priceHudSize, priceHudColor);
 
 		changeSceneButton->draw();
+
+		DrawCircleV({ 1.0f, static_cast<float>(GetScreenHeight() + (playerMoneyCircleRadius / 2.0f)) }, playerMoneyCircleRadius, playerMoneyCircleColor );
+		DrawText(TextFormat("$ %i", survivor->getMoney()), 1, GetScreenHeight() - 30, playerMoneyHudSize, playerMoneyColor);
 		
 		EndDrawing();
 	}

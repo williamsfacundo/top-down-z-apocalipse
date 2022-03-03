@@ -47,10 +47,13 @@ namespace Z_APOCALIPSE
 
 		const int initialPrice = 50;
 		const int priceHudSize = 20;
-		const int playerMoneyHudSize = 30;
+		const int playerMoneyHudSize = 30;		
 		const int priceHudSeparation = 50;
 		const float higherPriceMultiplyer = 0.25f;
-		const Color priceHudColor = GREEN;		
+		const float playerMoneyCircleRadius = 220;
+		const Color priceHudColor = GREEN;	
+		const Color playerMoneyColor = BLACK;
+		const Color playerMoneyCircleColor = YELLOW;
 
 		UpgraderButton* velocityUpdateButton;
 		UpgraderButton* maxAcelerationUpdateButton;
@@ -70,7 +73,7 @@ namespace Z_APOCALIPSE
 		int getPrice(short index);
 
 		void input(Survivor* survivor, SceneManager* sceneManager);
-		void draw();		
+		void draw(Survivor* survivor);
 	};
 }
 

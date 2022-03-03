@@ -116,7 +116,7 @@ namespace Z_APOCALIPSE
 
 				upgrader->input(gameplay->getPlayer(), sceneManager);
 
-				upgrader->draw();
+				upgrader->draw(gameplay->getPlayer());
 				break;
 			default:
 				break;
