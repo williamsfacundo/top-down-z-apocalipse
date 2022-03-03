@@ -46,7 +46,11 @@ namespace Z_APOCALIPSE
 		const Color levelTextColor = GREEN;
 
 		const int initialPrice = 50;
+		const int priceHudSize = 20;
+		const int playerMoneyHudSize = 30;
+		const int priceHudSeparation = 50;
 		const float higherPriceMultiplyer = 0.25f;
+		const Color priceHudColor = GREEN;		
 
 		UpgraderButton* velocityUpdateButton;
 		UpgraderButton* maxAcelerationUpdateButton;
@@ -61,8 +65,9 @@ namespace Z_APOCALIPSE
 		Upgrader();
 		~Upgrader();
 
-		void resetLevels();
-		
+		void resetLevels();		
+
+		int getPrice(short index);
 
 		void input(Survivor* survivor, SceneManager* sceneManager);
 		void draw();		

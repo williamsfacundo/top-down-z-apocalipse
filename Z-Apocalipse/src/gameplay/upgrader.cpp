@@ -60,60 +60,65 @@ namespace Z_APOCALIPSE
 		}
 	}
 
+	int Upgrader::getPrice(short index) 
+	{
+		return (initialPrice * levels[index]) + static_cast<int>(initialPrice * levels[index] * higherPriceMultiplyer);
+	}
+
 	void Upgrader::input(Survivor* survivor, SceneManager* sceneManager)
 	{		
-		if (velocityUpdateButton->buttonPressed() && levels[0] < maxLevel && survivor->getMoney() >= (initialPrice * levels[0]) + (initialPrice * levels[0] * higherPriceMultiplyer)) //survivor->getStartingRoundVelocity() + velocityUpgradeValue <= survivor->getMaxVelocity()
+		if (velocityUpdateButton->buttonPressed() && levels[0] < maxLevel && survivor->getMoney() >= getPrice(0)) //survivor->getStartingRoundVelocity() + velocityUpgradeValue <= survivor->getMaxVelocity()
 		{
-			survivor->addMoney(-((initialPrice * levels[0]) + (initialPrice * levels[0] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(0));
 			survivor->addStartingRoundVelocity(velocityUpgradeValue);
 			survivor->setVelocity(survivor->getStartingRoundVelocity());
 			levels[0] += 1;
 		}
-		else if (maxAcelerationUpdateButton->buttonPressed() && levels[1] < maxLevel && survivor->getMoney() >= (initialPrice * levels[1]) + (initialPrice * levels[1] * higherPriceMultiplyer)) //survivor->getStartingRoundMaxAceleration() + maxAcelerationUpgradeValue <= survivor->getMaxAceleration()
+		else if (maxAcelerationUpdateButton->buttonPressed() && levels[1] < maxLevel && survivor->getMoney() >= getPrice(1)) //survivor->getStartingRoundMaxAceleration() + maxAcelerationUpgradeValue <= survivor->getMaxAceleration()
 		{
-			survivor->addMoney(-((initialPrice * levels[1]) + (initialPrice * levels[1] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(1));
 			survivor->addStartingRoundMaxAceleration(maxAcelerationUpgradeValue);
 			survivor->setAceleration(survivor->getStartingRoundMaxAceleration());
 			levels[1] += 1;
 		}
-		else if (maxAmoUpdateButton->buttonPressed() && levels[2] < maxLevel && survivor->getMoney() >= (initialPrice * levels[2]) + (initialPrice * levels[2] * higherPriceMultiplyer)) //survivor->getStartingRoundRemainingBullets() + maxBulletsPlayerUpgradeValue <= survivor->getMaxBulletsPlayerCanHave()
+		else if (maxAmoUpdateButton->buttonPressed() && levels[2] < maxLevel && survivor->getMoney() >= getPrice(2)) //survivor->getStartingRoundRemainingBullets() + maxBulletsPlayerUpgradeValue <= survivor->getMaxBulletsPlayerCanHave()
 		{
-			survivor->addMoney(-((initialPrice * levels[2]) + (initialPrice * levels[2] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(2));
 			survivor->addStartingRoundRemainingBullets(maxBulletsPlayerUpgradeValue);
 			survivor->setRemainingBullets(survivor->getStartingRoundRemainingBullets());
 			levels[2] += 1;			
 		}
-		else if (chargerUpdateButton->buttonPressed() && levels[3] < maxLevel && survivor->getMoney() >= (initialPrice * levels[3]) + (initialPrice * levels[3] * higherPriceMultiplyer)) //survivor->getStartingRoundMaxBulletsInCharger() + chargerUpgradeValue <= survivor->getMaxBulletsChargerSupports()
+		else if (chargerUpdateButton->buttonPressed() && levels[3] < maxLevel && survivor->getMoney() >= getPrice(3)) //survivor->getStartingRoundMaxBulletsInCharger() + chargerUpgradeValue <= survivor->getMaxBulletsChargerSupports()
 		{
-			survivor->addMoney(-((initialPrice * levels[3]) + (initialPrice * levels[3] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(3));
 			survivor->addStartingRoundMaxBulletsInCharger(chargerUpgradeValue);
 			survivor->setBulletsInCharger(survivor->getStartingRoundMaxBulletsInCharger());
 			levels[3] += 1;			
 		}
-		else if (fireRateUpdateButton->buttonPressed() && levels[4] < maxLevel && survivor->getMoney() >= (initialPrice * levels[4]) + (initialPrice * levels[4] * higherPriceMultiplyer)) //survivor->getStartingRoundShootingTime() - shootingTimeDecreaserValue > survivor->getMinShootingTime()
+		else if (fireRateUpdateButton->buttonPressed() && levels[4] < maxLevel && survivor->getMoney() >= getPrice(4)) //survivor->getStartingRoundShootingTime() - shootingTimeDecreaserValue > survivor->getMinShootingTime()
 		{
-			survivor->addMoney(-((initialPrice * levels[4]) + (initialPrice * levels[4] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(4));
 			survivor->addStartingRoundShootingTime(-shootingTimeDecreaserValue);
 			survivor->setShootingTimer(survivor->getStartingRoundShootingTime());
 			levels[4] += 1;			
 		}
-		else if (reloadSpeedUpdateButton->buttonPressed() && levels[5] < maxLevel && survivor->getMoney() >= (initialPrice * levels[5]) + (initialPrice * levels[5] * higherPriceMultiplyer)) //survivor->getStartingRoundReloadTime() - reloadTimeDecreaserValue > survivor->getMinReloadTime()
+		else if (reloadSpeedUpdateButton->buttonPressed() && levels[5] < maxLevel && survivor->getMoney() >= getPrice(5)) //survivor->getStartingRoundReloadTime() - reloadTimeDecreaserValue > survivor->getMinReloadTime()
 		{
-			survivor->addMoney(-((initialPrice * levels[5]) + (initialPrice * levels[5] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(5));
 			survivor->addStartingRoundReloadTime(-reloadTimeDecreaserValue);
 			survivor->setReloadTimer(survivor->getStartingRoundReloadTime());
 			levels[5] += 1;			
 		}
-		else if (extraLifeUpdateButton->buttonPressed() && levels[6] < maxLevel && survivor->getMoney() >= (initialPrice * levels[6]) + (initialPrice * levels[6] * higherPriceMultiplyer)) //survivor->getRoundStartingLives() + 1 <= survivor->getMaxLives()
+		else if (extraLifeUpdateButton->buttonPressed() && levels[6] < maxLevel && survivor->getMoney() >= getPrice(6)) //survivor->getRoundStartingLives() + 1 <= survivor->getMaxLives()
 		{
-			survivor->addMoney(-((initialPrice * levels[6]) + (initialPrice * levels[6] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(6));
 			survivor->addRoundStartingLive();
 			survivor->setLives(survivor->getRoundStartingLives());
 			levels[6] += 1;					
 		}
-		else if (damageUpdateButton->buttonPressed() && levels[7] < maxLevel && survivor->getMoney() >= (initialPrice * levels[7]) + (initialPrice * levels[7] * higherPriceMultiplyer)) //survivor->getStartingRoundDamage() + damageUpgradeValue <= survivor->getMaxDamage()
+		else if (damageUpdateButton->buttonPressed() && levels[7] < maxLevel && survivor->getMoney() >= getPrice(7)) //survivor->getStartingRoundDamage() + damageUpgradeValue <= survivor->getMaxDamage()
 		{
-			survivor->addMoney(-((initialPrice * levels[7]) + (initialPrice * levels[7] * higherPriceMultiplyer)));
+			survivor->addMoney(-getPrice(7));
 			survivor->addStartingRoundDamage(damageUpgradeValue);
 			survivor->setDamage(survivor->getStartingRoundDamage());
 			levels[7] += 1;		
@@ -136,23 +141,38 @@ namespace Z_APOCALIPSE
 
 		velocityUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[0]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 5) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(0)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 5.0f, priceHudSize, priceHudColor);
+		
 		maxAcelerationUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[1]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 6) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(1)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 6.0f, priceHudSize, priceHudColor);
+
 		maxAmoUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[2]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 7) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(2)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 7.0f, priceHudSize, priceHudColor);
+
 		chargerUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[3]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 8) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(3)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 8.0f, priceHudSize, priceHudColor);
+
 		fireRateUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[4]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 9) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(4)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 9.0f, priceHudSize, priceHudColor);
+
 		reloadSpeedUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[5]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 10) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(5)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 10.0f, priceHudSize, priceHudColor);
+
 		extraLifeUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[6]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 11) - buttonsRadius, levelSize, levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(6)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 11.0f, priceHudSize, priceHudColor);
+
 		damageUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[7]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 12) - buttonsRadius, levelSize, levelTextColor);
-		
-		changeSceneButton->draw();
+		DrawText(TextFormat("$ %i", getPrice(7)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 12.0f, priceHudSize, priceHudColor);
 
+		changeSceneButton->draw();
+		
 		EndDrawing();
 	}
 }
