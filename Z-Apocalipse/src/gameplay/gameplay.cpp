@@ -202,6 +202,11 @@ namespace Z_APOCALIPSE
 		return moneyForKillingZombie;
 	}
 
+	Survivor* Gameplay::getPlayer()
+	{
+		return playerOne;
+	}
+
 	void Gameplay::init()
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, (getGameplaySize() / charactersSizeDivider) / 2.0f,
@@ -232,7 +237,7 @@ namespace Z_APOCALIPSE
 		pauseGameInput(sceneManager);
 	}
 	
-	void Gameplay::update() 
+	void Gameplay::update(SceneManager* sceneManager)
 	{			
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		updateZombieSpawnTimer();
@@ -242,6 +247,7 @@ namespace Z_APOCALIPSE
 		zombiesCollisionWithPlayer();	
 		zombiesCollisionWithEachOther();
 		decreasTimerToEndRound();
+		winRound(sceneManager);
 		defeatCondition();
 	}
 	
@@ -450,19 +456,19 @@ namespace Z_APOCALIPSE
 			{
 				timerToEndRound = 0.0f;
 			}
-		}	
-		else 
-		{
-			winRound();
-		}
+		}		
 	}
 
-	void Gameplay::winRound() 
-	{
-		nextRound();
-		playerOne->setInitialRoundMoney(playerOne->getMoney());
-		increaseStatsForNextRound();
-		resetGameplay();
+	void Gameplay::winRound(SceneManager* sceneManager) 
+	{	
+		if (getTimerToEndRound() == 0.0f ) 
+		{
+			nextRound();
+			playerOne->setInitialRoundMoney(playerOne->getMoney());
+			increaseStatsForNextRound();
+			resetGameplay();
+			sceneManager->setCurrentScene(upgraderScene);
+		}		
 	}
 
 	void Gameplay::defeatCondition() 
@@ -576,8 +582,7 @@ namespace Z_APOCALIPSE
 		addMoneyForKillingZombie(getMoneyForKillingZombie() * addMoneyRewardPercentage);
 		addMaxZombiesInRound(zombiesAdditionNextRound);
 		addZombieVelocity(getZombieVelocity() * increasedZombiesVelocity);
-		addZombieDamageToDie(getZombieDamageToDie() * increasedZombiesDamageToDie);
-				
+		addZombieDamageToDie(getZombieDamageToDie() * increasedZombiesDamageToDie);				
 	}
 
 	void Gameplay::resetGameplay() 

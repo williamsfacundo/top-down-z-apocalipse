@@ -55,6 +55,7 @@ namespace Z_APOCALIPSE
 		gameplay = new Gameplay();
 		mainMenu = new MainMenu(mainMenuTexts);
 		credits = new Credits();
+		upgrader = new Upgrader();
 
 		setRunning(true);
 		setMainMenuChangeScenes();
@@ -68,6 +69,7 @@ namespace Z_APOCALIPSE
 		delete gameplay;
 		delete mainMenu;
 		delete credits;
+		delete upgrader;
 	}
 
 	void Game::runGame()
@@ -79,12 +81,15 @@ namespace Z_APOCALIPSE
 			case Scenes::GAMEPLAY:
 				
 				gameplay->input(sceneManager);
-				gameplay->update();
+
+				gameplay->update(sceneManager);
+
 				gameplay->draw();
 				break;
 			case Scenes::MAIN_MENU:
 
 				mainMenu->input(sceneManager, mainMenuChangeScenes);
+
 				mainMenu->draw();
 				break;
 			case Scenes::OPTIONS:
@@ -106,6 +111,12 @@ namespace Z_APOCALIPSE
 				pauseInput(gameplay->getPauseButtonPosition(), gameplay->getPauseButtonRadius());
 
 				gameplay->draw();
+				break;
+			case Scenes::UPGRADER:
+
+				upgrader->input(gameplay->getPlayer(), sceneManager);
+
+				upgrader->draw();
 				break;
 			default:
 				break;

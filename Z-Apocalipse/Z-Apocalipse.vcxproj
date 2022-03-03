@@ -162,6 +162,8 @@
     <ClCompile Include="src\gameplay\gameplay.cpp" />
     <ClCompile Include="src\gameplay\scene_manager.cpp" />
     <ClCompile Include="src\gameplay\survivor.cpp" />
+    <ClCompile Include="src\gameplay\upgrader.cpp" />
+    <ClCompile Include="src\gameplay\upgrader_button.cpp" />
     <ClCompile Include="src\gameplay\zombie.cpp" />
     <ClCompile Include="src\game\button.cpp" />
     <ClCompile Include="src\game\credits.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="src\gameplay\gameplay.h" />
     <ClInclude Include="src\gameplay\scene_manager.h" />
     <ClInclude Include="src\gameplay\survivor.h" />
+    <ClInclude Include="src\gameplay\upgrader.h" />
+    <ClInclude Include="src\gameplay\upgrader_button.h" />
     <ClInclude Include="src\gameplay\zombie.h" />
     <ClInclude Include="src\game\button.h" />
     <ClInclude Include="src\game\credits.h" />

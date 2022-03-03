@@ -5,6 +5,7 @@
 #include "gameplay.h"
 #include "..\game\main_menu.h"
 #include "..\game\credits.h"
+#include "..\gameplay\upgrader.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -16,8 +17,8 @@ namespace Z_APOCALIPSE
 		const char* title = "Z-APOCALIPSE";
 		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
 		const short fps = 60;
-		const Scenes initialScene = Scenes::MAIN_MENU;	
-		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY;
+		const Scenes initialScene = Scenes::UPGRADER; 	
+		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY; 
 		const MouseButton pauseMenuInputButton = MouseButton::MOUSE_BUTTON_LEFT;
 				
 		Scenes mainMenuChangeScenes[maxMainMenuButtons];
@@ -25,6 +26,7 @@ namespace Z_APOCALIPSE
 		Gameplay* gameplay;
 		MainMenu* mainMenu;
 		Credits* credits;
+		Upgrader* upgrader;
 
 		bool running;
 	public:

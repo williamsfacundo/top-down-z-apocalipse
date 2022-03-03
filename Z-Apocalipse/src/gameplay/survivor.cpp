@@ -4,10 +4,14 @@
 #include <cmath>
 #include <raylib.h>
 
+#include "character.h"
+#include "bullet.h"
+
 namespace Z_APOCALIPSE 
 {
 	Survivor::Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap) : Character(color, position, radius, gameplayMap)
 	{
+		setRoundStartingLives(initialLives);
 		setLives(initialLives);
 		setMoney(initialMoney);
 		setInitialRoundMoney(initialMoney);
@@ -18,17 +22,23 @@ namespace Z_APOCALIPSE
 		setMoveRightKey(initialMoveRightKey);
 		setMoveLeftKey(initialMoveLeftKey);
 		setShootButton(initialShootButton);
-		setVelocity(50.5f);
+		setStartingRoundVelocity(initialVelocity);
+		setVelocity(getStartingRoundVelocity());
 		setAceleration(0.0f);
 		setDirectionNumberMultiplyer(1);	
-		setShootingTimer(startingShootingTimer);
-		setDamage(initialDamage);
+		setStartingRoundShootingTime(startingShootingTimer);
+		setShootingTimer(0.0f);
+		setStartingRoundDamage(initialDamage);
+		setDamage(getStartingRoundDamage());
 		setInvulnerabilityTimer(0.0f);
-		setMaxBulletsInCharger(initialBulletsInCharger);
-		setBulletsInCharger(maxBulletsInCharger);
-		setRemainingBullets(initialMaxBullets - maxBulletsInCharger);
+		setStartingRoundMaxBulletsInCharger(initialBulletsInCharger);
+		setBulletsInCharger(getStartingRoundMaxBulletsInCharger());
+		setStartingRoundRemainingBullets(initialMaxBullets - getStartingRoundMaxBulletsInCharger());
+		setRemainingBullets(getStartingRoundRemainingBullets());
 		setReloadKey(initialReloadKey);		
 		setBulletsToNull();
+		setStartingRoundReloadTime(initialReloadTime);
+		setStartingRoundMaxAceleration(initialMaxAceleration);
 		setReloadTimer(0.0f);		
 	}
 
@@ -45,9 +55,24 @@ namespace Z_APOCALIPSE
 
 #pragma region SETTERS
 
+	void Survivor::setRoundStartingLives(short lives) 
+	{
+		this->roundStartingLives = lives;
+	}
+
+	void Survivor::addRoundStartingLive() 
+	{
+		roundStartingLives += 1;
+	}
+
 	void Survivor::setLives(short lives)
 	{
 		this->lives = lives;
+	}
+
+	void Survivor::addLive() 
+	{
+		lives += 1;
 	}
 
 	void Survivor::subtractLive()
@@ -110,6 +135,16 @@ namespace Z_APOCALIPSE
 		this->shootButton = shootButton;
 	}
 
+	void Survivor::setStartingRoundVelocity(float startingRoundVelocity) 
+	{
+		this->startingRoundVelocity = startingRoundVelocity;
+	}
+
+	void Survivor::addStartingRoundVelocity(float value) 
+	{
+		startingRoundVelocity += value;
+	}
+
 	void Survivor::setVelocity(float velocity)
 	{
 		this->velocity = velocity;
@@ -125,9 +160,29 @@ namespace Z_APOCALIPSE
 		this->directionNumberMultiplyer = directionNumberMultiplyer;
 	}
 
+	void Survivor::setStartingRoundShootingTime(float startingRoundShootingTime)
+	{
+		this->startingRoundShootingTime = startingRoundShootingTime;
+	}
+
+	void Survivor::addStartingRoundShootingTime(float time) 
+	{
+		startingRoundShootingTime += time;
+	}
+
 	void Survivor::setShootingTimer(float shootingTimer)
 	{
 		this->shootingTimer = shootingTimer;
+	}
+
+	void Survivor::setStartingRoundDamage(float startingRoundDamage) 
+	{
+		this->startingRoundDamage = startingRoundDamage;
+	}
+
+	void Survivor::addStartingRoundDamage(float value) 
+	{
+		startingRoundDamage += value;
 	}
 
 	void Survivor::setDamage(float damage)
@@ -140,14 +195,39 @@ namespace Z_APOCALIPSE
 		this->invulnerabilityTimer = invulnerabilityTimer;
 	}
 
+	void Survivor::setStartingRoundReloadTime(float startingRoundReloadTime)
+	{
+		this->startingRoundReloadTime = startingRoundReloadTime;
+	}
+
+	void Survivor::addStartingRoundReloadTime(float startingRoundReloadTime)
+	{
+		this->startingRoundReloadTime += startingRoundReloadTime;
+	}
+
 	void Survivor::setReloadTimer(float reloadTimer) 
 	{
 		this->reloadTimer = reloadTimer;
 	}	
 
-	void Survivor::setMaxBulletsInCharger(short maxBulletsInCharger)
+	void Survivor::setStartingRoundMaxAceleration(float startingRoundMaxAceleration)
 	{
-		this->maxBulletsInCharger = maxBulletsInCharger;
+		this->startingRoundMaxAceleration = startingRoundMaxAceleration;
+	}
+
+	void Survivor::addStartingRoundMaxAceleration(float value) 
+	{
+		startingRoundMaxAceleration += value;
+	}
+
+	void Survivor::setStartingRoundMaxBulletsInCharger(short startingRoundmaxBulletsInCharger)
+	{
+		this->startingRoundMaxBulletsInCharger = startingRoundmaxBulletsInCharger;
+	}
+
+	void Survivor::addStartingRoundMaxBulletsInCharger(short value) 
+	{
+		startingRoundMaxBulletsInCharger += value;
 	}
 
 	void Survivor::setBulletsInCharger(short bulletsInCharger)
@@ -155,10 +235,25 @@ namespace Z_APOCALIPSE
 		this->bulletsInCharger = bulletsInCharger;
 	}
 
+	void Survivor::decreasBulletsInCharger() 
+	{
+		bulletsInCharger -= 1;
+	}
+
+	void Survivor::setStartingRoundRemainingBullets(short startingRoundRemainingBullets) 
+	{
+		this->startingRoundRemainingBullets = startingRoundRemainingBullets;
+	}
+		
+	void Survivor::addStartingRoundRemainingBullets(short value)
+	{
+		startingRoundRemainingBullets += value;
+	}
+
 	void Survivor::setRemainingBullets(short remainingBullets)
 	{
 		this->remainingBullets = remainingBullets;
-	}	
+	}
 
 	void Survivor::setBulletsToNull()
 	{
@@ -172,6 +267,11 @@ namespace Z_APOCALIPSE
 
 #pragma region GETTERS
 
+	short Survivor::getRoundStartingLives() 
+	{
+		return roundStartingLives;
+	}
+	
 	short Survivor::getLives()
 	{
 		return lives;
@@ -220,6 +320,11 @@ namespace Z_APOCALIPSE
 	MouseButton Survivor::getShootButton()
 	{
 		return shootButton;
+	}
+
+	float Survivor::getStartingRoundVelocity() 
+	{
+		return startingRoundVelocity;
 	}
 
 	float Survivor::getVelocity()
@@ -274,6 +379,11 @@ namespace Z_APOCALIPSE
 		return maxBullets;
 	}
 
+	float Survivor::getStartingRoundDamage() 
+	{
+		return startingRoundDamage;
+	}
+
 	float Survivor::getDamage()
 	{
 		return damage;
@@ -284,19 +394,39 @@ namespace Z_APOCALIPSE
 		return invulnerabilityTimer;
 	}
 
+	float Survivor::getStartingRoundReloadTime() 
+	{
+		return startingRoundReloadTime;
+	}
+
+	float Survivor::getStartingRoundShootingTime() 
+	{
+		return startingRoundShootingTime;
+	}
+
 	float Survivor::getReloadTimer() 
 	{
 		return reloadTimer;
 	}
-	
-	short Survivor::getMaxBulletsInCharger()
+
+	float Survivor::getStartingRoundMaxAceleration()
 	{
-		return maxBulletsInCharger;
+		return startingRoundMaxAceleration;
+	}
+	
+	short Survivor::getStartingRoundMaxBulletsInCharger()
+	{
+		return startingRoundMaxBulletsInCharger;
 	}
 
 	short Survivor::getBulletsInCharger()
 	{
 		return bulletsInCharger;
+	}
+
+	short Survivor::getStartingRoundRemainingBullets() 
+	{
+		return startingRoundRemainingBullets;
 	}
 
 	short Survivor::getRemainingBullets()
@@ -307,6 +437,46 @@ namespace Z_APOCALIPSE
 	short Survivor::getInitialLives() 
 	{
 		return initialLives;
+	}
+
+	short Survivor::getMaxLives()
+	{
+		return maxLives;
+	}
+
+	float Survivor::getMinReloadTime() 
+	{
+		return minReloadTime;
+	}
+
+	float Survivor::getMinShootingTime() 
+	{
+		return minShootingTime;
+	}
+
+	short Survivor::getMaxBulletsChargerSupports() 
+	{
+		return maxBulletsChargerSupports;
+	}
+
+	short Survivor::getMaxBulletsPlayerCanHave() 
+	{
+		return maxBulletsPlayerCanHave;
+	}
+
+	float Survivor::getMaxAceleration() 
+	{
+		return maxAceleration;
+	}
+
+	float Survivor::getMaxVelocity() 
+	{
+		return maxVelocity;
+	}
+
+	float Survivor::getMaxDamage()
+	{
+		return maxDamage;
 	}
 
 #pragma endregion
@@ -322,10 +492,10 @@ namespace Z_APOCALIPSE
 	{		
 		if (IsMouseButtonPressed(getShootButton()) && bulletsInCharger > 0 && getShootingTimer() == 0.0f && getReloadTimer() == 0.0f && mouseOnGameplay) 
 		{
-			shootingTimer = startingShootingTimer;
+			setShootingTimer(getStartingRoundShootingTime());			
 
 			bullets[getEmptyBulletIndex()] = new Bullet(getPosition(), getBulletDirection(), BulletsType::GUN, (getRadius() / bulletsSizeDivider) / 2.0f);
-			bulletsInCharger -= 1;
+			decreasBulletsInCharger();
 		}
 	}
 
@@ -424,7 +594,7 @@ namespace Z_APOCALIPSE
 
 	void Survivor::addAceleration() 
 	{
-		if (aceleration < maxAceleration)
+		if (aceleration < getStartingRoundMaxAceleration())
 		{
 			aceleration += GetFrameTime() * acelerationMultiplyer;
 		}
@@ -586,11 +756,11 @@ namespace Z_APOCALIPSE
 
 	void Survivor::reload() 
 	{
-		short missingBullets = maxBulletsInCharger - bulletsInCharger;
+		short missingBullets = startingRoundMaxBulletsInCharger - bulletsInCharger;
 
 		if (missingBullets != 0) 
 		{
-			setReloadTimer(reloadTime);
+			setReloadTimer(getStartingRoundReloadTime());
 
 			if (remainingBullets >= missingBullets)
 			{
@@ -638,14 +808,16 @@ namespace Z_APOCALIPSE
 		setMoney(initialRoundMoney);
 		setMovementStatus(MovementStatus::NONE);
 		setDirection(MovementStatus::UP);
-		setBulletsInCharger(maxBulletsInCharger);
-		setRemainingBullets(initialMaxBullets - maxBulletsInCharger);
+		setBulletsInCharger(getStartingRoundMaxBulletsInCharger());
+		setRemainingBullets(getStartingRoundRemainingBullets() - getStartingRoundMaxBulletsInCharger());
 		setPosition(position);
+		setVelocity(getStartingRoundVelocity());
 		setAceleration(0.0f);
 		setReloadTimer(0.0f);
 		setInvulnerabilityTimer(0.0f);
 		setShootingTimer(0.0f);
 		destroyBullets();
-		setLives(getInitialLives());
+		setLives(getRoundStartingLives());
+		setDamage(getStartingRoundDamage());
 	}
 }

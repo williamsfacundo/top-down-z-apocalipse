@@ -37,7 +37,8 @@ namespace Z_APOCALIPSE
 		static const short maxZombies = 10;
 		static const short maxSpawners = 4;
 		const Scenes pauseMenuScene = Scenes::PAUSE;
-		const MouseButton pauseGameInputButton = MouseButton::MOUSE_BUTTON_LEFT;	
+		const MouseButton pauseGameInputButton = MouseButton::MOUSE_BUTTON_LEFT;
+		const Scenes upgraderScene = Scenes::UPGRADER;
 			
 		Vector2 gameplaySpacePos;
 		Vector2 zombiesSpawnsPositions[maxSpawners];
@@ -92,10 +93,11 @@ namespace Z_APOCALIPSE
 		short getRound();
 		float getGameplaySize();
 		short getMoneyForKillingZombie();
+		Survivor* getPlayer();
 
 		void init();
 		void input(SceneManager* sceneManager);
-		void update();
+		void update(SceneManager* sceneManager);
 		void draw();
 		void deinit();
 
@@ -113,7 +115,7 @@ namespace Z_APOCALIPSE
 		void createZombie();
 		short findEmptyZombieIndex();
 		void decreasTimerToEndRound();
-		void winRound();
+		void winRound(SceneManager* sceneManager);
 		void defeatCondition();
 		void drawHud();
 		void drawTimer();
