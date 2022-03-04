@@ -520,32 +520,27 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::drawTimer() 
 	{					
-		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2), uiSmallSize, uiColor);
-	}
-
-	void Gameplay::drawVersion() 
-	{
-		DrawText("v 0.1", GetScreenWidth() - ((uiBigSize / 2) * 5), GetScreenHeight() - uiBigSize, uiBigSize, uiColor);
-	}
+		DrawText(TextFormat("%i", static_cast<int>(timerToEndRound)), GetScreenWidth() / 2 - uiSmallSize, static_cast<int>((gameplaySpacePos.y / 2) - (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
+	}	
 
 	void Gameplay::drawLivesRemaining() 
 	{
-		DrawText(TextFormat("Lives: %i", playerOne->getLives()), uiSmallSize, static_cast<int>(gameplaySpacePos.y / 2), uiSmallSize, uiColor);
+		DrawText(TextFormat("Lives: %i", playerOne->getLives()), uiSmallSize, static_cast<int>((gameplaySpacePos.y / 2) - (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawInbulnerabilityTimer() 
 	{
 		if (playerOne->getInvulnerabilityTimer() > 0.0f)
 		{
-			DrawText(TextFormat("(INVULNERABILITY)"), uiSmallSize * 5, static_cast<int>(gameplaySpacePos.y / 2), static_cast<int>(uiSmallSize * 0.55f), uiColor);
+			DrawText(TextFormat("(INVULNERABILITY)"), uiSmallSize * 5, static_cast<int>((gameplaySpacePos.y / 2) - (GetScreenWidth() * (hudHeightPercentage / 16))), static_cast<int>(uiSmallSize * 0.55f), uiColor);
 		}
 	}
 
 	void Gameplay::drawPlayerBulletsUI() 
 	{
-		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
-		DrawText("/", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
-		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+		DrawText(TextFormat("%i", playerOne->getBulletsInCharger()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
+		DrawText("/", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 3), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
+		DrawText(TextFormat("%i", playerOne->getRemainingBullets()), static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 2), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawReloadingText() 
@@ -553,19 +548,19 @@ namespace Z_APOCALIPSE
 		if(playerOne->getReloadTimer() > 0.0f)
 		{
 			DrawText("(RELOADING)", static_cast<int>(GetScreenWidth() / 1.6f) - (uiBigSize * 4),
-				static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + uiSmallSize),
+				static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + uiSmallSize + (GetScreenWidth() * (hudHeightPercentage / 16))),
 				static_cast<int>(uiSmallSize * 0.55f), uiColor);
 		}		
 	}
 
 	void Gameplay::drawRoundHud() 
 	{
-		DrawText(TextFormat("Round %i", getRound()), uiSmallSize, static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+		DrawText(TextFormat("Round %i", getRound()), uiSmallSize, static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawPlayerMoney() 
 	{
-		DrawText(TextFormat("$ %i", playerOne->getMoney()), GetScreenWidth() - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight), uiSmallSize, uiColor);
+		DrawText(TextFormat("$ %i", playerOne->getMoney()), GetScreenWidth() - (uiBigSize * 4), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight + (GetScreenWidth() * (hudHeightPercentage / 16))), uiSmallSize, uiColor);
 	}
 
 	void Gameplay::drawGameplay() 

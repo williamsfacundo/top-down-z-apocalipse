@@ -126,8 +126,7 @@ namespace Z_APOCALIPSE
 		void winRound(SceneManager* sceneManager);
 		void defeatCondition();
 		void drawHud();
-		void drawTimer();
-		void drawVersion();
+		void drawTimer();		
 		void drawLivesRemaining();
 		void drawInbulnerabilityTimer();
 		void drawPlayerBulletsUI();
