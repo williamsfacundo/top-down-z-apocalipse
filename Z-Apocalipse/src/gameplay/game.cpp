@@ -74,6 +74,7 @@ namespace Z_APOCALIPSE
 		credits = new Credits();
 		upgrader = new Upgrader();
 		tutorial = new Tutorial();
+		endGame = new EndGame();
 
 		setversionTextPosition( { static_cast<float>(GetScreenWidth() * 0.85f ), static_cast<float>(GetScreenHeight() * 0.85f) } );
 		setRunning(true);
@@ -90,6 +91,7 @@ namespace Z_APOCALIPSE
 		delete credits;
 		delete upgrader;
 		delete tutorial;
+		delete endGame;
 	}
 
 	void Game::drawVersion() 
@@ -154,6 +156,12 @@ namespace Z_APOCALIPSE
 				tutorial->input(sceneManager);
 
 				tutorial->draw();
+				break;
+			case Scenes::END_GAME:
+
+				endGame->input(sceneManager);
+
+				endGame->draw();
 				break;
 			default:
 				break;

@@ -274,7 +274,7 @@ namespace Z_APOCALIPSE
 		zombiesCollisionWithEachOther();
 		decreasTimerToEndRound();
 		winRound(sceneManager);
-		defeatCondition();
+		defeatCondition(sceneManager);
 	}
 	
 	void Gameplay::draw() 
@@ -497,11 +497,13 @@ namespace Z_APOCALIPSE
 		}		
 	}
 
-	void Gameplay::defeatCondition() 
-	{
+	void Gameplay::defeatCondition(SceneManager* sceneManager)
+	{		
 		if (playerOne->getLives() <= 0) 
 		{			
 			resetGameplay();
+
+			sceneManager->setCurrentScene(endGameScene);
 		}
 	}
 

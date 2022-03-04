@@ -41,6 +41,7 @@ namespace Z_APOCALIPSE
 		const Scenes pauseMenuScene = Scenes::PAUSE;
 		const MouseButton inputButton = MouseButton::MOUSE_BUTTON_LEFT;
 		const Scenes upgraderScene = Scenes::UPGRADER;
+		const Scenes endGameScene = Scenes::END_GAME;
 			
 		Vector2 gameplaySpacePos;
 		Vector2 zombiesSpawnsPositions[maxSpawners];
@@ -124,7 +125,7 @@ namespace Z_APOCALIPSE
 		short findEmptyZombieIndex();
 		void decreasTimerToEndRound();
 		void winRound(SceneManager* sceneManager);
-		void defeatCondition();
+		void defeatCondition(SceneManager* sceneManager);
 		void drawHud();
 		void drawTimer();		
 		void drawLivesRemaining();

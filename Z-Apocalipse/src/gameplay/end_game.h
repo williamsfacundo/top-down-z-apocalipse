@@ -18,7 +18,7 @@ namespace Z_APOCALIPSE
 		const Color buttonsColorOne = YELLOW;
 		const Color buttonsColorTwo = RED;
 
-		const float goMenuButtonYPercentage = 0.3f;
+		const float goMenuButtonXPercentage = 0.2f;
 		const float goMenuButtonWidthPercentage = 0.2f;
 		const float goMenuButtonHeightPercentage = 0.1f;
 		const float goMenuButtonYPercentage = 0.9f;

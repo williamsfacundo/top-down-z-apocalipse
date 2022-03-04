@@ -9,7 +9,7 @@ namespace Z_APOCALIPSE
 {
 	EndGame::EndGame() 
 	{
-		goMenuButton = new Button({ static_cast<float>(GetScreenWidth() * goMenuButtonYPercentage),
+		goMenuButton = new Button({ static_cast<float>(GetScreenWidth() * goMenuButtonXPercentage),
 			static_cast<float>(GetScreenHeight() * goMenuButtonYPercentage), static_cast<float>(GetScreenWidth() * goMenuButtonWidthPercentage),
 			static_cast<float>(GetScreenHeight() * goMenuButtonHeightPercentage) },buttonsColorOne, buttonsColorTwo, goMenuButtonText);
 	}

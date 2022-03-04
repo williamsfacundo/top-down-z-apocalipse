@@ -7,6 +7,7 @@
 #include "..\game\credits.h"
 #include "..\gameplay\upgrader.h"
 #include "..\gameplay\tutorial.h"
+#include "..\gameplay\end_game.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -34,6 +35,7 @@ namespace Z_APOCALIPSE
 		Credits* credits;
 		Upgrader* upgrader;
 		Tutorial* tutorial;
+		EndGame* endGame;
 
 		bool running;
 	public:
