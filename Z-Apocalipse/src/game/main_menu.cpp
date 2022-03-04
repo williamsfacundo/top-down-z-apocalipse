@@ -29,12 +29,11 @@ namespace Z_APOCALIPSE
 		ClearBackground(backgroundColor);
 
 		drawTitle();
+
 		for (short i = 0; i < maxMainMenuButtons; i++) 
 		{
 			button[i]->draw();	
-		}
-
-		EndDrawing();
+		}	
 	}
 
 	void MainMenu::drawTitle()

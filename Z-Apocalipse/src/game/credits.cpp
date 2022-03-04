@@ -42,9 +42,7 @@ namespace Z_APOCALIPSE
 
 		drawDevName();
 		
-		button->draw();
-
-		EndDrawing();
+		button->draw();		
 	}	
 
 	void Credits::drawDevName() 

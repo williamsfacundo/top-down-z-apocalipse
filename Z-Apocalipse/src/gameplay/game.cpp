@@ -35,9 +35,19 @@ namespace Z_APOCALIPSE
 		mainMenuChangeScenes[3] = Scenes::EXIT;
 	}
 
+	void Game::setversionTextPosition(Vector2 versionTextPosition) 
+	{
+		this->versionTextPosition = versionTextPosition;
+	}
+
 	void Game::setRunning(bool running) 
 	{
 		this->running = running;
+	}
+
+	Vector2 Game::getversionTextPosition() 
+	{
+		return versionTextPosition;
 	}
 
 	bool Game::getRunning() 
@@ -57,6 +67,7 @@ namespace Z_APOCALIPSE
 		credits = new Credits();
 		upgrader = new Upgrader();
 
+		setversionTextPosition( { static_cast<float>(GetScreenWidth() * 0.85f ), static_cast<float>(GetScreenHeight() * 0.85f) } );
 		setRunning(true);
 		setMainMenuChangeScenes();
 	}	
@@ -70,6 +81,13 @@ namespace Z_APOCALIPSE
 		delete mainMenu;
 		delete credits;
 		delete upgrader;
+	}
+
+	void Game::drawVersion() 
+	{
+		DrawText(versionText, static_cast<int>(getversionTextPosition().x), (getversionTextPosition().y), versionTextSize, versionTextColor);
+					
+		EndDrawing();
 	}
 
 	void Game::runGame()
@@ -91,6 +109,8 @@ namespace Z_APOCALIPSE
 				mainMenu->input(sceneManager, mainMenuChangeScenes);
 
 				mainMenu->draw();
+
+				drawVersion();
 				break;
 			case Scenes::OPTIONS:
 
@@ -101,6 +121,8 @@ namespace Z_APOCALIPSE
 				credits->input(sceneManager);
 
 				credits->draw(mainMenu);
+
+				drawVersion();
 				break;
 			case Scenes::EXIT:
 
