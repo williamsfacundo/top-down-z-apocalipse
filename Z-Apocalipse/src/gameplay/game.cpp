@@ -2,6 +2,13 @@
 
 #include <raylib.h>
 
+#include "scene_manager.h"
+#include "gameplay.h"
+#include "..\game\main_menu.h"
+#include "..\game\credits.h"
+#include "..\gameplay\upgrader.h"
+#include "..\gameplay\tutorial.h"
+
 namespace Z_APOCALIPSE
 {
 	Game::Game(int screenWidth, int screenHeight)
@@ -29,7 +36,7 @@ namespace Z_APOCALIPSE
 
 	void Game::setMainMenuChangeScenes() 
 	{
-		mainMenuChangeScenes[0] = Scenes::GAMEPLAY;
+		mainMenuChangeScenes[0] = Scenes::TUTORIAL;
 		mainMenuChangeScenes[1] = Scenes::OPTIONS;
 		mainMenuChangeScenes[2] = Scenes::CREDITS;
 		mainMenuChangeScenes[3] = Scenes::EXIT;
@@ -66,6 +73,7 @@ namespace Z_APOCALIPSE
 		mainMenu = new MainMenu(mainMenuTexts);
 		credits = new Credits();
 		upgrader = new Upgrader();
+		tutorial = new Tutorial();
 
 		setversionTextPosition( { static_cast<float>(GetScreenWidth() * 0.85f ), static_cast<float>(GetScreenHeight() * 0.85f) } );
 		setRunning(true);
@@ -81,6 +89,7 @@ namespace Z_APOCALIPSE
 		delete mainMenu;
 		delete credits;
 		delete upgrader;
+		delete tutorial;
 	}
 
 	void Game::drawVersion() 
@@ -139,6 +148,12 @@ namespace Z_APOCALIPSE
 				upgrader->input(gameplay->getPlayer(), sceneManager);
 
 				upgrader->draw(gameplay->getPlayer());
+				break;
+			case Scenes::TUTORIAL:
+
+				tutorial->input(sceneManager);
+
+				tutorial->draw();
 				break;
 			default:
 				break;

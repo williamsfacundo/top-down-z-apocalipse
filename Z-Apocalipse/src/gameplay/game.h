@@ -6,6 +6,7 @@
 #include "..\game\main_menu.h"
 #include "..\game\credits.h"
 #include "..\gameplay\upgrader.h"
+#include "..\gameplay\tutorial.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -32,6 +33,7 @@ namespace Z_APOCALIPSE
 		MainMenu* mainMenu;
 		Credits* credits;
 		Upgrader* upgrader;
+		Tutorial* tutorial;
 
 		bool running;
 	public:
