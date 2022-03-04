@@ -98,7 +98,7 @@ namespace Z_APOCALIPSE
 
 	void Zombie::drawZombieHealthBar() 
 	{
-		DrawRectangleV({ getPosition().x - getRadius(), getPosition().y - getRadius() - healthBarHeight },
+		DrawRectangleV({ getPosition().x - getRadius(), getPosition().y - getRadius() - (healthBarHeight * 1.5f) },
 			{ calculateHealthBarWidth(), healthBarHeight }, healthBarColor);
 	}
 

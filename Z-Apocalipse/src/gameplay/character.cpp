@@ -53,7 +53,7 @@ namespace Z_APOCALIPSE
 			if (position.y - getRadius() - distance.y > getGameplayMap().y) 
 			{
 				position.y += distance.y;
-			}
+			}			
 		}
 	}
 
