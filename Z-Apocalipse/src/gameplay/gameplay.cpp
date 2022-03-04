@@ -36,6 +36,11 @@ namespace Z_APOCALIPSE
 		this->pauseButtonPosition = pauseButtonPosition;
 	}
 
+	void Gameplay::setMuteButtonPosition(Vector2 muteButtonPosition) 
+	{
+		this->muteButtonPosition = muteButtonPosition;
+	}
+
 	void Gameplay::setTimerToSpawnZombie(float timer) 
 	{
 		this->timerToSpawnZombie = timer;
@@ -59,6 +64,11 @@ namespace Z_APOCALIPSE
 	void Gameplay::setPauseButtonRadius(float pauseButtonRadius)
 	{
 		this->pauseButtonRadius = pauseButtonRadius;
+	}
+
+	void Gameplay::setMuteButtonRadius(float muteButtonRadius) 
+	{
+		this->muteButtonRadius = muteButtonRadius;
 	}
 
 	void Gameplay::setZombieVelocity(float zombieVelocity)
@@ -124,6 +134,11 @@ namespace Z_APOCALIPSE
 		return pauseButtonPosition;
 	}
 
+	Vector2 Gameplay::getMuteButtonPosition() 
+	{
+		return muteButtonPosition;
+	}
+
 	float Gameplay::getTimerToSpawnZombie() 
 	{
 		return timerToSpawnZombie;
@@ -176,6 +191,11 @@ namespace Z_APOCALIPSE
 		return pauseButtonRadius;
 	}
 
+	float Gameplay::getMuteButtonRadius() 
+	{
+		return muteButtonRadius;
+	}
+
 	float Gameplay::getZombieVelocity() 
 	{
 		return zombieVelocity;
@@ -222,7 +242,9 @@ namespace Z_APOCALIPSE
 
 		setZombiesSpawnsPositions();
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
-		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() - (GetScreenWidth() / 15)), getPauseButtonRadius() * 1.4f});
+		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() * 0.95f), getPauseButtonRadius() * 1.4f});
+		setMuteButtonRadius(getPauseButtonRadius());
+		setMuteButtonPosition({ static_cast<float>(GetScreenWidth() * 0.85f), getPauseButtonRadius() * 1.4f });
 		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
 		setTimerToEndRound(initialTimeToEndRound);		
 		setZombieVelocity(zombieInitialVelocity);
@@ -238,6 +260,7 @@ namespace Z_APOCALIPSE
 		playerOne->input(isMouseOnGameplaySpace());
 
 		pauseGameInput(sceneManager);
+		//muteGameInput();
 	}
 	
 	void Gameplay::update(SceneManager* sceneManager)
@@ -491,7 +514,8 @@ namespace Z_APOCALIPSE
 		drawReloadingText();
 		drawRoundHud();
 		drawPlayerMoney();
-		drawPauseButton();		
+		drawPauseButton();
+		drawMuteButton();
 	}
 
 	void Gameplay::drawTimer() 
@@ -556,12 +580,26 @@ namespace Z_APOCALIPSE
 		DrawCircleV(getPauseButtonPosition(), getPauseButtonRadius(), pauseButtonColor);
 	}
 
+	void Gameplay::drawMuteButton()
+	{
+		DrawCircleV(getMuteButtonPosition(), getMuteButtonRadius(), muteButtonColor);
+	}
+
 	void Gameplay::pauseGameInput(SceneManager* sceneManager)
 	{
 		if (CheckCollisionPointCircle(GetMousePosition(), getPauseButtonPosition(), getPauseButtonRadius())
-			&& IsMouseButtonPressed(pauseGameInputButton))
+			&& IsMouseButtonPressed(inputButton))
 		{
 			sceneManager->setCurrentScene(pauseMenuScene);
+		}
+	}
+
+	void Gameplay::muteGameInput() 
+	{
+		if (CheckCollisionPointCircle(GetMousePosition(), getMuteButtonPosition(), getMuteButtonRadius()) 
+			&& IsMouseButtonPressed(inputButton))
+		{
+			
 		}
 	}
 

@@ -18,6 +18,7 @@ namespace Z_APOCALIPSE
 		const Color zombiesColor = GREEN;
 		const Color uiColor = BLACK;
 		const Color pauseButtonColor = BLACK;
+		const Color muteButtonColor = RED;
 		const float hudHeightPercentage = 0.26f;		
 		const float charactersSizeDivider = 24.0f;		
 		const float initialtimeToSpawnZombie = 2.0f;
@@ -38,18 +39,20 @@ namespace Z_APOCALIPSE
 		static const short maxZombies = 10;
 		static const short maxSpawners = 4;
 		const Scenes pauseMenuScene = Scenes::PAUSE;
-		const MouseButton pauseGameInputButton = MouseButton::MOUSE_BUTTON_LEFT;
+		const MouseButton inputButton = MouseButton::MOUSE_BUTTON_LEFT;
 		const Scenes upgraderScene = Scenes::UPGRADER;
 			
 		Vector2 gameplaySpacePos;
 		Vector2 zombiesSpawnsPositions[maxSpawners];
 		Vector2 pauseButtonPosition;
+		Vector2 muteButtonPosition;
 		float gameplaySpaceHeight;	
 		float timerToSpawnZombie;
 		float roundStartingTimerToSpawnZombie;
 		float timerToEndRound;
 		float roundStartingTimerToEndRound;
 		float pauseButtonRadius;		
+		float muteButtonRadius;
 		float zombieVelocity;
 		float zombieDamageToDie;
 		short round;
@@ -64,11 +67,13 @@ namespace Z_APOCALIPSE
 				
 		void setZombiesSpawnsPositions();
 		void setPauseButtonPosition(Vector2 pauseButtonPosition);
+		void setMuteButtonPosition(Vector2 muteButtonPosition);
 		void setTimerToSpawnZombie(float timer);
 		void setRoundStartingTimerToSpawnZombie(float roundStartingTimerToSpawnZombie);
 		void setTimerToEndRound(float timer);
 		void setRoundStartingTimerToEndRound(float roundStartingTimerToEndRound);
 		void setPauseButtonRadius(float pauseButtonRadius);
+		void setMuteButtonRadius(float muteButtonRadius);
 		void setZombieVelocity(float zombieVelocity);
 		void setZombieDamageToDie(float zombieDamageToDie);
 		void setRound(short round);	
@@ -83,12 +88,14 @@ namespace Z_APOCALIPSE
 		void addZombieDamageToDie(float value);
 		
 		Vector2 getPauseButtonPosition();
+		Vector2 getMuteButtonPosition();
 		float getTimerToSpawnZombie();
 		float getRoundStartingTimerToSpawnZombie();
 		Vector2 getRandomZombieSpawnPosition();
 		float getTimerToEndRound();
 		float getRoundStartingTimerToEndRound();
 		float getPauseButtonRadius();
+		float getMuteButtonRadius();
 		float getZombieVelocity();
 		float getZombieDamageToDie();
 		short getRound();
@@ -129,7 +136,9 @@ namespace Z_APOCALIPSE
 		void drawPlayerMoney();
 		void drawGameplay();		
 		void drawPauseButton();
+		void drawMuteButton();
 		void pauseGameInput(SceneManager* sceneManager);
+		void muteGameInput();
 		bool isMouseOnGameplaySpace();
 		void increaseStatsForNextRound();
 		void resetGameplay();
