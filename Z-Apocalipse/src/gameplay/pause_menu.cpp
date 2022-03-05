@@ -7,25 +7,19 @@
 
 namespace Z_APOCALIPSE
 {
-	PauseMenu::PauseMenu(Scenes changeScenes[maxButtons])
+	PauseMenu::PauseMenu(Scenes changeScenes[maxPauseMenuButtons])
 	{
-		setChangeScenes(changeScenes);
+		setChangeScenes(changeScenes);		
 
-		float buttonsHeight = static_cast<float>(GetScreenHeight() * buttonsYPercentage);
+		setButtons();
 
-		for (short i = 0; i < maxButtons; i++) 
-		{
-			buttons[i] = new Button({ static_cast<float>((GetScreenWidth() / 2) - (buttonsHeight / 2.0f)), 
-				buttonsHeight + (GetScreenHeight() * buttonsHeightSeparationPercentage * i), 
-				static_cast<float>(GetScreenWidth() * buttonsWidthPercentage), 
-				buttonsHeight }, 
-				buttonsColorOne, buttonsColorTwo, buttonsText[i]);
-		}
+		setTitleTextXPos(static_cast<int>((GetScreenWidth() / 2) - ((titleAmountLetters / 2.5f) * titleSize)));
+		setTitleTextYPos(static_cast<int>(GetScreenHeight() * titleTextYPercentage));
 	}
 
 	PauseMenu::~PauseMenu()
 	{
-		for (short i = 0; i < maxButtons; i++)
+		for (short i = 0; i < maxPauseMenuButtons; i++)
 		{
 			delete buttons[i];
 			buttons[i] = NULL;
@@ -42,11 +36,26 @@ namespace Z_APOCALIPSE
 		this->titleTextYPos = titleTextYPos;
 	}
 
-	void PauseMenu::setChangeScenes(Scenes changeScenes[maxButtons]) 
+	void PauseMenu::setChangeScenes(Scenes changeScenes[maxPauseMenuButtons]) 
 	{
-		for (short i = 0; i < maxButtons; i++) 
+		for (short i = 0; i < maxPauseMenuButtons; i++) 
 		{
 			this->changeScenes[i] = changeScenes[i];
+		}
+	}
+
+	void PauseMenu::setButtons()
+	{		
+		float width = static_cast<float>(GetScreenWidth() * buttonsWidthPercentage);
+		float height = static_cast<float>(GetScreenHeight() * buttonsHeightPercentage);
+		float xPos = static_cast<float>((GetScreenWidth() / 2) - (width / 2.0f));
+		float yPos = static_cast<float>(GetScreenHeight() * buttonsYPercentage);
+		float separation = static_cast<float>(GetScreenHeight() * buttonsHeightSeparationPercentage);
+
+		for (short i = 0; i < maxPauseMenuButtons; i++)
+		{
+			buttons[i] = new Button({ xPos,	yPos + (separation * i), width,	height },
+				buttonsColorOne, buttonsColorTwo, buttonsText[i]);
 		}
 	}
 
@@ -67,7 +76,7 @@ namespace Z_APOCALIPSE
 
 	void PauseMenu::input(SceneManager* sceneManager)
 	{
-		for (short i = 0; i < maxButtons; i++) 
+		for (short i = 0; i < maxPauseMenuButtons; i++) 
 		{
 			buttons[i]->changeSceneWhenButtonPress(sceneManager, getChangeScene(i));
 		}
@@ -90,7 +99,7 @@ namespace Z_APOCALIPSE
 
 	void PauseMenu::drawButtons()
 	{
-		for (short i = 0; i < maxButtons; i++)
+		for (short i = 0; i < maxPauseMenuButtons; i++)
 		{
 			buttons[i]->draw();
 		}

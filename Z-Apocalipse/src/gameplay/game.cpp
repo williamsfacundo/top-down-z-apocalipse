@@ -42,6 +42,14 @@ namespace Z_APOCALIPSE
 		mainMenuChangeScenes[3] = Scenes::EXIT;
 	}
 
+	void Game::setPauseMenuChangeScenes()
+	{
+		pauseMenuChangeScenes[0] = Scenes::GAMEPLAY;
+		pauseMenuChangeScenes[1] = Scenes::RESTART_GAMEPLAY;
+		pauseMenuChangeScenes[2] = Scenes::OPTIONS;
+		pauseMenuChangeScenes[3] = Scenes::MAIN_MENU_RESTART_GAMEPLAY;
+	}
+
 	void Game::setversionTextPosition(Vector2 versionTextPosition) 
 	{
 		this->versionTextPosition = versionTextPosition;
@@ -68,6 +76,8 @@ namespace Z_APOCALIPSE
 
 		SetTargetFPS(fps);
 
+		setPauseMenuChangeScenes();
+
 		sceneManager = new SceneManager(initialScene);
 		gameplay = new Gameplay();
 		mainMenu = new MainMenu(mainMenuTexts);
@@ -75,10 +85,11 @@ namespace Z_APOCALIPSE
 		upgrader = new Upgrader();
 		tutorial = new Tutorial();
 		endGame = new EndGame();
+		pauseMenu = new PauseMenu(pauseMenuChangeScenes);
 
 		setversionTextPosition( { static_cast<float>(GetScreenWidth() * 0.85f ), static_cast<float>(GetScreenHeight() * 0.85f) } );
 		setRunning(true);
-		setMainMenuChangeScenes();
+		setMainMenuChangeScenes();		
 	}	
 
 	void Game::deinit()
@@ -92,6 +103,7 @@ namespace Z_APOCALIPSE
 		delete upgrader;
 		delete tutorial;
 		delete endGame;
+		delete pauseMenu;
 	}
 
 	void Game::drawVersion() 
@@ -138,13 +150,7 @@ namespace Z_APOCALIPSE
 			case Scenes::EXIT:
 
 				setRunning(false);
-				break;
-			case Scenes::PAUSE:
-
-				pauseInput(gameplay->getPauseButtonPosition(), gameplay->getPauseButtonRadius());
-
-				gameplay->draw();
-				break;
+				break;			
 			case Scenes::UPGRADER:
 
 				upgrader->input(gameplay->getPlayer(), sceneManager);
@@ -163,7 +169,25 @@ namespace Z_APOCALIPSE
 
 				endGame->draw();
 				break;
+			case Scenes::PAUSE_MENU:
+
+				pauseMenu->input(sceneManager);
+				
+				pauseMenu->draw();
+
+				drawVersion();
+				break;
+			case Scenes::RESTART_GAMEPLAY:
+				
+				temporalUnuseScenes();
+				break;
+			case Scenes::MAIN_MENU_RESTART_GAMEPLAY:
+
+				temporalUnuseScenes();
+				break;
 			default:
+
+				setRunning(false);
 				break;
 			}			
 		}		
@@ -182,13 +206,4 @@ namespace Z_APOCALIPSE
 		DrawText("PRESS 'SPACE' TO GO BACK", 1, 1, 50, BLACK);
 		EndDrawing();
 	}	
-
-	void Game::pauseInput(Vector2 pauseCirclePosition, float pauseCircleRadius) 
-	{
-		if (CheckCollisionPointCircle(GetMousePosition(), pauseCirclePosition, pauseCircleRadius)
-			&& IsMouseButtonPressed(pauseMenuInputButton))
-		{
-			sceneManager->setCurrentScene(pauseMenuChangeScene);
-		}
-	}
 }

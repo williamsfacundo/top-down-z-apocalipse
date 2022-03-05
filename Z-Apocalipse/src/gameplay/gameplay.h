@@ -50,7 +50,7 @@ namespace Z_APOCALIPSE
 		static const short maxSpawners = 4;
 		static const short maxAmmunitions = 24;
 
-		const Scenes pauseMenuScene = Scenes::PAUSE;
+		const Scenes pauseMenuScene = Scenes::PAUSE_MENU;
 
 		const MouseButton inputButton = MouseButton::MOUSE_BUTTON_LEFT;
 
