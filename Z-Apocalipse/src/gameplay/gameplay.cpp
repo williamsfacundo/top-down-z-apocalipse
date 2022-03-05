@@ -104,11 +104,11 @@ namespace Z_APOCALIPSE
 	void Gameplay::setZombiesKilled(int zombiesKilled) 
 	{
 		this->zombiesKilled = zombiesKilled;
-	}
+	}	
 
-	void Gameplay::addZombiesKilled(short value)
+	void Gameplay::setTimeSurvived(int timeSurvived) 
 	{
-		zombiesKilled += value;
+		this->timeSurvived = timeSurvived;
 	}
 
 	void Gameplay::addTimeToSpawnZombie(float value) 
@@ -142,6 +142,16 @@ namespace Z_APOCALIPSE
 	void Gameplay::addZombieDamageToDie(float value) 
 	{
 		this->zombieDamageToDie += value;
+	}
+
+	void Gameplay::addZombiesKilled(short value)
+	{
+		zombiesKilled += value;
+	}
+
+	void Gameplay::addTimeSurvived(short value) 
+	{
+		timeSurvived += value;
 	}
 
 	Vector2 Gameplay::getPauseButtonPosition()
@@ -245,6 +255,11 @@ namespace Z_APOCALIPSE
 		return zombiesKilled;
 	}
 
+	int Gameplay::getTimeSurvived()
+	{
+		return timeSurvived;
+	}
+
 	Survivor* Gameplay::getPlayer()
 	{
 		return playerOne;
@@ -274,6 +289,7 @@ namespace Z_APOCALIPSE
 		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
 		setRoundStartingTimerToEndRound(initialTimeToEndRound);
 		setZombiesKilled(0);
+		setTimeSurvived(0);
 	}
 	
 	void Gameplay::input(SceneManager* sceneManager)
@@ -503,6 +519,7 @@ namespace Z_APOCALIPSE
 			if (timerToEndRound < 0.0f)
 			{
 				timerToEndRound = 0.0f;
+				addTimeSurvived(1);
 			}
 		}		
 	}
@@ -526,9 +543,10 @@ namespace Z_APOCALIPSE
 			resetGameplay();	
 			
 			sceneManager->setCurrentScene(endGameScene);
-			endGame->calculateScore(getZombiesKilled(), 0);
+			endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
 
 			setZombiesKilled(0);
+			setTimeSurvived(0);
 		}
 	}
 
