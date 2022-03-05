@@ -181,6 +181,7 @@ namespace Z_APOCALIPSE
 		void initialGameplayStats();
 		void deleteAmmunitions();
 		void creatNewAmmo();		
+		void restartGameplay(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader, Scenes changeScene);
 	};
 }
 

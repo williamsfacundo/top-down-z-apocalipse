@@ -27,6 +27,8 @@ namespace Z_APOCALIPSE
 
 		const Scenes initialScene = Scenes::MAIN_MENU; 	
 		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY;		
+		const Scenes restartGameplayScene = Scenes::GAMEPLAY;
+		const Scenes mainMenuRestartGameplayScene = Scenes::MAIN_MENU;
 
 		const MouseButton pauseMenuInputButton = MouseButton::MOUSE_BUTTON_LEFT;
 

@@ -634,17 +634,7 @@ namespace Z_APOCALIPSE
 	{		
 		if (playerOne->getLives() <= 0) 
 		{			
-			initialGameplayStats();
-
-			playerOne->startingSurvivorStats();
-
-			upgrader->resetLevels();
-			
-			sceneManager->setCurrentScene(endGameScene);
-			endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
-
-			setZombiesKilled(0);
-			setTimeSurvived(0);
+			restartGameplay(sceneManager, endGame, upgrader, endGameScene);
 		}
 	}
 
@@ -832,5 +822,20 @@ namespace Z_APOCALIPSE
 
 			ammunitions[index] = new Ammunition( getRandomAmmoPosition(radius, index), radius);
 		}
+	}
+
+	void Gameplay::restartGameplay(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader, Scenes changeScene)
+	{
+		initialGameplayStats();
+
+		playerOne->startingSurvivorStats();
+
+		upgrader->resetLevels();
+
+		sceneManager->setCurrentScene(changeScene);
+		endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
+
+		setZombiesKilled(0);
+		setTimeSurvived(0);
 	}
 }

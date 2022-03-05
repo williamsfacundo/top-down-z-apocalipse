@@ -179,7 +179,7 @@ namespace Z_APOCALIPSE
 				break;
 			case Scenes::RESTART_GAMEPLAY:
 				
-				temporalUnuseScenes();
+				gameplay->restartGameplay(sceneManager, endGame, upgrader, restartGameplayScene);
 				break;
 			case Scenes::MAIN_MENU_RESTART_GAMEPLAY:
 
