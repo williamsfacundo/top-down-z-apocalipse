@@ -27,7 +27,7 @@ namespace Z_APOCALIPSE
 		const float charactersSizeDivider = 24.0f;		
 		const float ammoSizeDivider = 48.0f;
 		const float initialtimeToSpawnZombie = 2.0f;
-		const float initialTimeToEndRound = 60.0f;		
+		const float initialTimeToEndRound = 25.0f; //		
 		const float zombieInitialVelocity = 35.0f;
 		const float zombieInitialDamageToDie = 20.0f;
 		const float decreasZombieSpawnerPercentage = 0.11f;
@@ -42,7 +42,7 @@ namespace Z_APOCALIPSE
 
 		const short initialRound = 1;
 		const short zombiesAdditionNextRound = 1;
-		const short initialMoneyForKillingZombie = 20;
+		const short initialMoneyForKillingZombie = 20; //
 		const short maxTimeToEndRound = 300;
 		const short maxAmmoPositionValidations = 300;
 
@@ -159,7 +159,7 @@ namespace Z_APOCALIPSE
 		short findEmptyAmmoIndex();
 		void decreasTimerToEndRound();
 		void decreasTimerToCreatNewAmmo();
-		void winRound(SceneManager* sceneManager);
+		void winRound(SceneManager* sceneManager, Upgrader* upgrader);
 		void defeatCondition(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader);
 		void drawHud();
 		void drawTimer();		

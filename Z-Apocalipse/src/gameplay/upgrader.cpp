@@ -178,4 +178,20 @@ namespace Z_APOCALIPSE
 		
 		EndDrawing();
 	}	
+
+	bool Upgrader::allLevelsMaxed()
+	{
+		bool levelsMaxed = true;
+
+		for (short i = 0; i < maxButtons; i++)
+		{
+			if (levels[i] != maxLevel)
+			{
+				levelsMaxed = false;
+				i = maxButtons;
+			}
+		}
+
+		return levelsMaxed;
+	}
 }

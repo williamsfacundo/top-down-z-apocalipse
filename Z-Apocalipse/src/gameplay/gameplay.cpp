@@ -363,7 +363,7 @@ namespace Z_APOCALIPSE
 		decreasTimerToCreatNewAmmo();
 		creatNewAmmo();
 
-		winRound(sceneManager);
+		winRound(sceneManager, upgrader);
 		defeatCondition(sceneManager, endGame, upgrader);
 	}
 	
@@ -618,7 +618,7 @@ namespace Z_APOCALIPSE
 		}
 	}
 
-	void Gameplay::winRound(SceneManager* sceneManager) 
+	void Gameplay::winRound(SceneManager* sceneManager, Upgrader* upgrader)
 	{	
 		if (getTimerToEndRound() == 0.0f ) 
 		{
@@ -626,7 +626,11 @@ namespace Z_APOCALIPSE
 			playerOne->setInitialRoundMoney(playerOne->getMoney());
 			increaseStatsForNextRound();
 			resetGameplayForWiningRound();
-			sceneManager->setCurrentScene(upgraderScene);
+
+			if (!upgrader->allLevelsMaxed()) 
+			{
+				sceneManager->setCurrentScene(upgraderScene); 
+			}		
 		}		
 	}
 

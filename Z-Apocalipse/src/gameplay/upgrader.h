@@ -74,6 +74,8 @@ namespace Z_APOCALIPSE
 
 		void input(Survivor* survivor, SceneManager* sceneManager);
 		void draw(Survivor* survivor);		
+
+		bool allLevelsMaxed();
 	};
 }
 
