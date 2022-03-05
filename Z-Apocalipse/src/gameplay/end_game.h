@@ -18,22 +18,28 @@ namespace Z_APOCALIPSE
 		const Color backgroundColor = BLACK;
 		const Color buttonsColorOne = YELLOW;
 		const Color buttonsColorTwo = RED;
+		const Color scoreTextColor = GREEN; 
 
-		const float titleYPercentage = 0.3f;
+		const float titleYPercentage = 0.22f;
 		const float titleXPercentage = 0.26f;
+		const float scoreTextYPercentage = 0.45;
+		const float scoreTextXPercentage = 0.18;
 		const float goMenuButtonXPercentage = 0.1f;
 		const float restartButtonXPercentage = 0.7f;
 		const float buttonsWidthPercentage = 0.2f;
 		const float buttonsHeightPercentage = 0.1f;
 		const float buttonsYPercentage = 0.8f;
+		
 			
-		const short titleSize = 60;		
+		const short titleSize = 70;		
+		const short scoreSize = 60;
 		const short zombiesKilledMultiplyer = 85;
 		const short timeSurvivedMultiplyer = 15;
 
 		const char* titleText = "END GAME";
 		const char* goMenuButtonText = "GO MENU";
 		const char* restartButtonText = "RESTART";
+		const char* scoreText = "SCORE %i";
 
 		int score;
 
@@ -50,7 +56,8 @@ namespace Z_APOCALIPSE
 		void input(SceneManager* sceneManager);
 		void draw();
 
-		void drawTitle();		
+		void drawTitle();	
+		void drawScore();
 
 		void calculateScore(int zombiesKilled, int timeSurvived);
 	};

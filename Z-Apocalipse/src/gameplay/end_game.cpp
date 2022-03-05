@@ -53,6 +53,8 @@ namespace Z_APOCALIPSE
 		restartButton->draw();
 
 		drawTitle();
+		
+		drawScore();
 
 		EndDrawing();
 	}
@@ -62,6 +64,12 @@ namespace Z_APOCALIPSE
 		DrawText(titleText, static_cast<int>(GetScreenWidth() * titleXPercentage),
 			static_cast<int>(GetScreenHeight() * titleYPercentage), titleSize, titleColor);
 	}	
+
+	void EndGame::drawScore() 
+	{
+		DrawText(TextFormat(scoreText, getScore()), static_cast<int>(GetScreenWidth() * scoreTextXPercentage),
+			static_cast<int>(GetScreenHeight() * scoreTextYPercentage), scoreSize, scoreTextColor);
+	}
 
 	void EndGame::calculateScore(int zombiesKilled, int timeSurvived) 
 	{
