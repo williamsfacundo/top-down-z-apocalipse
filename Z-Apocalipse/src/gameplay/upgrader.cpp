@@ -77,8 +77,7 @@ namespace Z_APOCALIPSE
 		else if (maxAcelerationUpdateButton->buttonPressed() && levels[1] < maxLevel && survivor->getMoney() >= getPrice(1)) //survivor->getStartingRoundMaxAceleration() + maxAcelerationUpgradeValue <= survivor->getMaxAceleration()
 		{
 			survivor->addMoney(-getPrice(1));
-			survivor->addStartingRoundMaxAceleration(maxAcelerationUpgradeValue);
-			survivor->setAceleration(survivor->getStartingRoundMaxAceleration());
+			survivor->addStartingRoundMaxAceleration(maxAcelerationUpgradeValue);			
 			levels[1] += 1;
 		}
 		else if (maxAmoUpdateButton->buttonPressed() && levels[2] < maxLevel && survivor->getMoney() >= getPrice(2)) //survivor->getStartingRoundRemainingBullets() + maxBulletsPlayerUpgradeValue <= survivor->getMaxBulletsPlayerCanHave()
