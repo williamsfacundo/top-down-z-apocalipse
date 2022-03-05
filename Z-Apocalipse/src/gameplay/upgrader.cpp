@@ -177,5 +177,5 @@ namespace Z_APOCALIPSE
 		DrawText(TextFormat("$ %i", survivor->getMoney()), 1, GetScreenHeight() - 30, playerMoneyHudSize, playerMoneyColor);
 		
 		EndDrawing();
-	}
+	}	
 }

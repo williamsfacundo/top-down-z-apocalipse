@@ -7,6 +7,7 @@
 #include "zombie.h"
 #include "scene_manager.h"
 #include "end_game.h"
+#include "upgrader.h"
 
 namespace Z_APOCALIPSE
 {
@@ -23,7 +24,7 @@ namespace Z_APOCALIPSE
 		const float hudHeightPercentage = 0.26f;		
 		const float charactersSizeDivider = 24.0f;		
 		const float initialtimeToSpawnZombie = 2.0f;
-		const float initialTimeToEndRound = 60.0f;		
+		const float initialTimeToEndRound = 20.0f;		
 		const float zombieInitialVelocity = 35.0f;
 		const float zombieInitialDamageToDie = 20.0f;
 		const float decreasZombieSpawnerPercentage = 0.11f;
@@ -84,8 +85,8 @@ namespace Z_APOCALIPSE
 		void nextRound();
 		void setMoneyForKillingZombie(short moneyForKillingZombie);
 		void setZombiesKilled(int zombiesKilled);		
-		void setTimeSurvived(int timeSurvived);
-		
+		void setTimeSurvived(int timeSurvived);		
+		void setZombiesToNull();
 
 		void addTimeToSpawnZombie(float value);
 		void addTimeToEndRound(float value);
@@ -116,7 +117,7 @@ namespace Z_APOCALIPSE
 
 		void init();
 		void input(SceneManager* sceneManager);
-		void update(SceneManager* sceneManager, EndGame* endGame);
+		void update(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader);
 		void draw();
 		void deinit();
 
@@ -135,7 +136,7 @@ namespace Z_APOCALIPSE
 		short findEmptyZombieIndex();
 		void decreasTimerToEndRound();
 		void winRound(SceneManager* sceneManager);
-		void defeatCondition(SceneManager* sceneManager, EndGame* endGame);
+		void defeatCondition(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader);
 		void drawHud();
 		void drawTimer();		
 		void drawLivesRemaining();
@@ -151,7 +152,8 @@ namespace Z_APOCALIPSE
 		void muteGameInput();
 		bool isMouseOnGameplaySpace();
 		void increaseStatsForNextRound();
-		void resetGameplay();
+		void resetGameplayForWiningRound();
+		void initialGameplayStats();
 	};
 }
 

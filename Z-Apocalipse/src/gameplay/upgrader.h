@@ -73,7 +73,7 @@ namespace Z_APOCALIPSE
 		int getPrice(short index);
 
 		void input(Survivor* survivor, SceneManager* sceneManager);
-		void draw(Survivor* survivor);
+		void draw(Survivor* survivor);		
 	};
 }
 

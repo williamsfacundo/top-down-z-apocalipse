@@ -16,7 +16,9 @@ namespace Z_APOCALIPSE
 		const KeyboardKey initialMoveRightKey = KEY_D;
 		const KeyboardKey initialMoveLeftKey = KEY_A;
 		const KeyboardKey initialReloadKey = KEY_R;
+
 		const MouseButton initialShootButton = MOUSE_BUTTON_LEFT;
+
 		const short initialLives = 3;
 		const short maxLives = 8;
 		const short initialMoney = 200;
@@ -26,6 +28,7 @@ namespace Z_APOCALIPSE
 		const short maxBulletsChargerSupports = 36;
 		const short initialMaxBullets = initialBulletsInCharger * 6;
 		const short maxBulletsPlayerCanHave = 126;
+
 		const float startingShootingTimer = 1.15f;
 		const float minShootingTime = 0.225f;
 		const float initialDamage = 10.0f;
@@ -46,14 +49,17 @@ namespace Z_APOCALIPSE
 		int money;
 		int initialRoundMoney;
 		short directionNumberMultiplyer;
+
 		MovementStatus movementStatus;
 		MovementStatus direction;
+
 		KeyboardKey moveUpKey;
 		KeyboardKey moveDownKey;
 		KeyboardKey moveRightKey;
 		KeyboardKey moveLeftKey;
 		KeyboardKey reloadKey;
 		MouseButton shootButton;
+
 		float startingRoundVelocity;
 		float velocity;
 		float aceleration;
@@ -68,7 +74,8 @@ namespace Z_APOCALIPSE
 		short startingRoundMaxBulletsInCharger;
 		short bulletsInCharger;
 		short startingRoundRemainingBullets;
-		short remainingBullets;				
+		short remainingBullets;			
+
 		Bullet* bullets[maxBullets];
 		Rectangle gameplayMap;		
 	public:
@@ -182,7 +189,8 @@ namespace Z_APOCALIPSE
 		void drawSurvivor();
 		void drawBullets();
 		void destroyBullets();
-		void resetSurvivor(Vector2 position);
+		void resetSurvivorForWiningRound(Vector2 position);
+		void startingSurvivorStats();
 	};
 }
 

@@ -10,6 +10,7 @@
 #include "zombie.h"
 #include "scene_manager.h"
 #include "end_game.h"
+#include "upgrader.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -109,6 +110,14 @@ namespace Z_APOCALIPSE
 	void Gameplay::setTimeSurvived(int timeSurvived) 
 	{
 		this->timeSurvived = timeSurvived;
+	}
+
+	void Gameplay::setZombiesToNull() 
+	{
+		for (short i = 0; i < maxZombiesInRound; i++)
+		{
+			zombies[i] = NULL;
+		}
 	}
 
 	void Gameplay::addTimeToSpawnZombie(float value) 
@@ -270,24 +279,16 @@ namespace Z_APOCALIPSE
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, (getGameplaySize() / charactersSizeDivider) / 2.0f,
 			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		
-		for (short i = 0; i < maxZombiesInRound; i++) 
-		{
-			zombies[i] = NULL;
-		}
+		setZombiesToNull();
 
 		setZombiesSpawnsPositions();
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
-		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() * 0.95f), getPauseButtonRadius() * 1.4f});
+		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() * 0.95f), getPauseButtonRadius() * 1.4f });
 		setMuteButtonRadius(getPauseButtonRadius());
 		setMuteButtonPosition({ static_cast<float>(GetScreenWidth() * 0.85f), getPauseButtonRadius() * 1.4f });
-		setTimerToSpawnZombie(initialtimeToSpawnZombie);		
-		setTimerToEndRound(initialTimeToEndRound);		
-		setZombieVelocity(zombieInitialVelocity);
-		setZombieDamageToDie(zombieInitialDamageToDie);
-		setRound(initialRound);		
-		setMoneyForKillingZombie(initialMoneyForKillingZombie);
-		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
-		setRoundStartingTimerToEndRound(initialTimeToEndRound);
+
+		initialGameplayStats();
+
 		setZombiesKilled(0);
 		setTimeSurvived(0);
 	}
@@ -300,7 +301,7 @@ namespace Z_APOCALIPSE
 		//muteGameInput();
 	}
 	
-	void Gameplay::update(SceneManager* sceneManager, EndGame* endGame)
+	void Gameplay::update(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader)
 	{			
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		updateZombieSpawnTimer();
@@ -311,7 +312,7 @@ namespace Z_APOCALIPSE
 		zombiesCollisionWithEachOther();
 		decreasTimerToEndRound();
 		winRound(sceneManager);
-		defeatCondition(sceneManager, endGame);
+		defeatCondition(sceneManager, endGame, upgrader);
 	}
 	
 	void Gameplay::draw() 
@@ -531,16 +532,20 @@ namespace Z_APOCALIPSE
 			nextRound();
 			playerOne->setInitialRoundMoney(playerOne->getMoney());
 			increaseStatsForNextRound();
-			resetGameplay();
+			resetGameplayForWiningRound();
 			sceneManager->setCurrentScene(upgraderScene);
 		}		
 	}
 
-	void Gameplay::defeatCondition(SceneManager* sceneManager, EndGame* endGame)
+	void Gameplay::defeatCondition(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader)
 	{		
 		if (playerOne->getLives() <= 0) 
 		{			
-			resetGameplay();	
+			initialGameplayStats();
+
+			playerOne->startingSurvivorStats();
+
+			upgrader->resetLevels();
 			
 			sceneManager->setCurrentScene(endGameScene);
 			endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
@@ -666,13 +671,29 @@ namespace Z_APOCALIPSE
 		addZombieDamageToDie(getZombieDamageToDie() * increasedZombiesDamageToDie);				
 	}
 
-	void Gameplay::resetGameplay() 
+	void Gameplay::resetGameplayForWiningRound() 
 	{
 		setTimerToSpawnZombie(getRoundStartingTimerToSpawnZombie());
 		setTimerToEndRound(getRoundStartingTimerToEndRound());
 				
 		destroyZombies();
 
-		playerOne->resetSurvivor({ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
+		playerOne->resetSurvivorForWiningRound({ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
+	}
+
+	void Gameplay::initialGameplayStats() 
+	{
+		destroyZombies();
+
+		playerOne->setPosition({ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });		
+
+		setTimerToSpawnZombie(initialtimeToSpawnZombie);
+		setTimerToEndRound(initialTimeToEndRound);
+		setZombieVelocity(zombieInitialVelocity);
+		setZombieDamageToDie(zombieInitialDamageToDie);
+		setRound(initialRound);
+		setMoneyForKillingZombie(initialMoneyForKillingZombie);
+		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
+		setRoundStartingTimerToEndRound(initialTimeToEndRound);		
 	}
 }

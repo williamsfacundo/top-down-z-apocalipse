@@ -11,35 +11,7 @@ namespace Z_APOCALIPSE
 {
 	Survivor::Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap) : Character(color, position, radius, gameplayMap)
 	{
-		setRoundStartingLives(initialLives);
-		setLives(initialLives);
-		setMoney(initialMoney);
-		setInitialRoundMoney(initialMoney);
-		setMovementStatus(MovementStatus::NONE);
-		setDirection(MovementStatus::UP);
-		setMoveUpKey(initialMoveUpKey);
-		setMoveDownKey(initialMoveDownKey);
-		setMoveRightKey(initialMoveRightKey);
-		setMoveLeftKey(initialMoveLeftKey);
-		setShootButton(initialShootButton);
-		setStartingRoundVelocity(initialVelocity);
-		setVelocity(getStartingRoundVelocity());
-		setAceleration(0.0f);
-		setDirectionNumberMultiplyer(1);	
-		setStartingRoundShootingTime(startingShootingTimer);
-		setShootingTimer(0.0f);
-		setStartingRoundDamage(initialDamage);
-		setDamage(getStartingRoundDamage());
-		setInvulnerabilityTimer(0.0f);
-		setStartingRoundMaxBulletsInCharger(initialBulletsInCharger);
-		setBulletsInCharger(getStartingRoundMaxBulletsInCharger());
-		setStartingRoundRemainingBullets(initialMaxBullets - getStartingRoundMaxBulletsInCharger());
-		setRemainingBullets(getStartingRoundRemainingBullets());
-		setReloadKey(initialReloadKey);		
-		setBulletsToNull();
-		setStartingRoundReloadTime(initialReloadTime);
-		setStartingRoundMaxAceleration(initialMaxAceleration);
-		setReloadTimer(0.0f);		
+		startingSurvivorStats();
 	}
 
 	Survivor::~Survivor() 
@@ -803,7 +775,7 @@ namespace Z_APOCALIPSE
 		}
 	}
 
-	void Survivor::resetSurvivor(Vector2 position) 
+	void Survivor::resetSurvivorForWiningRound(Vector2 position) 
 	{
 		setMoney(initialRoundMoney);
 		setMovementStatus(MovementStatus::NONE);
@@ -819,5 +791,38 @@ namespace Z_APOCALIPSE
 		destroyBullets();
 		setLives(getRoundStartingLives());
 		setDamage(getStartingRoundDamage());
+	}
+
+	void Survivor::startingSurvivorStats() 
+	{
+		setRoundStartingLives(initialLives);
+		setLives(initialLives);
+		setMoney(initialMoney);
+		setInitialRoundMoney(initialMoney);
+		setMovementStatus(MovementStatus::NONE);
+		setDirection(MovementStatus::UP);
+		setMoveUpKey(initialMoveUpKey);
+		setMoveDownKey(initialMoveDownKey);
+		setMoveRightKey(initialMoveRightKey);
+		setMoveLeftKey(initialMoveLeftKey);
+		setShootButton(initialShootButton);
+		setStartingRoundVelocity(initialVelocity);
+		setVelocity(getStartingRoundVelocity());
+		setAceleration(0.0f);
+		setDirectionNumberMultiplyer(1);
+		setStartingRoundShootingTime(startingShootingTimer);
+		setShootingTimer(0.0f);
+		setStartingRoundDamage(initialDamage);
+		setDamage(getStartingRoundDamage());
+		setInvulnerabilityTimer(0.0f);
+		setStartingRoundMaxBulletsInCharger(initialBulletsInCharger);
+		setBulletsInCharger(getStartingRoundMaxBulletsInCharger());
+		setStartingRoundRemainingBullets(initialMaxBullets - getStartingRoundMaxBulletsInCharger());
+		setRemainingBullets(getStartingRoundRemainingBullets());
+		setReloadKey(initialReloadKey);
+		setBulletsToNull();
+		setStartingRoundReloadTime(initialReloadTime);
+		setStartingRoundMaxAceleration(initialMaxAceleration);
+		setReloadTimer(0.0f);
 	}
 }
