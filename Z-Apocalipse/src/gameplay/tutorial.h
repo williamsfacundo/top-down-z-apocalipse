@@ -25,13 +25,13 @@ namespace Z_APOCALIPSE
 		const float titleTextYPercentage = 0.1f;
 		const float tutorialTextsXPercentage = 0.05f;
 		const float tutorialTextsInitialYPercentage = 0.18f;
-		const float tutorialTextsSeparation = 0.09f;	
+		const float tutorialTextsSeparation = 0.08f;	
 
 		const int titleTextSize = 40;
 		const int tutorialTextsSize = 16;
 
 		const short titleTextAmountOfLetters = 8;
-		static const short maxTutorialTexts = 7;
+		static const short maxTutorialTexts = 8;
 
 		const char* buttonText = "START";
 		const char* titleText = "TUTORIAL";
@@ -39,6 +39,7 @@ namespace Z_APOCALIPSE
 		const char* tutorialTexts[maxTutorialTexts] = { 
 			"MOVE CHARACTER: W-A-S-D (KEYS)", 
 			"AIM WITH MOUSE AND LEFT CLICK TO SHOOT (R KEY TO RELOAD)", 
+			"PLAYER CAN PICK UP AMMUNITION FROM THE FLOOR",
 			"SURVIVE ZOMBIES WAVES (X AMOUNT OF TIME PER ROUND), KILLING AS MUCH AS YOU CAN",
 			"EVERY KILL GIVES THE PLAYER MONEY TO SPEND AT THE UPGRADE MENU",
 			"UPGRADE MENU WILL BE AVAILABLE AT THE END OF EACH ROUND",
