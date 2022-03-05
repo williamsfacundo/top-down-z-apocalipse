@@ -22,8 +22,11 @@ namespace Z_APOCALIPSE
 		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
 		const char* versionText = "v0.4";
 
-		const short versionTextSize = 45;
-		const short fps = 60;		
+		const short fps = 60;	
+
+		const float versionYPercentage = 0.85f;
+		const float versionXPercentage = 0.85f;
+		const float versionSizeDivider = 20;
 
 		const Scenes initialScene = Scenes::MAIN_MENU; 	
 		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY;		
@@ -38,6 +41,8 @@ namespace Z_APOCALIPSE
 
 		Scenes mainMenuChangeScenes[maxMainMenuButtons];
 		Scenes pauseMenuChangeScenes[maxMainMenuButtons];
+
+		int versionTextSize;
 
 		SceneManager* sceneManager;
 		Gameplay* gameplay;
@@ -57,10 +62,12 @@ namespace Z_APOCALIPSE
 		void setScreenHeight(int screenHeight);		
 		void setMainMenuChangeScenes();
 		void setPauseMenuChangeScenes();
+		void setVersionTextSize();
 		void setversionTextPosition(Vector2 versionTextPosition);
 		void setRunning(bool running);
 				
 		Vector2 getversionTextPosition();
+		int getVersionTextSize();
 		bool getRunning();
 
 		void init();		

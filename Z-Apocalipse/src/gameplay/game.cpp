@@ -8,6 +8,7 @@
 #include "..\game\credits.h"
 #include "..\gameplay\upgrader.h"
 #include "..\gameplay\tutorial.h"
+#include "..\math\math.h"
 
 namespace Z_APOCALIPSE
 {
@@ -50,6 +51,11 @@ namespace Z_APOCALIPSE
 		pauseMenuChangeScenes[3] = Scenes::MAIN_MENU_RESTART_GAMEPLAY;
 	}
 
+	void Game::setVersionTextSize() 
+	{
+		versionTextSize = vectorMath::getScreenHypotenuse() / versionSizeDivider;
+	}
+
 	void Game::setversionTextPosition(Vector2 versionTextPosition) 
 	{
 		this->versionTextPosition = versionTextPosition;
@@ -65,6 +71,11 @@ namespace Z_APOCALIPSE
 		return versionTextPosition;
 	}
 
+	int Game::getVersionTextSize() 
+	{
+		return versionTextSize;
+	}
+
 	bool Game::getRunning() 
 	{
 		return running;
@@ -77,6 +88,10 @@ namespace Z_APOCALIPSE
 		SetTargetFPS(fps);
 
 		setPauseMenuChangeScenes();
+		setVersionTextSize();
+		setversionTextPosition({ static_cast<float>(GetScreenWidth() * versionXPercentage), static_cast<float>(GetScreenHeight() * versionYPercentage) });
+		setRunning(true);
+		setMainMenuChangeScenes();
 
 		sceneManager = new SceneManager(initialScene);
 		gameplay = new Gameplay();
@@ -85,11 +100,7 @@ namespace Z_APOCALIPSE
 		upgrader = new Upgrader();
 		tutorial = new Tutorial();
 		endGame = new EndGame();
-		pauseMenu = new PauseMenu(pauseMenuChangeScenes);
-
-		setversionTextPosition( { static_cast<float>(GetScreenWidth() * 0.85f ), static_cast<float>(GetScreenHeight() * 0.85f) } );
-		setRunning(true);
-		setMainMenuChangeScenes();		
+		pauseMenu = new PauseMenu(pauseMenuChangeScenes);			
 	}	
 
 	void Game::deinit()
@@ -108,7 +119,7 @@ namespace Z_APOCALIPSE
 
 	void Game::drawVersion() 
 	{
-		DrawText(versionText, static_cast<int>(getversionTextPosition().x), (getversionTextPosition().y), versionTextSize, versionTextColor);
+		DrawText(versionText, static_cast<int>(getversionTextPosition().x), (getversionTextPosition().y), getVersionTextSize(), versionTextColor);
 					
 		EndDrawing();
 	}
