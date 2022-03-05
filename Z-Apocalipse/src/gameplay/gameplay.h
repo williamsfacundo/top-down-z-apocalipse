@@ -60,6 +60,7 @@ namespace Z_APOCALIPSE
 		short round;
 		short maxZombiesInRound = 5;
 		short moneyForKillingZombie;
+		int zombiesKilled;
 
 		Survivor* playerOne;
 		Zombie* zombies[maxZombies];
@@ -81,6 +82,8 @@ namespace Z_APOCALIPSE
 		void setRound(short round);	
 		void nextRound();
 		void setMoneyForKillingZombie(short moneyForKillingZombie);
+		void setZombiesKilled(int zombiesKilled);
+		void addZombiesKilled(short value);
 
 		void addTimeToSpawnZombie(float value);
 		void addTimeToEndRound(float value);
@@ -103,6 +106,7 @@ namespace Z_APOCALIPSE
 		short getRound();
 		float getGameplaySize();
 		short getMoneyForKillingZombie();
+		int getZombiesKilled();
 		Survivor* getPlayer();
 
 		void init();

@@ -101,6 +101,16 @@ namespace Z_APOCALIPSE
 		this->moneyForKillingZombie = moneyForKillingZombie;
 	}
 
+	void Gameplay::setZombiesKilled(int zombiesKilled) 
+	{
+		this->zombiesKilled = zombiesKilled;
+	}
+
+	void Gameplay::addZombiesKilled(short value)
+	{
+		zombiesKilled += value;
+	}
+
 	void Gameplay::addTimeToSpawnZombie(float value) 
 	{
 		timerToSpawnZombie += value;
@@ -230,6 +240,11 @@ namespace Z_APOCALIPSE
 		return moneyForKillingZombie;
 	}
 
+	int Gameplay::getZombiesKilled() 
+	{
+		return zombiesKilled;
+	}
+
 	Survivor* Gameplay::getPlayer()
 	{
 		return playerOne;
@@ -258,6 +273,7 @@ namespace Z_APOCALIPSE
 		setMoneyForKillingZombie(initialMoneyForKillingZombie);
 		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
 		setRoundStartingTimerToEndRound(initialTimeToEndRound);
+		setZombiesKilled(0);
 	}
 	
 	void Gameplay::input(SceneManager* sceneManager)
@@ -417,6 +433,7 @@ namespace Z_APOCALIPSE
 				if (zombies[i]->isZombieDead()) 
 				{
 					playerOne->addMoney(moneyForKillingZombie);
+					addZombiesKilled(1);
 
 					delete zombies[i];
 					zombies[i] = NULL;
@@ -506,10 +523,12 @@ namespace Z_APOCALIPSE
 	{		
 		if (playerOne->getLives() <= 0) 
 		{			
-			resetGameplay();
-
+			resetGameplay();	
+			
 			sceneManager->setCurrentScene(endGameScene);
-			endGame->calculateScore(0, 0);
+			endGame->calculateScore(getZombiesKilled(), 0);
+
+			setZombiesKilled(0);
 		}
 	}
 
