@@ -496,7 +496,8 @@ namespace Z_APOCALIPSE
 		{
 			if (ammunitions[i] != NULL) 
 			{
-				if (ammunitions[i]->isCollidingWithCircle(playerOne->getPosition(), playerOne->getRadius()))
+				if (ammunitions[i]->isCollidingWithCircle(playerOne->getPosition(), playerOne->getRadius()) && 
+					playerOne->getRemainingBullets() != playerOne->getStartingRoundRemainingBullets())
 				{
 					playerOne->addRemainingBullets(ammunitions[i]->getBulletsForPickUp());
 
