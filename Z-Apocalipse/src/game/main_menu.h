@@ -29,7 +29,7 @@ namespace Z_APOCALIPSE
 
 		const short titleAmountOfLetters = 12;
 
-		short titleTextSize = 60;
+		int titleTextSize;
 
 		Vector2 titlePosition;
 

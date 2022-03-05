@@ -2,6 +2,7 @@
 
 #include <raylib.h>
 
+#include "..\math\math.h"
 #include "..\game\button.h";
 #include "scene_manager.h"
 
@@ -9,12 +10,15 @@ namespace Z_APOCALIPSE
 {
 	PauseMenu::PauseMenu(Scenes changeScenes[maxPauseMenuButtons])
 	{
-		setChangeScenes(changeScenes);		
+		setTitleTextSize(vectorMath::getScreenHypotenuse() / titleSizeDivider);
 
-		setButtons();
+		setTitleTextXPos(static_cast<int>((GetScreenWidth() / 2) - ((titleAmountLetters / 3) * titleSize)));
 
-		setTitleTextXPos(static_cast<int>((GetScreenWidth() / 2) - ((titleAmountLetters / 2.5f) * titleSize)));
 		setTitleTextYPos(static_cast<int>(GetScreenHeight() * titleTextYPercentage));
+
+		setChangeScenes(changeScenes);
+
+		setButtons();	
 	}
 
 	PauseMenu::~PauseMenu()
@@ -24,6 +28,11 @@ namespace Z_APOCALIPSE
 			delete buttons[i];
 			buttons[i] = NULL;
 		}
+	}
+
+	void PauseMenu::setTitleTextSize(int titleSize)
+	{
+		this->titleSize = titleSize;
 	}
 
 	void PauseMenu::setTitleTextXPos(int titleTextXPos) 
@@ -54,9 +63,14 @@ namespace Z_APOCALIPSE
 
 		for (short i = 0; i < maxPauseMenuButtons; i++)
 		{
-			buttons[i] = new Button({ xPos,	yPos + (separation * i), width,	height },
+			buttons[i] = new Button({ xPos,	yPos + (separation * i) + (height * i), width,	height },
 				buttonsColorOne, buttonsColorTwo, buttonsText[i]);
 		}
+	}
+
+	int PauseMenu::getTitleTextSize()
+	{
+		return titleSize;
 	}
 
 	int PauseMenu::getTitleTextXPos()
@@ -94,7 +108,7 @@ namespace Z_APOCALIPSE
 
 	void PauseMenu::drawTitle() 
 	{
-		DrawText(titleText, getTitleTextXPos(), getTitleTextYPos(), titleSize, titleColor);
+		DrawText(titleText, getTitleTextXPos(), getTitleTextYPos(), getTitleTextSize(), titleColor);
 	}
 
 	void PauseMenu::drawButtons()

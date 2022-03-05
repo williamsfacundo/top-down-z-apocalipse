@@ -12,6 +12,7 @@ namespace Z_APOCALIPSE
 	MainMenu::MainMenu(const char* texts[maxMainMenuButtons])
 	{
 		setTitleTextSize(vectorMath::getScreenHypotenuse() / titleSizeDivider);
+
 		setTitlePosition();
 
 		createButtons(texts);

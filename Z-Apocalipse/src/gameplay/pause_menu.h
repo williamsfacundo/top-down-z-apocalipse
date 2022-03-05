@@ -19,17 +19,18 @@ namespace Z_APOCALIPSE
 		const Color titleColor = BLACK;
 				
 		const float titleTextYPercentage = 0.05f;
-		const float buttonsYPercentage = 0.2f;		
+		const float buttonsYPercentage = 0.3f;		
 		const float buttonsWidthPercentage = 0.25f;
 		const float buttonsHeightPercentage = 0.12f;
-		const float buttonsHeightSeparationPercentage = 0.2f;
+		const float buttonsHeightSeparationPercentage = 0.05f;
+		const float titleSizeDivider = 20;
 
 		const char* buttonsText[maxPauseMenuButtons] = { "RESUME", "RESTART", "OPTIONS", "MENU" };
 		const char* titleText = "PAUSE MENU";
 
-		const short titleSize = 60;
 		const short titleAmountLetters = 10;
-		
+
+		int titleSize;		
 		int titleTextXPos;
 		int titleTextYPos;
 
@@ -40,11 +41,13 @@ namespace Z_APOCALIPSE
 		PauseMenu(Scenes changeScenes[maxPauseMenuButtons]);
 		~PauseMenu();
 
+		void setTitleTextSize(int titleSize);
 		void setTitleTextXPos(int titleTextXPos);
 		void setTitleTextYPos(int titleTextYPos);
 		void setChangeScenes(Scenes changeScenes[maxPauseMenuButtons]);
 		void setButtons();
 
+		int getTitleTextSize();
 		int getTitleTextXPos();
 		int getTitleTextYPos();
 		Scenes getChangeScene(short index);
