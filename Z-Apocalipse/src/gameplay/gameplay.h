@@ -22,6 +22,7 @@ namespace Z_APOCALIPSE
 		const Color uiColor = BLACK;
 		const Color pauseButtonColor = BLACK;
 		const Color muteButtonColor = RED;
+		const Color pauseTextColor = WHITE;
 
 		const float hudHeightPercentage = 0.26f;		
 		const float charactersSizeDivider = 24.0f;		
@@ -39,16 +40,19 @@ namespace Z_APOCALIPSE
 
 		const int uiSmallSize = 30;
 		const int uiBigSize = 40;		
+		const int pauseTextSize = 20;
 
 		const short initialRound = 1;
 		const short zombiesAdditionNextRound = 1;
 		const short initialMoneyForKillingZombie = 20; //
 		const short maxTimeToEndRound = 300;
 		const short maxAmmoPositionValidations = 300;
-
+		
 		static const short maxZombies = 10;
 		static const short maxSpawners = 4;
 		static const short maxAmmunitions = 24;
+
+		const char* pauseText = "P";
 
 		const Scenes pauseMenuScene = Scenes::PAUSE_MENU;
 

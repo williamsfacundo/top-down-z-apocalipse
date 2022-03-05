@@ -652,7 +652,7 @@ namespace Z_APOCALIPSE
 		drawRoundHud();
 		drawPlayerMoney();
 		drawPauseButton();
-		drawMuteButton();
+		//drawMuteButton();
 	}
 
 	void Gameplay::drawTimer() 
@@ -711,6 +711,9 @@ namespace Z_APOCALIPSE
 	void Gameplay::drawPauseButton() 
 	{
 		DrawCircleV(getPauseButtonPosition(), getPauseButtonRadius(), pauseButtonColor);
+		
+		DrawText(pauseText, static_cast<int>(getPauseButtonPosition().x - (getPauseButtonRadius() / 4.0f)), 
+			static_cast<int>(getPauseButtonPosition().y - (getPauseButtonRadius() / 4.0f)),	pauseTextSize, pauseTextColor);
 	}
 
 	void Gameplay::drawMuteButton()
