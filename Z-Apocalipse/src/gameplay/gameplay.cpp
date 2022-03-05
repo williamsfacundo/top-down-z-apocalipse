@@ -6,6 +6,11 @@
 #include <raylib.h>
 #include "..\math\math.h"
 
+#include "survivor.h"
+#include "zombie.h"
+#include "scene_manager.h"
+#include "end_game.h"
+
 namespace Z_APOCALIPSE 
 {
 	using namespace vectorMath;
@@ -263,7 +268,7 @@ namespace Z_APOCALIPSE
 		//muteGameInput();
 	}
 	
-	void Gameplay::update(SceneManager* sceneManager)
+	void Gameplay::update(SceneManager* sceneManager, EndGame* endGame)
 	{			
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		updateZombieSpawnTimer();
@@ -274,7 +279,7 @@ namespace Z_APOCALIPSE
 		zombiesCollisionWithEachOther();
 		decreasTimerToEndRound();
 		winRound(sceneManager);
-		defeatCondition(sceneManager);
+		defeatCondition(sceneManager, endGame);
 	}
 	
 	void Gameplay::draw() 
@@ -497,13 +502,14 @@ namespace Z_APOCALIPSE
 		}		
 	}
 
-	void Gameplay::defeatCondition(SceneManager* sceneManager)
+	void Gameplay::defeatCondition(SceneManager* sceneManager, EndGame* endGame)
 	{		
 		if (playerOne->getLives() <= 0) 
 		{			
 			resetGameplay();
 
 			sceneManager->setCurrentScene(endGameScene);
+			endGame->calculateScore(0, 0);
 		}
 	}
 

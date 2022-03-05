@@ -6,6 +6,7 @@
 #include "survivor.h"
 #include "zombie.h"
 #include "scene_manager.h"
+#include "end_game.h"
 
 namespace Z_APOCALIPSE
 {
@@ -106,7 +107,7 @@ namespace Z_APOCALIPSE
 
 		void init();
 		void input(SceneManager* sceneManager);
-		void update(SceneManager* sceneManager);
+		void update(SceneManager* sceneManager, EndGame* endGame);
 		void draw();
 		void deinit();
 
@@ -125,7 +126,7 @@ namespace Z_APOCALIPSE
 		short findEmptyZombieIndex();
 		void decreasTimerToEndRound();
 		void winRound(SceneManager* sceneManager);
-		void defeatCondition(SceneManager* sceneManager);
+		void defeatCondition(SceneManager* sceneManager, EndGame* endGame);
 		void drawHud();
 		void drawTimer();		
 		void drawLivesRemaining();

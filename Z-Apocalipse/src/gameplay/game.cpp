@@ -111,7 +111,7 @@ namespace Z_APOCALIPSE
 				
 				gameplay->input(sceneManager);
 
-				gameplay->update(sceneManager);
+				gameplay->update(sceneManager, endGame);
 
 				gameplay->draw();
 				break;

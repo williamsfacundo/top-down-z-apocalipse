@@ -16,12 +16,24 @@ namespace Z_APOCALIPSE
 		restartButton = new Button({ static_cast<float>(GetScreenWidth() * restartButtonXPercentage),
 			static_cast<float>(GetScreenHeight() * buttonsYPercentage), static_cast<float>(GetScreenWidth() * buttonsWidthPercentage),
 			static_cast<float>(GetScreenHeight() * buttonsHeightPercentage) }, buttonsColorOne, buttonsColorTwo, restartButtonText);
+
+		setScore(0);
 	}
 
 	EndGame::~EndGame() 
 	{
 		delete goMenuButton;
 		delete restartButton;
+	}
+
+	void EndGame::setScore(int score)
+	{
+		this->score = score;
+	}
+
+	int EndGame::getScore()
+	{
+		return score;
 	}
 
 	void EndGame::input(SceneManager* sceneManager) 
@@ -49,5 +61,10 @@ namespace Z_APOCALIPSE
 	{
 		DrawText(titleText, static_cast<int>(GetScreenWidth() * titleXPercentage),
 			static_cast<int>(GetScreenHeight() * titleYPercentage), titleSize, titleColor);
+	}	
+
+	void EndGame::calculateScore(int zombiesKilled, int timeSurvived) 
+	{
+		setScore((zombiesKilled * zombiesKilledMultiplyer) + (timeSurvived * timeSurvivedMultiplyer));
 	}
 }
