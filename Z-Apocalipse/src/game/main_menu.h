@@ -1,6 +1,8 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
+#include <raylib.h>
+
 #include "button.h"
 #include "..\gameplay\scene_manager.h"
 
@@ -11,25 +13,42 @@ namespace Z_APOCALIPSE
 	class MainMenu
 	{
 	private:		
-		const float widthPercentage = 0.2f;
-		const float heightPercentage = 0.1f;
+		const float buttonsYPercentage = 0.2f;
+		const float buttonsWidthPercentage = 0.3f;
+		const float buttonsHeightPercentage = 0.1f;
 		const float separationPercentage = 0.05f;
-		const float tittlePercentage = 0.2f;
+		const float tittleYPercentage = 0.1f;
+		const float titleSizeDivider = 20;
+
 		const Color backgroundColor = WHITE;
 		const Color buttonColorOne = BLUE;
 		const Color buttonColorTwo = RED;
 		const Color titleTextColor = BLACK;
-		const char* titleText = "Z-APOCALIPSE";
-		const short titleTextSize = 60;
+
+		const char* titleText = "Z-APOCALIPSE";		
+
+		const short titleAmountOfLetters = 12;
+
+		short titleTextSize = 60;
+
+		Vector2 titlePosition;
 
 		Button* button[maxMainMenuButtons];	
 	public:
 		MainMenu(const char* texts[maxMainMenuButtons]);
 		~MainMenu();		
+
+		void setTitleTextSize(short titleTextSize);
+		void setTitlePosition();
+
+		short getTitleTextSize();
+		Vector2 getTitlePosition();
 				
 		void input(SceneManager* sceneManager, Scenes newScene[maxMainMenuButtons]);	
+		
 		void draw();
 		void drawTitle();
+		void drawButtons();
 
 		void createButtons(const char* texts[maxMainMenuButtons]);
 	};

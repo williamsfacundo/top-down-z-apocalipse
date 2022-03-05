@@ -1,6 +1,7 @@
 #include "math.h"
 
 #include <cmath>
+#include <raylib.h>
 
 namespace Z_APOCALIPSE
 {
@@ -45,6 +46,13 @@ namespace Z_APOCALIPSE
 			{
 				return false;
 			}
+		}
+
+		float getScreenHypotenuse() 
+		{
+			Vector2 screenSize = { static_cast<float>(GetScreenWidth()), static_cast<float>(GetScreenHeight()) };
+
+			return static_cast<float>(getVectorLength(screenSize));
 		}
 	}
 }
