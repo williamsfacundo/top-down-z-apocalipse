@@ -87,6 +87,11 @@ namespace Z_APOCALIPSE
 		this->zombieDamageToDie = zombieDamageToDie;
 	}
 
+	void Gameplay::setTimerToCreateNewAmmo(float timerToCreateNewAmmo) 
+	{
+		this->timerToCreateNewAmmo = timerToCreateNewAmmo;
+	}
+
 	void Gameplay::setRound(short round)
 	{
 		this->round = round;
@@ -117,6 +122,14 @@ namespace Z_APOCALIPSE
 		for (short i = 0; i < maxZombiesInRound; i++)
 		{
 			zombies[i] = NULL;
+		}
+	}
+
+	void Gameplay::setAmmunitionsToNull() 
+	{
+		for (short i = 0; i < maxAmmunitions; i++) 
+		{
+			ammunitions[i] = NULL;
 		}
 	}
 
@@ -240,6 +253,11 @@ namespace Z_APOCALIPSE
 		return zombieDamageToDie;
 	}
 
+	float Gameplay::getTimerToCreateNewAmmo() 
+	{
+		return timerToCreateNewAmmo;
+	}
+
 	short Gameplay::getRound() 
 	{
 		return round;
@@ -274,12 +292,42 @@ namespace Z_APOCALIPSE
 		return playerOne;
 	}
 
+	Vector2 Gameplay::getRandomAmmoPosition(float radius, short ammoIndex)
+	{
+		Vector2 position = { static_cast<float>(GetRandomValue(static_cast<int>(gameplaySpacePos.x + radius), static_cast<int>(gameplaySpacePos.x + GetScreenWidth() - radius))),
+			static_cast<float>(GetRandomValue(static_cast<int>(gameplaySpacePos.y + radius), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight - radius))) };	
+
+		for (short i = 0; i < maxAmmoPositionValidations; i++)
+		{
+			for (short v = 0; v < maxAmmunitions; v++)
+			{
+				if (ammunitions[v] != NULL && i != ammoIndex)
+				{
+					if (CheckCollisionCircles(position, radius, ammunitions[v]->getPosition(), ammunitions[v]->getRadius()))
+					{
+						v = maxAmmunitions;
+
+						Vector2 position = { static_cast<float>(GetRandomValue(static_cast<int>(gameplaySpacePos.x + radius), static_cast<int>(gameplaySpacePos.x + GetScreenWidth() - radius))),
+							static_cast<float>(GetRandomValue(static_cast<int>(gameplaySpacePos.y + radius), static_cast<int>(gameplaySpacePos.y + gameplaySpaceHeight - radius))) };
+					}
+					else if (v == maxAmmunitions - 1)
+					{
+						i = maxAmmoPositionValidations;
+					}					
+				}		
+			}
+		}		
+
+		return position;
+	}
+
 	void Gameplay::init()
 	{		
 		playerOne = new Survivor(playerOneColor, { GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f }, (getGameplaySize() / charactersSizeDivider) / 2.0f,
 			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		
 		setZombiesToNull();
+		setAmmunitionsToNull();
 
 		setZombiesSpawnsPositions();
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
@@ -311,6 +359,9 @@ namespace Z_APOCALIPSE
 		zombiesCollisionWithPlayer();	
 		zombiesCollisionWithEachOther();
 		decreasTimerToEndRound();
+		decreasTimerToCreatNewAmmo();
+		creatNewAmmo();
+
 		winRound(sceneManager);
 		defeatCondition(sceneManager, endGame, upgrader);
 	}
@@ -330,14 +381,9 @@ namespace Z_APOCALIPSE
 	{
 		delete playerOne;
 
-		for (short i = 0; i < maxZombiesInRound; i++) 
-		{
-			if (zombies[i] != NULL)
-			{
-				delete zombies[i];
-				zombies[i] = NULL;
-			}
-		}
+		destroyZombies();
+
+		deleteAmmunitions();
 	}
 
 	void Gameplay::drawGameplayRectangle() 
@@ -409,6 +455,8 @@ namespace Z_APOCALIPSE
 						playerOne->getPosition(), playerOne->getRadius()))
 					{
 						playerOne->hitByZombie();
+
+						i = maxZombiesInRound;
 					}
 				}
 			}
@@ -511,6 +559,19 @@ namespace Z_APOCALIPSE
 		return 0;
 	}
 
+	short Gameplay::findEmptyAmmoIndex()
+	{
+		for (short i = 0; i < maxAmmunitions; i++)
+		{
+			if (ammunitions[i] == NULL)
+			{
+				return i;
+			}
+		}
+
+		return 0;
+	}
+
 	void Gameplay::decreasTimerToEndRound() 
 	{
 		if (timerToEndRound > 0.0f)
@@ -523,6 +584,19 @@ namespace Z_APOCALIPSE
 				addTimeSurvived(1);
 			}
 		}		
+	}
+
+	void Gameplay::decreasTimerToCreatNewAmmo() 
+	{
+		if (timerToCreateNewAmmo > 0.0f)
+		{
+			timerToCreateNewAmmo -= GetFrameTime();
+
+			if (timerToCreateNewAmmo < 0.0f)
+			{
+				timerToCreateNewAmmo = 0.0f;				
+			}
+		}
 	}
 
 	void Gameplay::winRound(SceneManager* sceneManager) 
@@ -614,10 +688,11 @@ namespace Z_APOCALIPSE
 	}
 
 	void Gameplay::drawGameplay() 
-	{
+	{		
 		drawGameplayRectangle();
+		drawAmmo();
 		drawZombies();
-		playerOne->draw();
+		playerOne->draw();		
 	}
 
 	void Gameplay::drawPauseButton() 
@@ -628,6 +703,17 @@ namespace Z_APOCALIPSE
 	void Gameplay::drawMuteButton()
 	{
 		DrawCircleV(getMuteButtonPosition(), getMuteButtonRadius(), muteButtonColor);
+	}
+
+	void Gameplay::drawAmmo() 
+	{
+		for (short i = 0; i < maxAmmunitions; i++)
+		{
+			if (ammunitions[i] != NULL)
+			{
+				ammunitions[i]->draw();
+			}
+		}
 	}
 
 	void Gameplay::pauseGameInput(SceneManager* sceneManager)
@@ -673,9 +759,12 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::resetGameplayForWiningRound() 
 	{
+		deleteAmmunitions();
+
 		setTimerToSpawnZombie(getRoundStartingTimerToSpawnZombie());
 		setTimerToEndRound(getRoundStartingTimerToEndRound());
-				
+		setTimerToCreateNewAmmo(initialTimeToCreatNewAmmo);
+
 		destroyZombies();
 
 		playerOne->resetSurvivorForWiningRound({ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });
@@ -684,6 +773,7 @@ namespace Z_APOCALIPSE
 	void Gameplay::initialGameplayStats() 
 	{
 		destroyZombies();
+		deleteAmmunitions();
 
 		playerOne->setPosition({ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f });		
 
@@ -691,9 +781,37 @@ namespace Z_APOCALIPSE
 		setTimerToEndRound(initialTimeToEndRound);
 		setZombieVelocity(zombieInitialVelocity);
 		setZombieDamageToDie(zombieInitialDamageToDie);
+		setTimerToCreateNewAmmo(initialTimeToCreatNewAmmo);
 		setRound(initialRound);
 		setMoneyForKillingZombie(initialMoneyForKillingZombie);
 		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
 		setRoundStartingTimerToEndRound(initialTimeToEndRound);		
+	}
+
+	void Gameplay::deleteAmmunitions() 
+	{
+		for (short i = 0; i < maxAmmunitions; i++) 
+		{
+			if (ammunitions[i] != NULL) 
+			{
+				delete ammunitions[i];
+				ammunitions[i] = NULL;
+			}
+		}
+	}
+
+	void Gameplay::creatNewAmmo() 
+	{
+		short index = 0;
+		float radius = (getGameplaySize() / ammoSizeDivider) / 2.0f;
+
+		if (getTimerToCreateNewAmmo() <= 0.0f && Ammunition::getAmountOfAmmunitions() < maxAmmunitions) 
+		{
+			setTimerToCreateNewAmmo(initialTimeToCreatNewAmmo);
+
+			index = findEmptyAmmoIndex();
+
+			ammunitions[index] = new Ammunition( getRandomAmmoPosition(radius, index), radius);
+		}
 	}
 }

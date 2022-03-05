@@ -2,11 +2,20 @@
 
 namespace Z_APOCALIPSE 
 {
+	short Ammunition::amountOfAmmunitions = 0;
+
 	Ammunition::Ammunition(Vector2 position, float radius)
 	{
 		setPosition(position);
 		setRadius(radius);
+
+		amountOfAmmunitions += 1;
 	}		
+
+	Ammunition::~Ammunition()
+	{
+		amountOfAmmunitions -= 1;
+	}
 
 	void Ammunition::setPosition(Vector2 position) 
 	{
@@ -33,8 +42,18 @@ namespace Z_APOCALIPSE
 		return bulletsForPickUp;
 	}
 
+	short Ammunition::getAmountOfAmmunitions() 
+	{
+		return amountOfAmmunitions;
+	}
+
 	void Ammunition::draw() 
 	{
 		DrawCircleV(getPosition(), getRadius(), ammunitionColor);
+	}
+
+	bool Ammunition::isCollidingWithCircle(Vector2 position, float radius) 
+	{
+		return CheckCollisionCircles(getPosition(), getRadius(), position, radius);
 	}
 }
