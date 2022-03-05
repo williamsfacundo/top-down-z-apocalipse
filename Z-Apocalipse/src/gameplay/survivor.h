@@ -121,7 +121,8 @@ namespace Z_APOCALIPSE
 		void decreasBulletsInCharger();
 		void setStartingRoundRemainingBullets(short startingRoundRemainingBullets);
 		void addStartingRoundRemainingBullets(short value);
-		void setRemainingBullets(short remainingBullets);		
+		void setRemainingBullets(short remainingBullets);
+		void addRemainingBullets(short value);
 		void setBulletsToNull();		
 		
 		short getRoundStartingLives();

@@ -358,6 +358,7 @@ namespace Z_APOCALIPSE
 		zombiesDeath();
 		zombiesCollisionWithPlayer();	
 		zombiesCollisionWithEachOther();
+		playerPickUpAmmo();
 		decreasTimerToEndRound();
 		decreasTimerToCreatNewAmmo();
 		creatNewAmmo();
@@ -484,6 +485,23 @@ namespace Z_APOCALIPSE
 							zombies[v]->move(normal);
 						}
 					}
+				}
+			}
+		}
+	}
+
+	void Gameplay::playerPickUpAmmo() 
+	{
+		for (short i = 0; i < maxAmmunitions; i++) 
+		{
+			if (ammunitions[i] != NULL) 
+			{
+				if (ammunitions[i]->isCollidingWithCircle(playerOne->getPosition(), playerOne->getRadius()))
+				{
+					playerOne->addRemainingBullets(ammunitions[i]->getBulletsForPickUp());
+
+					delete ammunitions[i];
+					ammunitions[i] = NULL;					
 				}
 			}
 		}

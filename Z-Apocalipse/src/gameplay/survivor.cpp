@@ -227,6 +227,18 @@ namespace Z_APOCALIPSE
 		this->remainingBullets = remainingBullets;
 	}
 
+	void Survivor::addRemainingBullets(short value) 
+	{
+		if (remainingBullets + value <= getStartingRoundRemainingBullets()) 
+		{
+			remainingBullets += value;
+		}		
+		else 
+		{
+			remainingBullets = getStartingRoundRemainingBullets();
+		}
+	}
+
 	void Survivor::setBulletsToNull()
 	{
 		for (short i = 0; i < maxBullets; i++)
