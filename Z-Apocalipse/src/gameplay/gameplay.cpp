@@ -672,7 +672,7 @@ namespace Z_APOCALIPSE
 		{
 			timerToEndRound -= GetFrameTime();
 
-			if (timerToEndRound < 0.0f)
+			if (timerToEndRound <= 0.0f)
 			{
 				timerToEndRound = 0.0f;
 				addTimeSurvived(1);
@@ -912,6 +912,8 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::restartGameplay(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader, Scenes changeScene)
 	{
+		endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
+
 		initialGameplayStats();
 
 		playerOne->startingSurvivorStats();
@@ -919,8 +921,7 @@ namespace Z_APOCALIPSE
 		upgrader->resetLevels();
 
 		sceneManager->setCurrentScene(changeScene);
-		endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
-
+		
 		setZombiesKilled(0);
 		setTimeSurvived(0);
 	}

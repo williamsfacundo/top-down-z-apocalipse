@@ -252,35 +252,35 @@ namespace Z_APOCALIPSE
 
 		velocityUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[0]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 0.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(0)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 0.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(0)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 0.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		maxAcelerationUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[1]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 1.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(1)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 1.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(1)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 1.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		maxAmoUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[2]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 2.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(2)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 2.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(2)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 2.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		chargerUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[3]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 3.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(3)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 3.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(3)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 3.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		fireRateUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[4]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 4.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(4)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 4.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(4)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 4.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		reloadSpeedUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[5]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 5.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(5)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 5.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(5)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 5.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		extraLifeUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[6]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 6.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(6)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 6.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(6)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 6.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 
 		damageUpdateButton->drawButton();
 		DrawText(TextFormat("%i", levels[7]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 7.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(7)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 7.0f)), getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("$ %i", getPrice(7)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 7.0f) - buttonsRadius), getPriceHudSize(), priceHudColor);
 	}
 
 	void Upgrader::drawPlayerMoney(Survivor* survivor)
