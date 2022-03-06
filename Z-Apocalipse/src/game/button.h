@@ -38,6 +38,7 @@ namespace Z_APOCALIPSE
 		const char* getText();
 		
 		void changeSceneWhenButtonPress(SceneManager* sceneManager, Scenes newScene);
+		bool isButtonPressed();
 		void draw();
 		bool isMouseOnButton();	
 	};

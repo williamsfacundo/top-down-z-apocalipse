@@ -68,10 +68,15 @@ namespace Z_APOCALIPSE
 
 	void Button::changeSceneWhenButtonPress(SceneManager* sceneManager, Scenes newScene)
 	{
-		if (isMouseOnButton() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) 
+		if (isButtonPressed()) 
 		{
 			sceneManager->setCurrentScene(newScene);
 		}		
+	}
+
+	bool Button::isButtonPressed()
+	{
+		return (isMouseOnButton() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT));
 	}
 
 	void Button::draw()
