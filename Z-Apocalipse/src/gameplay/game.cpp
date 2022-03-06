@@ -1,6 +1,7 @@
 #include "game.h"
 
 #include <raylib.h>
+#include <iostream>
 
 #include "scene_manager.h"
 #include "gameplay.h"
@@ -8,20 +9,37 @@
 #include "..\game\credits.h"
 #include "..\gameplay\upgrader.h"
 #include "..\gameplay\tutorial.h"
+#include "..\gameplay\end_game.h"
+#include "..\gameplay\pause_menu.h"
+#include "..\game\options_menu.h"
 #include "..\math\math.h"
 
 namespace Z_APOCALIPSE
-{
-	Game::Game(int screenWidth, int screenHeight)
+
+{	Game::Game()
 	{
-		setScreenWidth(screenWidth);
-		setScreenHeight(screenHeight);
+		setScreenWidth(static_cast<int>(initialResolution.x));
+		setScreenHeight(static_cast<int>(initialResolution.y));
+
+		SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+		InitWindow(getScreenWidth(), getScreenHeight(), title);		
+
+		setWindowPosition();
+
+		SetTargetFPS(fps);
+
+		setResolution(initialResolution);
+		setRunning(true);
+		setPauseMenuChangeScenes();
+		setMainMenuChangeScenes();
 
 		init();
 	}
 
 	Game::~Game()
 	{
+		CloseWindow();
+
 		deinit();
 	}
 
@@ -38,7 +56,7 @@ namespace Z_APOCALIPSE
 	void Game::setMainMenuChangeScenes() 
 	{
 		mainMenuChangeScenes[0] = Scenes::TUTORIAL;
-		mainMenuChangeScenes[1] = Scenes::OPTIONS;
+		mainMenuChangeScenes[1] = Scenes::OPTIONS_MENU;
 		mainMenuChangeScenes[2] = Scenes::CREDITS;
 		mainMenuChangeScenes[3] = Scenes::EXIT;
 	}
@@ -47,7 +65,7 @@ namespace Z_APOCALIPSE
 	{
 		pauseMenuChangeScenes[0] = Scenes::GAMEPLAY;
 		pauseMenuChangeScenes[1] = Scenes::RESTART_GAMEPLAY;
-		pauseMenuChangeScenes[2] = Scenes::OPTIONS;
+		pauseMenuChangeScenes[2] = Scenes::OPTIONS_MENU;
 		pauseMenuChangeScenes[3] = Scenes::MAIN_MENU_RESTART_GAMEPLAY;
 	}
 
@@ -61,14 +79,34 @@ namespace Z_APOCALIPSE
 		this->versionTextPosition = versionTextPosition;
 	}
 
+	void Game::setResolution(Vector2 resolution) 
+	{
+		this->resolution = resolution;
+	}
+
 	void Game::setRunning(bool running) 
 	{
 		this->running = running;
 	}
 
+	int Game::getScreenWidth() 
+	{
+		return screenWidth;
+	}
+
+	int Game::getScreenHeight() 
+	{
+		return screenHeight;
+	}
+
 	Vector2 Game::getversionTextPosition() 
 	{
 		return versionTextPosition;
+	}
+
+	Vector2 Game::getResolution() 
+	{
+		return resolution;
 	}
 
 	int Game::getVersionTextSize() 
@@ -82,16 +120,9 @@ namespace Z_APOCALIPSE
 	}
 
 	void Game::init()
-	{
-		InitWindow(screenWidth, screenHeight, title);
-
-		SetTargetFPS(fps);
-
-		setPauseMenuChangeScenes();
+	{	
 		setVersionTextSize();
-		setversionTextPosition({ static_cast<float>(GetScreenWidth() * versionXPercentage), static_cast<float>(GetScreenHeight() * versionYPercentage) });
-		setRunning(true);
-		setMainMenuChangeScenes();
+		setversionTextPosition({ static_cast<float>(GetScreenWidth() * versionXPercentage), static_cast<float>(GetScreenHeight() * versionYPercentage) });			
 
 		sceneManager = new SceneManager(initialScene);
 		gameplay = new Gameplay();
@@ -101,12 +132,11 @@ namespace Z_APOCALIPSE
 		tutorial = new Tutorial();
 		endGame = new EndGame();
 		pauseMenu = new PauseMenu(pauseMenuChangeScenes);			
+		optionsMenu = new OptionsMenu(optionsMenuText);
 	}	
 
 	void Game::deinit()
 	{
-		CloseWindow();
-
 		delete sceneManager;
 		delete gameplay;
 		delete mainMenu;
@@ -115,6 +145,7 @@ namespace Z_APOCALIPSE
 		delete tutorial;
 		delete endGame;
 		delete pauseMenu;
+		delete optionsMenu;
 	}
 
 	void Game::drawVersion() 
@@ -145,11 +176,7 @@ namespace Z_APOCALIPSE
 				mainMenu->draw();
 
 				drawVersion();
-				break;
-			case Scenes::OPTIONS:
-
-				temporalUnuseScenes();
-				break;
+				break;			
 			case Scenes::CREDITS:
 
 				credits->input(sceneManager);
@@ -196,11 +223,21 @@ namespace Z_APOCALIPSE
 
 				gameplay->restartGameplay(sceneManager, endGame, upgrader, mainMenuRestartGameplayScene);
 				break;
+			case Scenes::OPTIONS_MENU:
+
+				optionsMenu->input(sceneManager, resolution);
+
+				optionsMenu->draw();
+
+				drawVersion();
+				break;
 			default:
 
 				setRunning(false);
 				break;
-			}			
+			}	
+
+			resolutionUpdate();
 		}		
 	}
 
@@ -217,4 +254,33 @@ namespace Z_APOCALIPSE
 		DrawText("PRESS 'SPACE' TO GO BACK", 1, 1, 50, BLACK);
 		EndDrawing();
 	}	
+
+	void Game::resolutionUpdate() 
+	{
+		if (resolutionChanged())
+		{
+			setScreenWidth(static_cast<int>(getResolution().x));
+			setScreenHeight(static_cast<int>(getResolution().y));
+
+			SetWindowSize(static_cast<int>(getScreenWidth()), static_cast<int>(getScreenHeight()));
+			setWindowPosition();
+
+			deinit();
+			init();
+		}
+	}
+
+	bool Game::resolutionChanged() 
+	{
+		return getScreenWidth() != static_cast<int>(getResolution().x) || getScreenHeight() != static_cast<int>(getResolution().y);
+	}
+
+	void Game::setWindowPosition() 
+	{
+		system("cls");
+		std::cout << "MonitorWidth" << GetMonitorWidth(GetMonitorCount()) << std::endl;
+		std::cout << "MonitorHeight" << GetMonitorHeight(GetMonitorCount()) << std::endl;
+
+		SetWindowPosition((GetMonitorWidth(GetMonitorCount() - 1) / 2) - (GetScreenWidth() / 2), (GetMonitorHeight(GetMonitorCount() - 1) / 2) - (GetScreenHeight() / 2));
+	}
 }

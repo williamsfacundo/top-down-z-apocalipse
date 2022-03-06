@@ -9,17 +9,16 @@
 #include "..\gameplay\tutorial.h"
 #include "..\gameplay\end_game.h"
 #include "..\gameplay\pause_menu.h"
+#include "..\game\options_menu.h"
 
 namespace Z_APOCALIPSE 
 {
 	class Game
 	{
 	private:
-		int screenWidth;
-		int screenHeight;
-
 		const char* title = "Z-APOCALIPSE";
 		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
+		const char* optionsMenuText[maxOptionsMenuButtons] = { "800 x 450", "1280 x 720", "FULL SCREEN", "MENU"};
 		const char* versionText = "v0.4";
 
 		const short fps = 60;	
@@ -38,10 +37,13 @@ namespace Z_APOCALIPSE
 		const Color versionTextColor = BLACK;		
 
 		Vector2 versionTextPosition;
+		Vector2 resolution;
 
 		Scenes mainMenuChangeScenes[maxMainMenuButtons];
 		Scenes pauseMenuChangeScenes[maxMainMenuButtons];
 
+		int screenWidth;
+		int screenHeight;
 		int versionTextSize;
 
 		SceneManager* sceneManager;
@@ -52,10 +54,11 @@ namespace Z_APOCALIPSE
 		Tutorial* tutorial;
 		EndGame* endGame;
 		PauseMenu* pauseMenu;
+		OptionsMenu* optionsMenu;
 
 		bool running;
 	public:
-		Game(int screenWidth, int screenHeight);
+		Game();
 		~Game();
 
 		void setScreenWidth(int screenWidth);
@@ -64,9 +67,13 @@ namespace Z_APOCALIPSE
 		void setPauseMenuChangeScenes();
 		void setVersionTextSize();
 		void setversionTextPosition(Vector2 versionTextPosition);
+		void setResolution(Vector2 resolution);
 		void setRunning(bool running);
 				
+		int getScreenWidth();
+		int getScreenHeight();
 		Vector2 getversionTextPosition();
+		Vector2 getResolution();
 		int getVersionTextSize();
 		bool getRunning();
 
@@ -76,9 +83,11 @@ namespace Z_APOCALIPSE
 		void drawVersion();
 
 		void runGame();
-		void temporalUnuseScenes();		
+		void temporalUnuseScenes();			
 
-		void pauseInput(Vector2 pauseCirclePosition,float pauseCircleRadius);
+		void resolutionUpdate();
+		bool resolutionChanged();
+		void setWindowPosition();
 	};
 }
 

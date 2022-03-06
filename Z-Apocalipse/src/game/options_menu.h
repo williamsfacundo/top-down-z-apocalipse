@@ -8,11 +8,12 @@
 
 namespace Z_APOCALIPSE
 {
+	const short maxOptionsMenuButtons = 4;
+	const Vector2 initialResolution = { 800.0f, 450.0f };
+
 	class OptionsMenu
 	{
 	private:
-		static const short maxOptionsMenuButtons = 4;
-
 		const float buttonsYPercentage = 0.2f;
 		const float buttonsWidthPercentage = 0.3f;
 		const float buttonsHeightPercentage = 0.1f;
@@ -31,9 +32,8 @@ namespace Z_APOCALIPSE
 
 		int titleTextSize;
 
-		const Vector2 lowResolution = { 800, 450 };
-		const Vector2 middleResolution = { 1280, 720 };
-		const Vector2 highResolution = { 1920, 1080 };
+		const Vector2 lowResolution = { 800.0f, 450.0f }; //800 450
+		const Vector2 middleResolution = { 1280.0f, 720.0f };		
 
 		const Scenes menuScene = Scenes::MAIN_MENU;
 

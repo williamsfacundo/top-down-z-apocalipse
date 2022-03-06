@@ -58,25 +58,25 @@ namespace Z_APOCALIPSE
 				case 0:
 
 					resolution = lowResolution;
+					i = maxOptionsMenuButtons;
 					break;
 				case 1:
 
 					resolution = middleResolution;
+					i = maxOptionsMenuButtons;
 					break;
 				case 2:
 
-					resolution = highResolution;
-					break;
-				default:
-
-					resolution = lowResolution;
-					break;
+					resolution = { static_cast<float>(GetMonitorWidth(GetMonitorCount() - 1)), static_cast<float>(GetMonitorHeight(GetMonitorCount() - 1)) };
+					i = maxOptionsMenuButtons;
+					break;				
 				}
 			}
 
 			if (i == 3) 
 			{
-				button[3]->changeSceneWhenButtonPress(sceneManager, menuScene);
+				button[i]->changeSceneWhenButtonPress(sceneManager, menuScene);
+				i = maxOptionsMenuButtons;
 			}
 		}
 	}

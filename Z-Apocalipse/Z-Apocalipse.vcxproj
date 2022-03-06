@@ -172,7 +172,7 @@
     <ClCompile Include="src\game\button.cpp" />
     <ClCompile Include="src\game\credits.cpp" />
     <ClCompile Include="src\game\main_menu.cpp" />
-    <ClCompile Include="src\game\options.cpp" />
+    <ClCompile Include="src\game\options_menu.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\math\math.cpp" />
   </ItemGroup>
@@ -193,7 +193,7 @@
     <ClInclude Include="src\game\button.h" />
     <ClInclude Include="src\game\credits.h" />
     <ClInclude Include="src\game\main_menu.h" />
-    <ClInclude Include="src\game\options.h" />
+    <ClInclude Include="src\game\options_menu.h" />
     <ClInclude Include="src\math\math.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
