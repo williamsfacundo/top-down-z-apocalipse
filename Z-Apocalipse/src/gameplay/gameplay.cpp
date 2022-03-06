@@ -1,6 +1,5 @@
 #include "gameplay.h"
 
-#include <iostream>
 #include <cmath>
 
 #include <raylib.h>
@@ -386,9 +385,13 @@ namespace Z_APOCALIPSE
 		setAmmunitionsToNull();
 
 		setZombiesSpawnsPositions();
+
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
+
 		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() * pauseButtonWidthPercentage), getPauseButtonRadius() * pauseButtonHeightPercentage });
+
 		setMuteButtonRadius(getPauseButtonRadius());
+
 		setMuteButtonPosition({ static_cast<float>(GetScreenWidth() * muteButtonWidthPercentage), getPauseButtonRadius() * muteButtonHeightPercentage });
 
 		initialGameplayStats();
@@ -406,11 +409,7 @@ namespace Z_APOCALIPSE
 	}
 	
 	void Gameplay::update(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader)
-	{	
-		std::cout << Zombie::getZombiesCreated() << std::endl;
-		std::cout << static_cast<int>(timerToSpawnZombie);
-		system("cls");
-
+	{
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		updateZombieSpawnTimer();
 		zombiesUpdate();

@@ -29,7 +29,7 @@ namespace Z_APOCALIPSE
 		const float charactersSizeDivider = 24.0f;		
 		const float ammoSizeDivider = 48.0f;
 		const float initialtimeToSpawnZombie = 2.0f;
-		const float initialTimeToEndRound = 25.0f; 		
+		const float initialTimeToEndRound = 5.0f; //25.0f		
 		const float zombieInitialVelocity = 35.0f;
 		const float zombieInitialDamageToDie = 20.0f;
 		const float decreasZombieSpawnerPercentage = 0.11f;
@@ -44,7 +44,7 @@ namespace Z_APOCALIPSE
 		const float muteTextSizeDivider = 44.0f; 
 		const float pauseButtonWidthPercentage = 0.95f;
 		const float pauseButtonHeightPercentage = 1.4f;
-		const float muteButtonWidthPercentage = 0.95f;
+		const float muteButtonWidthPercentage = 0.85f;
 		const float muteButtonHeightPercentage = 1.4f;
 
 		const short initialRound = 1;

@@ -12,6 +12,8 @@ namespace Z_APOCALIPSE
 	{
 		resetLevels();
 
+		setPlayerMoneyCircleRadius();
+
 		setPriceHudSize();
 
 		setPlayerMoneyHudSize();
@@ -46,6 +48,11 @@ namespace Z_APOCALIPSE
 		}
 	}
 
+	void Upgrader::setPlayerMoneyCircleRadius()
+	{
+		playerMoneyCircleRadius = vectorMath::getScreenHypotenuse() / playerMoneyCircleRadiusDivider;
+	}
+
 	void Upgrader::setPriceHudSize()
 	{
 		priceHudSize = static_cast<int>(vectorMath::getScreenHypotenuse() / priceSizeDivider);
@@ -73,32 +80,44 @@ namespace Z_APOCALIPSE
 
 	void Upgrader::setButtons() 
 	{
+		float buttonsXPos = static_cast<float>((GetScreenWidth() / 2) - (GetScreenWidth() * upgradeTestsOffsetPercentage));
+		float buttonsRadius = vectorMath::getScreenHypotenuse() / buttonsRadiusDivider;
+		float buttonsYPos = static_cast<float>(GetScreenHeight() * buttonsYPercentage);
+		float buttonsHeightSeparation = static_cast<float>(GetScreenHeight() * heightButtonsSeparationPercentage);
+
 		velocityUpdateButton = new UpgraderButton("Velocity", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 5.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 5.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 0.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 0.0f)) - buttonsRadius });
 
 		maxAcelerationUpdateButton = new UpgraderButton("Max Aceleration", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 6.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 6.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 1.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 1.0f)) - buttonsRadius });
 
 		maxAmoUpdateButton = new UpgraderButton("Max Amo", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 7.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 7.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 2.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 2.0f)) - buttonsRadius });
 
 		chargerUpdateButton = new UpgraderButton("Charger", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 8.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 8.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 3.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 3.0f)) - buttonsRadius });
 
 		fireRateUpdateButton = new UpgraderButton("Fire Rate", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 9.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 9.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 4.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 4.0f)) - buttonsRadius });
 
 		reloadSpeedUpdateButton = new UpgraderButton("Reload Speed", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 10.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 10.0f) - buttonsRadius });;
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 5.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 5.0f)) - buttonsRadius });;
 
 		extraLifeUpdateButton = new UpgraderButton("Lives", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 11.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 11.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 6.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 6.0f)) - buttonsRadius });
 
 		damageUpdateButton = new UpgraderButton("Damage", buttonsRadius, upgraderButtonsColor,
-			{ static_cast<float>(GetScreenWidth() / 2), heightButtonsSeparation * 12.0f }, { static_cast<float>((GetScreenWidth() / 2) - upgradeTestsOffset), (heightButtonsSeparation * 12.0f) - buttonsRadius });
+			{ static_cast<float>(GetScreenWidth() / 2), buttonsYPos + (buttonsHeightSeparation * 7.0f) }, { buttonsXPos, (buttonsYPos + (buttonsHeightSeparation * 7.0f)) - buttonsRadius });
 
-		changeSceneButton = new Button({ static_cast<float>(GetScreenWidth()) - changeSceneButtonWidth, static_cast<float>(GetScreenHeight()) - changeSceneButtonHeight, changeSceneButtonWidth, changeSceneButtonHeight },
+		changeSceneButton = new Button({ static_cast<float>(GetScreenWidth() - (GetScreenWidth() * changeSceneButtonWidthPercentage)), 
+			static_cast<float>(GetScreenHeight() * changeSceneButtonYPercentage), 
+			GetScreenWidth() * changeSceneButtonWidthPercentage, GetScreenHeight() * changeSceneButtonHeightPercentage },
 			changeSceneButtonColorOne, changeSceneButtonColorTwo, "CONTINUE");
+	}
+
+	float Upgrader::getPlayerMoneyCircleRadius() 
+	{
+		return playerMoneyCircleRadius;
 	}
 
 	int Upgrader::getPriceHudSize()
@@ -215,54 +234,59 @@ namespace Z_APOCALIPSE
 	void Upgrader::drawTitle()
 	{
 		DrawText(titleText, static_cast<int>((GetScreenWidth() / 2) - getTitleTextsSize() * (titleTextAmountLetters / 2)),
-			static_cast<int>(heightButtonsSeparation), getTitleTextsSize(), titleTextColor);
+			static_cast<int>(GetScreenHeight() * titleTextYPercentage), getTitleTextsSize(), titleTextColor);
 	}
 
 	void Upgrader::drawExplanationText()
 	{
 		DrawText(explanationText, static_cast<int>((GetScreenWidth() / 2) - getExplanationTextSize() * (explanationTextAmountLetters / 3)),
-			static_cast<int>(heightButtonsSeparation * 3.0f), getExplanationTextSize(), explanationTextColor);
+			static_cast<int>((GetScreenHeight() * explanationTextYPercentage)), getExplanationTextSize(), explanationTextColor);
 	}
 
 	void Upgrader::drawButtons()
 	{
+		int priceXPos = (GetScreenWidth() / 2) + static_cast<int>((GetScreenWidth() * priceHudSeparationPercentage));
+		float buttonsRadius = vectorMath::getScreenHypotenuse() / buttonsRadiusDivider;
+		float buttonsYPos = static_cast<float>(GetScreenHeight() * buttonsYPercentage);
+		float buttonsHeightSeparation = static_cast<float>(GetScreenHeight() * heightButtonsSeparationPercentage);		
+
 		velocityUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[0]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 5) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(0)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 5.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[0]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 0.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(0)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 0.0f)), getPriceHudSize(), priceHudColor);
 
 		maxAcelerationUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[1]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 6) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(1)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 6.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[1]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 1.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(1)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 1.0f)), getPriceHudSize(), priceHudColor);
 
 		maxAmoUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[2]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 7) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(2)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 7.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[2]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 2.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(2)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 2.0f)), getPriceHudSize(), priceHudColor);
 
 		chargerUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[3]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 8) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(3)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 8.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[3]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 3.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(3)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 3.0f)), getPriceHudSize(), priceHudColor);
 
 		fireRateUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[4]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 9) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(4)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 9.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[4]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 4.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(4)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 4.0f)), getPriceHudSize(), priceHudColor);
 
 		reloadSpeedUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[5]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 10) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(5)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 10.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[5]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 5.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(5)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 5.0f)), getPriceHudSize(), priceHudColor);
 
 		extraLifeUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[6]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 11) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(6)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 11.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[6]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 6.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(6)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 6.0f)), getPriceHudSize(), priceHudColor);
 
 		damageUpdateButton->drawButton();
-		DrawText(TextFormat("%i", levels[7]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(heightButtonsSeparation * 12) - buttonsRadius, getLevelSize(), levelTextColor);
-		DrawText(TextFormat("$ %i", getPrice(7)), (GetScreenWidth() / 2) + priceHudSeparation, heightButtonsSeparation * 12.0f, getPriceHudSize(), priceHudColor);
+		DrawText(TextFormat("%i", levels[7]), static_cast<int>(GetScreenWidth() / 2 - (buttonsRadius / 2)), static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 7.0f)) - static_cast<int>(buttonsRadius), getLevelSize(), levelTextColor);
+		DrawText(TextFormat("$ %i", getPrice(7)), priceXPos, static_cast<int>(buttonsYPos + (buttonsHeightSeparation * 7.0f)), getPriceHudSize(), priceHudColor);
 	}
 
 	void Upgrader::drawPlayerMoney(Survivor* survivor)
 	{
-		DrawCircleV({ 1.0f, static_cast<float>(GetScreenHeight() + (playerMoneyCircleRadius / 2.0f)) }, playerMoneyCircleRadius, playerMoneyCircleColor);
-		DrawText(TextFormat("$ %i", survivor->getMoney()), 1, GetScreenHeight() - 30, getPlayerMoneyHudSize(), playerMoneyColor);
+		DrawCircleV({ 1.0f, static_cast<float>(GetScreenHeight() + (getPlayerMoneyCircleRadius() / 2.0f)) }, getPlayerMoneyCircleRadius(), playerMoneyCircleColor);
+		DrawText(TextFormat("$ %i", survivor->getMoney()), static_cast<int>(GetScreenWidth() * moneyTextXPercentage), static_cast<int>(GetScreenHeight() * moneyTextYPercentage), getPlayerMoneyHudSize(), playerMoneyColor);
 	}
 
 	bool Upgrader::allLevelsMaxed()

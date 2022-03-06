@@ -2,12 +2,15 @@
 
 #include <raylib.h>
 
+#include "..\math\math.h"
+
 namespace Z_APOCALIPSE 
 {
 	UpgraderButton::UpgraderButton(const char* text, float radius, Color color, Vector2 position, Vector2 titlePosition)
 	{
 		setText(text);
 		setRadius(radius);
+		setFontSize();
 		setColor(color);
 		setCirclePosition(position);
 		setTitlePosition(titlePosition);
@@ -21,6 +24,11 @@ namespace Z_APOCALIPSE
 	void UpgraderButton::setRadius(float radius) 
 	{
 		this->radius = radius;
+	}
+
+	void UpgraderButton::setFontSize()
+	{
+		fontSize = static_cast<int>(vectorMath::getScreenHypotenuse() / textSizeDivider);
 	}
 
 	void UpgraderButton::setColor(Color color) 
@@ -48,6 +56,11 @@ namespace Z_APOCALIPSE
 		return radius;
 	}
 
+	int UpgraderButton::getFontSize()
+	{
+		return fontSize;
+	}
+
 	Color UpgraderButton::getColor() 
 	{
 		return color;
@@ -70,7 +83,7 @@ namespace Z_APOCALIPSE
 
 	void UpgraderButton::drawButton()
 	{		
-		DrawText( getText(), getTitlePosition().x, getTitlePosition().y, fontSize, getColor());
+		DrawText( getText(), getTitlePosition().x, getTitlePosition().y, getFontSize(), getColor());
 		DrawCircleV( getCirclePosition(), getRadius(), getColor());
 	}
 }

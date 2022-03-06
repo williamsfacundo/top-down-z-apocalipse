@@ -1,7 +1,6 @@
 #include "game.h"
 
 #include <raylib.h>
-#include <iostream>
 
 #include "scene_manager.h"
 #include "gameplay.h"
@@ -277,10 +276,6 @@ namespace Z_APOCALIPSE
 
 	void Game::setWindowPosition() 
 	{
-		system("cls");
-		std::cout << "MonitorWidth" << GetMonitorWidth(GetMonitorCount()) << std::endl;
-		std::cout << "MonitorHeight" << GetMonitorHeight(GetMonitorCount()) << std::endl;
-
 		SetWindowPosition((GetMonitorWidth(GetMonitorCount() - 1) / 2) - (GetScreenWidth() / 2), (GetMonitorHeight(GetMonitorCount() - 1) / 2) - (GetScreenHeight() / 2));
 	}
 }

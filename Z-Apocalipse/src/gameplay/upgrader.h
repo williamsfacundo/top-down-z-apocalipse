@@ -14,8 +14,7 @@ namespace Z_APOCALIPSE
 		const char* titleText = "UPGRADE MENU";
 		const char* explanationText = "Touch the circles to upgrade (MAX 6)";
 
-		const int initialPrice = 50;
-		const int priceHudSeparation = 50;
+		const int initialPrice = 50;		
 		
 		const short titleTextAmountLetters = 12;		
 		const short explanationTextAmountLetters = 36;				
@@ -28,19 +27,25 @@ namespace Z_APOCALIPSE
 		const float shootingTimeDecreaserValue = 0.185f;
 		const float maxAcelerationUpgradeValue = 50.0f;
 		const float damageUpgradeValue = 5.0f;
-		const float upgradeTestsOffset = 200.0f;
-		const float heightButtonsSeparation = 35.0f;
-		const float buttonsRadius = 10.0f;
-		const float changeSceneButtonWidth = 200;
-		const float changeSceneButtonHeight = 40;			
+		const float upgradeTestsOffsetPercentage = 0.3f;		
+		const float buttonsRadiusDivider = 80.0f;
+		const float changeSceneButtonYPercentage = 0.9f;
+		const float changeSceneButtonWidthPercentage = 0.3f;
+		const float changeSceneButtonHeightPercentage = 0.1f;
 		const float higherPriceMultiplyer = 0.25f;
-		const float playerMoneyCircleRadius = 220;
-
+		const float priceHudSeparationPercentage = 0.05f;
+		const float playerMoneyCircleRadiusDivider = 4.3f;
 		const float priceSizeDivider = 35.0f;
 		const float playerMoneySizeDivider = 30.0f;
 		const float levelSizeDivider = 40.0f;
 		const float titleSizeDivider = 15.0f;
 		const float explanationTextSizeDivider = 30.0f;
+		const float titleTextYPercentage = 0.06f;
+		const float explanationTextYPercentage = 0.25f;
+		const float buttonsYPercentage = 0.4f;
+		const float heightButtonsSeparationPercentage = 0.07f;	
+		const float moneyTextXPercentage = 0.01f;
+		const float moneyTextYPercentage = 0.90f;
 
 		const Color upgraderButtonsColor = WHITE;
 		const Color changeSceneButtonColorOne = YELLOW;
@@ -57,11 +62,13 @@ namespace Z_APOCALIPSE
 
 		static const short maxButtons = 8;
 
-		int priceHudSize; //20
-		int playerMoneyHudSize; //30
-		int levelSize; //18
-		int titleTextsSize; //35
-		int explanationTextSize; //25
+		float playerMoneyCircleRadius; 
+
+		int priceHudSize; 
+		int playerMoneyHudSize;
+		int levelSize; 
+		int titleTextsSize; 
+		int explanationTextSize; 
 
 		short levels[maxButtons];	
 
@@ -81,6 +88,7 @@ namespace Z_APOCALIPSE
 
 		void resetLevels();		
 
+		void setPlayerMoneyCircleRadius();
 		void setPriceHudSize();
 		void setPlayerMoneyHudSize();
 		void setLevelSize();
@@ -88,6 +96,7 @@ namespace Z_APOCALIPSE
 		void setExplanationTextSize();
 		void setButtons();
 
+		float getPlayerMoneyCircleRadius();
 		int getPriceHudSize();
 		int getPlayerMoneyHudSize();
 		int getLevelSize();
