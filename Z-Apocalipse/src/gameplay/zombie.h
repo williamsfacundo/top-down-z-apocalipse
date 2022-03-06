@@ -1,6 +1,8 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 
+#include <raylib.h>
+
 #include "character.h"
 
 namespace Z_APOCALIPSE

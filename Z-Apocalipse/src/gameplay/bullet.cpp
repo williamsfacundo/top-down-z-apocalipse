@@ -2,6 +2,8 @@
 
 #include <raylib.h>
 
+#include "..\math\math.h"
+
 namespace Z_APOCALIPSE 
 {
 	short Bullet::bulletsCreated = 0;
@@ -10,7 +12,8 @@ namespace Z_APOCALIPSE
 	{
 		setPosition(position);
 		setDirection(direction);
-		setVelocity(initialVelocity);
+		setInitialVelocity();
+		setVelocity(getInitialVelocity());
 		setType(type);
 
 		switch (getType())
@@ -52,6 +55,11 @@ namespace Z_APOCALIPSE
 		this->color = color;
 	}
 
+	void Bullet::setInitialVelocity()
+	{
+		initialVelocity = vectorMath::getScreenHypotenuse() / initialVelocityDivider;
+	}
+
 	void Bullet::setVelocity(float velocity) 
 	{
 		this->velocity = velocity;
@@ -80,6 +88,11 @@ namespace Z_APOCALIPSE
 	Color Bullet::getColor() 
 	{
 		return color;
+	}
+
+	float Bullet::getInitialVelocity() 
+	{
+		return initialVelocity;
 	}
 
 	float Bullet::getVelocity() 

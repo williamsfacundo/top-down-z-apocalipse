@@ -1,6 +1,5 @@
 #include "survivor.h"
 
-#include <iostream>
 #include <cmath>
 #include <raylib.h>
 
