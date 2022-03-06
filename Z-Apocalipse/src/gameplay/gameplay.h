@@ -29,7 +29,7 @@ namespace Z_APOCALIPSE
 		const float charactersSizeDivider = 24.0f;		
 		const float ammoSizeDivider = 48.0f;
 		const float initialtimeToSpawnZombie = 2.0f;
-		const float initialTimeToEndRound = 25.0f; //		
+		const float initialTimeToEndRound = 25.0f; 		
 		const float zombieInitialVelocity = 35.0f;
 		const float zombieInitialDamageToDie = 20.0f;
 		const float decreasZombieSpawnerPercentage = 0.11f;
@@ -39,14 +39,14 @@ namespace Z_APOCALIPSE
 		const float increasedZombiesDamageToDie = 0.5f;
 		const float initialTimeToCreatNewAmmo = 8.5f;
 
-		const int uiSmallSize = 30;
-		const int uiBigSize = 40;		
-		const int pauseTextSize = 20;
-		const int muteTextSize = 20;
+		const float uiSmallSizeDivider = 30.0f;  
+		const float uiBigSizeDivider = 23.0f; 
+		const float pauseTextSizeDivider = 44.0f;  
+		const float muteTextSizeDivider = 44.0f; 
 
 		const short initialRound = 1;
 		const short zombiesAdditionNextRound = 1;
-		const short initialMoneyForKillingZombie = 20; //
+		const short initialMoneyForKillingZombie = 20; 
 		const short maxTimeToEndRound = 300;
 		const short maxAmmoPositionValidations = 300;
 		
@@ -55,12 +55,11 @@ namespace Z_APOCALIPSE
 		static const short maxAmmunitions = 24;
 
 		const char* pauseText = "P";
-		const char* muteText = "M";
-
-		const Scenes pauseMenuScene = Scenes::PAUSE_MENU;
+		const char* muteText = "M";		
 
 		const MouseButton inputButton = MouseButton::MOUSE_BUTTON_LEFT;
 
+		const Scenes pauseMenuScene = Scenes::PAUSE_MENU;
 		const Scenes upgraderScene = Scenes::UPGRADER;
 		const Scenes endGameScene = Scenes::END_GAME;
 			
@@ -84,6 +83,10 @@ namespace Z_APOCALIPSE
 		short maxZombiesInRound = 5;
 		short moneyForKillingZombie;
 
+		int uiSmallSize; 
+		int uiBigSize; 
+		int pauseTextSize; 
+		int muteTextSize; 
 		int zombiesKilled;
 		int timeSurvived;
 
@@ -109,6 +112,10 @@ namespace Z_APOCALIPSE
 		void setRound(short round);	
 		void nextRound();
 		void setMoneyForKillingZombie(short moneyForKillingZombie);
+		void setUiSmallSize();
+		void setUiBigSize(); 
+		void setPauseTextSize();
+		void setMuteTextSize();
 		void setZombiesKilled(int zombiesKilled);		
 		void setTimeSurvived(int timeSurvived);		
 		void setZombiesToNull();
@@ -137,7 +144,11 @@ namespace Z_APOCALIPSE
 		float getTimerToCreateNewAmmo();
 		short getRound();
 		float getGameplaySize();
-		short getMoneyForKillingZombie();
+		short getMoneyForKillingZombie();		
+		int getUiSmallSize();
+		int getUiBigSize();
+		int getPauseTextSize();
+		int getMuteTextSize();
 		int getZombiesKilled();
 		int getTimeSurvived();
 		Survivor* getPlayer();

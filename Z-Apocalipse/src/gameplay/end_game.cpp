@@ -104,12 +104,7 @@ namespace Z_APOCALIPSE
 		
 		drawScore();
 
-		EndDrawing();
-
-		std::cout << "title: " << static_cast<int>(getTitleSize());
-		std::cout << "score: " << static_cast<int>(getScoreSize());		
-
-		system("cls");
+		EndDrawing();		
 	}
 
 	void EndGame::drawTitle() 

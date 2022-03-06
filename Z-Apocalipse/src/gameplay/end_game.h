@@ -20,10 +20,8 @@ namespace Z_APOCALIPSE
 		const Color buttonsColorTwo = RED;
 		const Color scoreTextColor = GREEN; 
 
-		const float titleYPercentage = 0.18f;
-		//const float titleXPercentage = 0.26f;
-		const float scoreTextYPercentage = 0.45;
-		//const float scoreTextXPercentage = 0.18;
+		const float titleYPercentage = 0.18f;		
+		const float scoreTextYPercentage = 0.45;		
 		const float goMenuButtonXPercentage = 0.1f;
 		const float restartButtonXPercentage = 0.7f;
 		const float buttonsWidthPercentage = 0.2f;
