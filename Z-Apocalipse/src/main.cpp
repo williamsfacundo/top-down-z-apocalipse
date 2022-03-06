@@ -1,7 +1,5 @@
 #include "gameplay/game.h"
 
-#include <iostream>
-
 #include "math/math.h"
 
 using namespace Z_APOCALIPSE;
