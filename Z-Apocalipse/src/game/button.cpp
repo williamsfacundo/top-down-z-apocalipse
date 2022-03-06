@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "..\gameplay\scene_manager.h"
+#include "..\math\math.h"
 
 namespace Z_APOCALIPSE
 {
@@ -11,6 +12,7 @@ namespace Z_APOCALIPSE
 		setShape(shape);
 		setShapeColorOne(colorOne);
 		setShapeColorTwo(colorTwo);
+		setTextSize();
 		setText(text);
 	}
 
@@ -27,6 +29,11 @@ namespace Z_APOCALIPSE
 	void Button::setShapeColorTwo(Color color) 
 	{
 		this->shapeColorTwo = color;
+	}
+
+	void Button::setTextSize() 
+	{
+		textSize = static_cast<int>(vectorMath::getVectorLength({getShape().width, getShape().height }) / textSizeDivider);
 	}
 	
 	void Button::setText(const char* text) 
@@ -47,6 +54,11 @@ namespace Z_APOCALIPSE
 	Color Button::getShapeColorTwo()
 	{
 		return shapeColorTwo;
+	}
+
+	int Button::getTextSize() 
+	{
+		return textSize;
 	}
 
 	const char* Button::getText() 
@@ -73,7 +85,7 @@ namespace Z_APOCALIPSE
 			DrawRectangleRec(getShape(), getShapeColorTwo());
 		}
 		
-		DrawText(getText(), getShape().x, getShape().y, textSize, textColor);
+		DrawText(getText(), getShape().x, getShape().y, getTextSize(), textColor);
 	}
 
 	bool Button::isMouseOnButton()

@@ -9,11 +9,15 @@ namespace Z_APOCALIPSE
 	{
 	private:
 		const MouseButton button = MouseButton::MOUSE_BUTTON_LEFT;
+
 		const short fontSize = 20;
 
 		const char* text;
+
 		float radius;
+
 		Color color;
+
 		Vector2 circlePosition;
 		Vector2 titlePosition;
 	public:

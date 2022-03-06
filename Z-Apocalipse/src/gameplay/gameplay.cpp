@@ -102,6 +102,14 @@ namespace Z_APOCALIPSE
 		round += 1;
 	}
 
+	void Gameplay::setMaxZombiesInRound(short maxZombiesInRound) 
+	{
+		if (this->maxZombiesInRound <= maxZombies)
+		{
+			this->maxZombiesInRound = maxZombiesInRound;
+		}
+	}
+
 	void Gameplay::setMoneyForKillingZombie(short moneyForKillingZombie) 
 	{
 		this->moneyForKillingZombie = moneyForKillingZombie;
@@ -139,7 +147,7 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::setZombiesToNull() 
 	{
-		for (short i = 0; i < maxZombiesInRound; i++)
+		for (short i = 0; i < maxZombies; i++)
 		{
 			zombies[i] = NULL;
 		}
@@ -173,7 +181,10 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::addMaxZombiesInRound(short value) 
 	{
-		this->maxZombiesInRound += value;
+		if (maxZombiesInRound + 1 <= maxZombies)
+		{ 
+			this->maxZombiesInRound += value; 
+		}
 	}
 
 	void Gameplay::addZombieVelocity(float value) 
@@ -376,9 +387,9 @@ namespace Z_APOCALIPSE
 
 		setZombiesSpawnsPositions();
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
-		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() * 0.95f), getPauseButtonRadius() * 1.4f });
+		setPauseButtonPosition({ static_cast<float>(GetScreenWidth() * pauseButtonWidthPercentage), getPauseButtonRadius() * pauseButtonHeightPercentage });
 		setMuteButtonRadius(getPauseButtonRadius());
-		setMuteButtonPosition({ static_cast<float>(GetScreenWidth() * 0.85f), getPauseButtonRadius() * 1.4f });
+		setMuteButtonPosition({ static_cast<float>(GetScreenWidth() * muteButtonWidthPercentage), getPauseButtonRadius() * muteButtonHeightPercentage });
 
 		initialGameplayStats();
 
@@ -395,7 +406,11 @@ namespace Z_APOCALIPSE
 	}
 	
 	void Gameplay::update(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader)
-	{			
+	{	
+		std::cout << Zombie::getZombiesCreated() << std::endl;
+		std::cout << static_cast<int>(timerToSpawnZombie);
+		system("cls");
+
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		updateZombieSpawnTimer();
 		zombiesUpdate();
@@ -847,6 +862,7 @@ namespace Z_APOCALIPSE
 		setZombieDamageToDie(zombieInitialDamageToDie);
 		setTimerToCreateNewAmmo(initialTimeToCreatNewAmmo);
 		setRound(initialRound);
+		setMaxZombiesInRound(initialMaxZombiesInRound);
 		setMoneyForKillingZombie(initialMoneyForKillingZombie);
 		setRoundStartingTimerToSpawnZombie(initialtimeToSpawnZombie);
 		setRoundStartingTimerToEndRound(initialTimeToEndRound);		

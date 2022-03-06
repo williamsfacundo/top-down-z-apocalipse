@@ -9,12 +9,18 @@ namespace Z_APOCALIPSE
 {
 	class Button
 	{
-	private:
-		const short textSize = 20;
+	private:			
+		const float textSizeDivider = 8.0f;
+
 		const Color textColor = BLACK;
+				
 		Rectangle shape;
+		
 		Color shapeColorOne;
 		Color shapeColorTwo;
+
+		int textSize; 
+
 		const char* text;
 	public:
 		Button(Rectangle shape, Color colorOne, Color colorTwo, const char* text);
@@ -22,11 +28,13 @@ namespace Z_APOCALIPSE
 		void setShape(Rectangle shape);
 		void setShapeColorOne(Color color);
 		void setShapeColorTwo(Color color);
+		void setTextSize();
 		void setText(const char* text);
 
 		Rectangle getShape();
 		Color getShapeColorOne();
 		Color getShapeColorTwo();
+		int getTextSize();
 		const char* getText();
 		
 		void changeSceneWhenButtonPress(SceneManager* sceneManager, Scenes newScene);

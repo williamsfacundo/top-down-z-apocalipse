@@ -38,19 +38,23 @@ namespace Z_APOCALIPSE
 		const float increasedZombiesVelocity = 0.15f;
 		const float increasedZombiesDamageToDie = 0.5f;
 		const float initialTimeToCreatNewAmmo = 8.5f;
-
 		const float uiSmallSizeDivider = 30.0f;  
 		const float uiBigSizeDivider = 23.0f; 
 		const float pauseTextSizeDivider = 44.0f;  
 		const float muteTextSizeDivider = 44.0f; 
+		const float pauseButtonWidthPercentage = 0.95f;
+		const float pauseButtonHeightPercentage = 1.4f;
+		const float muteButtonWidthPercentage = 0.95f;
+		const float muteButtonHeightPercentage = 1.4f;
 
 		const short initialRound = 1;
 		const short zombiesAdditionNextRound = 1;
 		const short initialMoneyForKillingZombie = 20; 
 		const short maxTimeToEndRound = 300;
 		const short maxAmmoPositionValidations = 300;
+		const short initialMaxZombiesInRound = 5;
 		
-		static const short maxZombies = 10;
+		static const short maxZombies = 20;
 		static const short maxSpawners = 4;
 		static const short maxAmmunitions = 24;
 
@@ -111,6 +115,7 @@ namespace Z_APOCALIPSE
 		void setTimerToCreateNewAmmo(float timerToCreateNewAmmo);
 		void setRound(short round);	
 		void nextRound();
+		void setMaxZombiesInRound(short maxZombiesInRound);
 		void setMoneyForKillingZombie(short moneyForKillingZombie);
 		void setUiSmallSize();
 		void setUiBigSize(); 
