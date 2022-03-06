@@ -80,7 +80,7 @@ namespace Z_APOCALIPSE
 		float timerToCreateNewAmmo;
 
 		short round;
-		short maxZombiesInRound = 5;
+		short maxZombiesInRound;
 		short moneyForKillingZombie;
 
 		int uiSmallSize; 

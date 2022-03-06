@@ -26,9 +26,11 @@ namespace Z_APOCALIPSE
 		const float tutorialTextsXPercentage = 0.05f;
 		const float tutorialTextsInitialYPercentage = 0.18f;
 		const float tutorialTextsSeparation = 0.08f;	
-
-		const int titleTextSize = 40;
-		const int tutorialTextsSize = 16;
+		const float titleSizeDivider = 23.0f;
+		const float tutorialTextSizeDivider = 57.0f;
+		
+		int titleTextSize;
+		int tutorialTextsSize;
 
 		const short titleTextAmountOfLetters = 8;
 		static const short maxTutorialTexts = 8;
@@ -50,6 +52,12 @@ namespace Z_APOCALIPSE
 	public:
 		Tutorial();
 		~Tutorial();
+		
+		void setTitleTextSize();
+		void setTutorialTextsSize();
+
+		int getTitleTextSize();
+		int getTutorialTextsSize();
 
 		void input(SceneManager* sceneManager);
 		void draw();
