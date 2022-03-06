@@ -93,7 +93,7 @@ namespace Z_APOCALIPSE
 		int pauseTextSize; 
 		int muteTextSize; 
 		int zombiesKilled;
-		int timeSurvived;
+		float timeSurvived;
 
 		Survivor* playerOne;
 		Zombie* zombies[maxZombies];
@@ -126,7 +126,7 @@ namespace Z_APOCALIPSE
 		void setPauseTextSize();
 		void setMuteTextSize();
 		void setZombiesKilled(int zombiesKilled);		
-		void setTimeSurvived(int timeSurvived);		
+		void setTimeSurvived(float timeSurvived);	
 		void setZombiesToNull();
 		void setAmmunitionsToNull();
 
@@ -137,7 +137,7 @@ namespace Z_APOCALIPSE
 		void addZombieVelocity(float value);
 		void addZombieDamageToDie(float value);
 		void addZombiesKilled(short value);
-		void addTimeSurvived(short value);
+		void addTimeSurvived(float value);
 		
 		Vector2 getPauseButtonPosition();
 		Vector2 getMuteButtonPosition();
@@ -160,7 +160,7 @@ namespace Z_APOCALIPSE
 		int getPauseTextSize();
 		int getMuteTextSize();
 		int getZombiesKilled();
-		int getTimeSurvived();
+		float getTimeSurvived();
 		Survivor* getPlayer();
 		Vector2 getRandomAmmoPosition(float ammoRadius, short ammoIndex);
 

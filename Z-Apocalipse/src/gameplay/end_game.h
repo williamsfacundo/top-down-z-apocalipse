@@ -30,8 +30,8 @@ namespace Z_APOCALIPSE
 		const float titleSizeDivider = 10.0f;
 		const float scoreSizeDivider = 15.0f;
 
-		const short zombiesKilledMultiplyer = 85;
-		const short timeSurvivedMultiplyer = 15;
+		const short zombiesKilledMultiplyer = 25;
+		const short timeSurvivedMultiplyer = 5;
 		const short titleAmountLetters = 8;
 		const short scoreTextAmountLetters = 6;
 

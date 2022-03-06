@@ -1,5 +1,6 @@
 #include "gameplay.h"
 
+#include <iostream>
 #include <cmath>
 
 #include <raylib.h>
@@ -144,7 +145,7 @@ namespace Z_APOCALIPSE
 		this->zombiesKilled = zombiesKilled;
 	}	
 
-	void Gameplay::setTimeSurvived(int timeSurvived) 
+	void Gameplay::setTimeSurvived(float timeSurvived) 
 	{
 		this->timeSurvived = timeSurvived;
 	}
@@ -209,7 +210,7 @@ namespace Z_APOCALIPSE
 		zombiesKilled += value;
 	}
 
-	void Gameplay::addTimeSurvived(short value) 
+	void Gameplay::addTimeSurvived(float value) 
 	{
 		timeSurvived += value;
 	}
@@ -345,7 +346,7 @@ namespace Z_APOCALIPSE
 		return zombiesKilled;
 	}
 
-	int Gameplay::getTimeSurvived()
+	float Gameplay::getTimeSurvived()
 	{
 		return timeSurvived;
 	}
@@ -416,7 +417,7 @@ namespace Z_APOCALIPSE
 
 		setZombiesKilled(0);
 
-		setTimeSurvived(0);
+		setTimeSurvived(0.0f);
 	}
 	
 	void Gameplay::input(SceneManager* sceneManager)
@@ -430,18 +431,31 @@ namespace Z_APOCALIPSE
 	void Gameplay::update(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader)
 	{
 		playerOne->update({ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
+		
 		updateZombieSpawnTimer();
+		
 		zombiesUpdate();
+		
 		bulletsCollisionWithZombies();
+		
 		zombiesDeath();
+		
 		zombiesCollisionWithPlayer();	
+		
 		zombiesCollisionWithEachOther();
+		
 		playerPickUpAmmo();
+		
 		decreasTimerToEndRound();
+
+		addTimeSurvived(GetFrameTime());
+
 		decreasTimerToCreatNewAmmo();
+		
 		creatNewAmmo();
 
 		winRound(sceneManager, upgrader);
+		
 		defeatCondition(sceneManager, endGame, upgrader);
 	}
 	
@@ -677,13 +691,12 @@ namespace Z_APOCALIPSE
 	void Gameplay::decreasTimerToEndRound() 
 	{
 		if (timerToEndRound > 0.0f)
-		{
+		{			
 			timerToEndRound -= GetFrameTime();
 
 			if (timerToEndRound <= 0.0f)
-			{
-				timerToEndRound = 0.0f;
-				addTimeSurvived(1);
+			{				
+				timerToEndRound = 0.0f;				
 			}
 		}		
 	}
@@ -919,8 +932,9 @@ namespace Z_APOCALIPSE
 	}
 
 	void Gameplay::restartGameplay(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader, Scenes changeScene)
-	{
-		endGame->calculateScore(getZombiesKilled(), getTimeSurvived());
+	{		
+		std::cout << getTimeSurvived() << std::endl;
+		endGame->calculateScore(getZombiesKilled(), static_cast<int>(getTimeSurvived()));
 
 		initialGameplayStats();
 
@@ -931,6 +945,6 @@ namespace Z_APOCALIPSE
 		sceneManager->setCurrentScene(changeScene);
 		
 		setZombiesKilled(0);
-		setTimeSurvived(0);
+		setTimeSurvived(0.0f);
 	}
 }
