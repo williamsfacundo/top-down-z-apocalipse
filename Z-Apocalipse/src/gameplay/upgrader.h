@@ -47,12 +47,12 @@ namespace Z_APOCALIPSE
 		const float moneyTextXPercentage = 0.01f;
 		const float moneyTextYPercentage = 0.90f;
 
-		const Color upgraderButtonsColor = WHITE;
+		const Color upgraderButtonsColor = BLUE;
 		const Color changeSceneButtonColorOne = YELLOW;
 		const Color changeSceneButtonColorTwo = RED;
 		const Color backGroundColor = BLACK;
-		const Color titleTextColor = RED;
-		const Color explanationTextColor = GREEN;
+		const Color titleTextColor = GRAY;
+		const Color explanationTextColor = WHITE;
 		const Color levelTextColor = GREEN;
 		const Color priceHudColor = GREEN;
 		const Color playerMoneyColor = BLACK;

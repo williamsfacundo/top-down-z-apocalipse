@@ -14,7 +14,7 @@ namespace Z_APOCALIPSE
 		const Scenes gameplayScene = Scenes::GAMEPLAY;
 
 		const Color backgroundColor = BLACK;
-		const Color titleTextColor = RED;
+		const Color titleTextColor = GRAY;
 		const Color buttonColorOne = YELLOW;
 		const Color buttonColorTwo = RED;
 		const Color tutorialTextsColor = WHITE;

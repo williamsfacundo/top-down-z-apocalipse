@@ -20,10 +20,10 @@ namespace Z_APOCALIPSE
 		const float tittleYPercentage = 0.1f;
 		const float titleSizeDivider = 20.0f;
 
-		const Color backgroundColor = WHITE;
-		const Color buttonColorOne = BLUE;
+		const Color backgroundColor = BLACK;
+		const Color buttonColorOne = YELLOW;
 		const Color buttonColorTwo = RED;
-		const Color titleTextColor = BLACK;
+		const Color titleTextColor = GRAY;
 
 		const char* titleText = "Z-APOCALIPSE";		
 

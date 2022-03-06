@@ -15,8 +15,8 @@ namespace Z_APOCALIPSE
 	private:
 		const Color buttonsColorOne = YELLOW;
 		const Color buttonsColorTwo = RED;
-		const Color backgroundColor = WHITE;
-		const Color titleColor = BLACK;
+		const Color backgroundColor = BLACK;
+		const Color titleColor = GRAY;
 				
 		const float titleTextYPercentage = 0.05f;
 		const float buttonsYPercentage = 0.3f;		

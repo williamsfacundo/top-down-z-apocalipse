@@ -11,11 +11,11 @@ namespace Z_APOCALIPSE
 	class Credits
 	{
 	private:
-		const Color backgroundColor = WHITE;
-		const Color buttonColorOne = BLUE;
+		const Color backgroundColor = BLACK;
+		const Color buttonColorOne = YELLOW;
 		const Color buttonColorTwo = RED;
-		const Color creditsColor = BLACK;
-		const Color developerTextColor = BLACK;
+		const Color creditsColor = WHITE;
+		const Color developerTextColor = WHITE;
 
 		const Scenes goBackScene = Scenes::MAIN_MENU;
 		

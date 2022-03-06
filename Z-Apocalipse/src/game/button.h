@@ -11,6 +11,8 @@ namespace Z_APOCALIPSE
 	{
 	private:			
 		const float textSizeDivider = 8.0f;
+		const float buttonTextXPercentage = 0.05f;
+		const float buttonTextYPercentage = 0.05f;
 
 		const Color textColor = BLACK;
 				

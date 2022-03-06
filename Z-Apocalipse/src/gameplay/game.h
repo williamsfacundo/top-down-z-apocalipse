@@ -34,7 +34,7 @@ namespace Z_APOCALIPSE
 
 		const MouseButton pauseMenuInputButton = MouseButton::MOUSE_BUTTON_LEFT;
 
-		const Color versionTextColor = BLACK;		
+		const Color versionTextColor = WHITE;		
 
 		Vector2 versionTextPosition;
 		Vector2 resolution;

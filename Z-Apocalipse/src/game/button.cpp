@@ -90,7 +90,7 @@ namespace Z_APOCALIPSE
 			DrawRectangleRec(getShape(), getShapeColorTwo());
 		}
 		
-		DrawText(getText(), getShape().x, getShape().y, getTextSize(), textColor);
+		DrawText(getText(), static_cast<int>(getShape().x + (getShape().width * buttonTextXPercentage)), static_cast<int>(getShape().y + (getShape().height * buttonTextYPercentage)), getTextSize(), textColor);
 	}
 
 	bool Button::isMouseOnButton()

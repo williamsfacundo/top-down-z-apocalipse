@@ -14,11 +14,11 @@ namespace Z_APOCALIPSE
 		Scenes menuScene = Scenes::MAIN_MENU;
 		Scenes gameplayScene = Scenes::GAMEPLAY;
 
-		const Color titleColor = RED;
+		const Color titleColor = GRAY;
 		const Color backgroundColor = BLACK;
 		const Color buttonsColorOne = YELLOW;
 		const Color buttonsColorTwo = RED;
-		const Color scoreTextColor = GREEN; 
+		const Color scoreTextColor = WHITE; 
 
 		const float titleYPercentage = 0.18f;		
 		const float scoreTextYPercentage = 0.45;		
