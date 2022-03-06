@@ -20,28 +20,34 @@ namespace Z_APOCALIPSE
 		const Color buttonsColorTwo = RED;
 		const Color scoreTextColor = GREEN; 
 
-		const float titleYPercentage = 0.22f;
-		const float titleXPercentage = 0.26f;
+		const float titleYPercentage = 0.18f;
+		//const float titleXPercentage = 0.26f;
 		const float scoreTextYPercentage = 0.45;
-		const float scoreTextXPercentage = 0.18;
+		//const float scoreTextXPercentage = 0.18;
 		const float goMenuButtonXPercentage = 0.1f;
 		const float restartButtonXPercentage = 0.7f;
 		const float buttonsWidthPercentage = 0.2f;
 		const float buttonsHeightPercentage = 0.1f;
 		const float buttonsYPercentage = 0.8f;
-		
-			
-		const short titleSize = 70;		
-		const short scoreSize = 60;
+		const float titleSizeDivider = 10.0f;
+		const float scoreSizeDivider = 15.0f;
+
 		const short zombiesKilledMultiplyer = 85;
 		const short timeSurvivedMultiplyer = 15;
+		const short titleAmountLetters = 8;
+		const short scoreTextAmountLetters = 6;
 
 		const char* titleText = "END GAME";
 		const char* goMenuButtonText = "GO MENU";
 		const char* restartButtonText = "RESTART";
 		const char* scoreText = "SCORE %i";
 
+		int titleSize;
+		int scoreSize;
 		int score;
+
+		Vector2 titleSizePosition;
+		Vector2 scoreSizePosition;
 
 		Button* goMenuButton;
 		Button* restartButton;
@@ -49,9 +55,17 @@ namespace Z_APOCALIPSE
 		EndGame();
 		~EndGame();
 
+		void setTitleSize();
+		void setScoreSize();
 		void setScore(int score);
+		void setTitleSizePosition();
+		void setScoreSizePosition();
 
+		int getTitleSize();
+		int getScoreSize();
 		int getScore();
+		Vector2 getTitleSizePosition();
+		Vector2 getScoreSizePosition();
 
 		void input(SceneManager* sceneManager);
 		void draw();

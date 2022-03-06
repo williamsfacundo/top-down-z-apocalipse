@@ -26,7 +26,7 @@ namespace Z_APOCALIPSE
 
 		const float versionYPercentage = 0.85f;
 		const float versionXPercentage = 0.85f;
-		const float versionSizeDivider = 20;
+		const float versionSizeDivider = 20.0f;
 
 		const Scenes initialScene = Scenes::MAIN_MENU; 	
 		const Scenes pauseMenuChangeScene = Scenes::GAMEPLAY;		

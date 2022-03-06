@@ -18,7 +18,7 @@ namespace Z_APOCALIPSE
 		const float buttonsHeightPercentage = 0.1f;
 		const float separationPercentage = 0.05f;
 		const float tittleYPercentage = 0.1f;
-		const float titleSizeDivider = 20;
+		const float titleSizeDivider = 20.0f;
 
 		const Color backgroundColor = WHITE;
 		const Color buttonColorOne = BLUE;

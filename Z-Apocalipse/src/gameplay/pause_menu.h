@@ -23,7 +23,7 @@ namespace Z_APOCALIPSE
 		const float buttonsWidthPercentage = 0.25f;
 		const float buttonsHeightPercentage = 0.12f;
 		const float buttonsHeightSeparationPercentage = 0.05f;
-		const float titleSizeDivider = 20;
+		const float titleSizeDivider = 20.0f;
 
 		const char* buttonsText[maxPauseMenuButtons] = { "RESUME", "RESTART", "OPTIONS", "MENU" };
 		const char* titleText = "PAUSE MENU";
