@@ -167,7 +167,10 @@ namespace Z_APOCALIPSE
 
 	void Gameplay::addTimeToSpawnZombie(float value) 
 	{
-		timerToSpawnZombie += value;
+		if (timerToSpawnZombie + value > 0)
+		{
+			timerToSpawnZombie += value;
+		}		
 	}
 
 	void Gameplay::addTimeToEndRound(float value) 

@@ -8,7 +8,7 @@
 
 namespace Z_APOCALIPSE 
 {
-	const short maxPauseMenuButtons = 4;
+	const short maxPauseMenuButtons = 3;
 
 	class PauseMenu
 	{
@@ -25,7 +25,7 @@ namespace Z_APOCALIPSE
 		const float buttonsHeightSeparationPercentage = 0.05f;
 		const float titleSizeDivider = 20.0f;
 
-		const char* buttonsText[maxPauseMenuButtons] = { "RESUME", "RESTART", "OPTIONS", "MENU" };
+		const char* buttonsText[maxPauseMenuButtons] = { "RESUME", "RESTART", "MENU", };
 		const char* titleText = "PAUSE MENU";
 
 		const short titleAmountLetters = 10;

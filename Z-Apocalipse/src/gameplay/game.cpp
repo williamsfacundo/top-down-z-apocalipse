@@ -64,8 +64,7 @@ namespace Z_APOCALIPSE
 	{
 		pauseMenuChangeScenes[0] = Scenes::GAMEPLAY;
 		pauseMenuChangeScenes[1] = Scenes::RESTART_GAMEPLAY;
-		pauseMenuChangeScenes[2] = Scenes::OPTIONS_MENU;
-		pauseMenuChangeScenes[3] = Scenes::MAIN_MENU_RESTART_GAMEPLAY;
+		pauseMenuChangeScenes[2] = Scenes::MAIN_MENU_RESTART_GAMEPLAY;
 	}
 
 	void Game::setVersionTextSize() 

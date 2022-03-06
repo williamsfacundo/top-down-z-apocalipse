@@ -19,7 +19,7 @@ namespace Z_APOCALIPSE
 		const char* title = "Z-APOCALIPSE";
 		const char* mainMenuTexts[maxMainMenuButtons] = { "PLAY", "OPTIONS", "CREDITS", "EXIT" };
 		const char* optionsMenuText[maxOptionsMenuButtons] = { "800 x 450", "1280 x 720", "FULL SCREEN", "MENU"};
-		const char* versionText = "v0.4";
+		const char* versionText = "v1.0";
 
 		const short fps = 60;	
 
