@@ -37,10 +37,10 @@ namespace Z_APOCALIPSE
 		const float minReloadTime = 0.7f;
 		const float bulletsSizeDivider = 3.0f;
 		const float initialMaxAceleration = 50.0f;
-		const float maxAceleration = 350.0f;
-		const float initialVelocity = 50.5f;
+		const float maxAceleration = 350.0f;		 
 		const float maxVelocity = 125.0f;
 		const float maxDamage = 35.0f;
+		const float initialVelocityDivider = 18.0f;
 
 		static const short maxBullets = 36;
 			
@@ -61,6 +61,7 @@ namespace Z_APOCALIPSE
 		MouseButton shootButton;
 
 		float startingRoundVelocity;
+		float initialVelocity;
 		float velocity;
 		float aceleration;
 		float startingRoundShootingTime;
@@ -100,6 +101,7 @@ namespace Z_APOCALIPSE
 		void setShootButton(MouseButton shootButton);
 		void setStartingRoundVelocity(float startingRoundVelocity);
 		void addStartingRoundVelocity(float value);
+		void setInitialVelocity();
 		void setVelocity(float velocity);
 		void setAceleration(float aceleration);
 		void setDirectionNumberMultiplyer(float directionNumberMultiplyer);		
@@ -137,6 +139,7 @@ namespace Z_APOCALIPSE
 		KeyboardKey getReloadKey();
 		MouseButton getShootButton();
 		float getStartingRoundVelocity();
+		float getInitialVelocity();
 		float getVelocity();
 		float getAceleration();
 		float getDirectionNumberMultiplyer();

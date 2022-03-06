@@ -5,11 +5,14 @@
 
 #include "character.h"
 #include "bullet.h"
+#include "..\math\math.h"
 
 namespace Z_APOCALIPSE 
 {
 	Survivor::Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap) : Character(color, position, radius, gameplayMap)
 	{
+		setInitialVelocity();
+
 		startingSurvivorStats();
 	}
 
@@ -114,6 +117,11 @@ namespace Z_APOCALIPSE
 	void Survivor::addStartingRoundVelocity(float value) 
 	{
 		startingRoundVelocity += value;
+	}
+
+	void Survivor::setInitialVelocity()
+	{
+		initialVelocity = vectorMath::getScreenHypotenuse() / initialVelocityDivider;
 	}
 
 	void Survivor::setVelocity(float velocity)
@@ -308,6 +316,11 @@ namespace Z_APOCALIPSE
 	float Survivor::getStartingRoundVelocity() 
 	{
 		return startingRoundVelocity;
+	}
+
+	float Survivor::getInitialVelocity()
+	{
+		return initialVelocity;
 	}
 
 	float Survivor::getVelocity()
@@ -817,7 +830,7 @@ namespace Z_APOCALIPSE
 		setMoveRightKey(initialMoveRightKey);
 		setMoveLeftKey(initialMoveLeftKey);
 		setShootButton(initialShootButton);
-		setStartingRoundVelocity(initialVelocity);
+		setStartingRoundVelocity(getInitialVelocity());
 		setVelocity(getStartingRoundVelocity());
 		setAceleration(0.0f);
 		setDirectionNumberMultiplyer(1);
