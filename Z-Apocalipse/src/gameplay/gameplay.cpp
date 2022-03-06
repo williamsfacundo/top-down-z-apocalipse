@@ -3,13 +3,13 @@
 #include <cmath>
 
 #include <raylib.h>
-#include "..\math\math.h"
 
 #include "survivor.h"
 #include "zombie.h"
 #include "scene_manager.h"
 #include "end_game.h"
 #include "upgrader.h"
+#include "..\math\math.h"
 
 namespace Z_APOCALIPSE 
 {
@@ -74,6 +74,11 @@ namespace Z_APOCALIPSE
 	void Gameplay::setMuteButtonRadius(float muteButtonRadius) 
 	{
 		this->muteButtonRadius = muteButtonRadius;
+	}
+
+	void Gameplay::setZombieInitialVelocity() 
+	{
+		zombieInitialVelocity = vectorMath::getScreenHypotenuse() / zombieInitialVelocityDivider;
 	}
 
 	void Gameplay::setZombieVelocity(float zombieVelocity)
@@ -273,6 +278,11 @@ namespace Z_APOCALIPSE
 		return muteButtonRadius;
 	}
 
+	float Gameplay::getZombieInitialVelocity() 
+	{
+		return zombieInitialVelocity;
+	}
+
 	float Gameplay::getZombieVelocity() 
 	{
 		return zombieVelocity;
@@ -377,14 +387,19 @@ namespace Z_APOCALIPSE
 			{ gameplaySpacePos.x, gameplaySpacePos.y, static_cast<float>(GetScreenWidth()) , gameplaySpaceHeight });
 		
 		setUiSmallSize();
+
 		setUiBigSize();
+		
 		setPauseTextSize();
+		
 		setMuteTextSize();
 
 		setZombiesToNull();
 		setAmmunitionsToNull();
 
 		setZombiesSpawnsPositions();
+
+		setZombieInitialVelocity();
 
 		setPauseButtonRadius((GetScreenHeight() * (hudHeightPercentage / 3.0f)) / 2.0f);
 
@@ -397,6 +412,7 @@ namespace Z_APOCALIPSE
 		initialGameplayStats();
 
 		setZombiesKilled(0);
+
 		setTimeSurvived(0);
 	}
 	
@@ -857,7 +873,7 @@ namespace Z_APOCALIPSE
 
 		setTimerToSpawnZombie(initialtimeToSpawnZombie);
 		setTimerToEndRound(initialTimeToEndRound);
-		setZombieVelocity(zombieInitialVelocity);
+		setZombieVelocity(getZombieInitialVelocity());
 		setZombieDamageToDie(zombieInitialDamageToDie);
 		setTimerToCreateNewAmmo(initialTimeToCreatNewAmmo);
 		setRound(initialRound);

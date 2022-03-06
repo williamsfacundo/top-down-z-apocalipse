@@ -30,7 +30,6 @@ namespace Z_APOCALIPSE
 		const float ammoSizeDivider = 48.0f;
 		const float initialtimeToSpawnZombie = 2.0f;
 		const float initialTimeToEndRound = 25.0f; 		
-		const float zombieInitialVelocity = 35.0f;
 		const float zombieInitialDamageToDie = 20.0f;
 		const float decreasZombieSpawnerPercentage = 0.11f;
 		const float addEndRoundTimePercentage = 0.3f;
@@ -46,6 +45,7 @@ namespace Z_APOCALIPSE
 		const float pauseButtonHeightPercentage = 1.4f;
 		const float muteButtonWidthPercentage = 0.85f;
 		const float muteButtonHeightPercentage = 1.4f;
+		const float zombieInitialVelocityDivider = 36.0f;
 
 		const short initialRound = 1;
 		const short zombiesAdditionNextRound = 1;
@@ -79,6 +79,7 @@ namespace Z_APOCALIPSE
 		float roundStartingTimerToEndRound;
 		float pauseButtonRadius;		
 		float muteButtonRadius;
+		float zombieInitialVelocity;
 		float zombieVelocity;
 		float zombieDamageToDie;
 		float timerToCreateNewAmmo;
@@ -110,6 +111,9 @@ namespace Z_APOCALIPSE
 		void setRoundStartingTimerToEndRound(float roundStartingTimerToEndRound);
 		void setPauseButtonRadius(float pauseButtonRadius);
 		void setMuteButtonRadius(float muteButtonRadius);
+
+		void setZombieInitialVelocity();
+
 		void setZombieVelocity(float zombieVelocity);
 		void setZombieDamageToDie(float zombieDamageToDie);
 		void setTimerToCreateNewAmmo(float timerToCreateNewAmmo);
@@ -144,6 +148,7 @@ namespace Z_APOCALIPSE
 		float getRoundStartingTimerToEndRound();
 		float getPauseButtonRadius();
 		float getMuteButtonRadius();
+		float getZombieInitialVelocity();
 		float getZombieVelocity();
 		float getZombieDamageToDie();
 		float getTimerToCreateNewAmmo();
