@@ -493,7 +493,7 @@ namespace Z_APOCALIPSE
 		{
 			if (zombies[i] != NULL)
 			{
-				zombies[i]->update(playerOne->getPosition());
+				zombies[i]->update(playerOne->getPosition(), isZombieCollidingWithPlayer(i));
 			}
 		}
 	}
@@ -530,8 +530,7 @@ namespace Z_APOCALIPSE
 			{
 				if (zombies[i] != NULL)
 				{
-					if (CheckCollisionCircles(zombies[i]->getPosition(), zombies[i]->getRadius(),
-						playerOne->getPosition(), playerOne->getRadius()))
+					if (isZombieCollidingWithPlayer(i))
 					{
 						playerOne->hitByZombie();
 
@@ -540,6 +539,12 @@ namespace Z_APOCALIPSE
 				}
 			}
 		}		
+	}
+
+	bool Gameplay::isZombieCollidingWithPlayer(short index) 
+	{
+		return CheckCollisionCircles(zombies[index]->getPosition(), zombies[index]->getRadius(),
+			playerOne->getPosition(), playerOne->getRadius());
 	}
 
 	void Gameplay::zombiesCollisionWithEachOther() 

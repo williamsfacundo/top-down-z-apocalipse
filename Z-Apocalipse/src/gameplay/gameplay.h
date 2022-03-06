@@ -177,18 +177,25 @@ namespace Z_APOCALIPSE
 		void zombiesUpdate();
 		void bulletsCollisionWithZombies();
 		void zombiesCollisionWithPlayer();
+		bool isZombieCollidingWithPlayer(short index);
 		void zombiesCollisionWithEachOther();
+
 		void playerPickUpAmmo();
+
 		void zombiesDeath();
 		void destroyZombies();
 		void updateZombieSpawnTimer();
 		void createZombie();		
 		short findEmptyZombieIndex();
+
 		short findEmptyAmmoIndex();
+
 		void decreasTimerToEndRound();
 		void decreasTimerToCreatNewAmmo();
+
 		void winRound(SceneManager* sceneManager, Upgrader* upgrader);
 		void defeatCondition(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader);
+
 		void drawHud();
 		void drawTimer();		
 		void drawLivesRemaining();
@@ -201,14 +208,19 @@ namespace Z_APOCALIPSE
 		void drawPauseButton();
 		void drawMuteButton();
 		void drawAmmo();
+
 		void pauseGameInput(SceneManager* sceneManager);
 		void muteGameInput();
+
 		bool isMouseOnGameplaySpace();
+
 		void increaseStatsForNextRound();
 		void resetGameplayForWiningRound();
 		void initialGameplayStats();
+
 		void deleteAmmunitions();
-		void creatNewAmmo();		
+		void creatNewAmmo();	
+
 		void restartGameplay(SceneManager* sceneManager, EndGame* endGame, Upgrader* upgrader, Scenes changeScene);
 	};
 }

@@ -35,8 +35,8 @@ namespace Z_APOCALIPSE
 		Vector2 getZombieDirection(Vector2 playerPosition);
 		static short getZombiesCreated();
 
-		void update(Vector2 playerPosition);
-		void movementUpdate(Vector2 playerPosition);
+		void update(Vector2 playerPosition, bool collidingWithPlayer);
+		void movementUpdate(Vector2 playerPosition, bool collidingWithPlayer);
 		void draw();
 		bool isZombieDead();
 		void drawZombieHealthBar();

@@ -75,15 +75,18 @@ namespace Z_APOCALIPSE
 		return zombiesCreated;
 	}
 
-	void Zombie::update(Vector2 playerPosition)
+	void Zombie::update(Vector2 playerPosition, bool collidingWithPlayer)
 	{
-		movementUpdate(playerPosition);
+		movementUpdate(playerPosition, collidingWithPlayer);
 	}
 	
-	void Zombie::movementUpdate(Vector2 playerPosition)
+	void Zombie::movementUpdate(Vector2 playerPosition, bool collidingWithPlayer)
 	{
-		move({ getZombieDirection(playerPosition).x * velocity * GetFrameTime(),
-			getZombieDirection(playerPosition).y * velocity * GetFrameTime()});
+		if (!collidingWithPlayer)
+		{
+			move({ getZombieDirection(playerPosition).x * velocity * GetFrameTime(),
+			getZombieDirection(playerPosition).y * velocity * GetFrameTime() });
+		}		
 	}
 	
 	void Zombie::draw() 
