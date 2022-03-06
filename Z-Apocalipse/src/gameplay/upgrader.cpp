@@ -16,6 +16,10 @@ namespace Z_APOCALIPSE
 
 		setPlayerMoneyCircleRadius();
 
+		setMaxAcelerationUpgradeValue();
+
+		setVelocityUpgradeValue();
+
 		setPriceHudSize();
 
 		setPlayerMoneyHudSize();
@@ -53,6 +57,16 @@ namespace Z_APOCALIPSE
 	void Upgrader::setPlayerMoneyCircleRadius()
 	{
 		playerMoneyCircleRadius = vectorMath::getScreenHypotenuse() / playerMoneyCircleRadiusDivider;
+	}
+
+	void Upgrader::setMaxAcelerationUpgradeValue() 
+	{
+		maxAcelerationUpgradeValue = vectorMath::getScreenHypotenuse() / maxAcelerationUpgradeValueDivider;
+	}
+
+	void Upgrader::setVelocityUpgradeValue()
+	{
+		velocityUpgradeValue = vectorMath::getScreenHypotenuse() / velocityUpgradeValueDivider;
 	}
 
 	void Upgrader::setPriceHudSize()
@@ -122,6 +136,16 @@ namespace Z_APOCALIPSE
 		return playerMoneyCircleRadius;
 	}
 
+	float Upgrader::getMaxAcelerationUpgradeValue()
+	{
+		return maxAcelerationUpgradeValue;
+	}
+
+	float Upgrader::getVelocityUpgradeValue()
+	{
+		return velocityUpgradeValue;
+	}
+
 	int Upgrader::getPriceHudSize()
 	{
 		return priceHudSize;
@@ -157,14 +181,14 @@ namespace Z_APOCALIPSE
 		if (velocityUpdateButton->buttonPressed() && levels[0] < maxLevel && survivor->getMoney() >= getPrice(0)) //survivor->getStartingRoundVelocity() + velocityUpgradeValue <= survivor->getMaxVelocity()
 		{
 			survivor->addMoney(-getPrice(0));
-			survivor->addStartingRoundVelocity(velocityUpgradeValue);
+			survivor->addStartingRoundVelocity(getVelocityUpgradeValue());
 			survivor->setVelocity(survivor->getStartingRoundVelocity());
 			levels[0] += 1;
 		}
 		else if (maxAcelerationUpdateButton->buttonPressed() && levels[1] < maxLevel && survivor->getMoney() >= getPrice(1)) //survivor->getStartingRoundMaxAceleration() + maxAcelerationUpgradeValue <= survivor->getMaxAceleration()
 		{
 			survivor->addMoney(-getPrice(1));
-			survivor->addStartingRoundMaxAceleration(maxAcelerationUpgradeValue);			
+			survivor->addStartingRoundMaxAceleration(getMaxAcelerationUpgradeValue());
 			levels[1] += 1;
 		}
 		else if (maxAmoUpdateButton->buttonPressed() && levels[2] < maxLevel && survivor->getMoney() >= getPrice(2)) //survivor->getStartingRoundRemainingBullets() + maxBulletsPlayerUpgradeValue <= survivor->getMaxBulletsPlayerCanHave()
@@ -212,7 +236,6 @@ namespace Z_APOCALIPSE
 		
 		changeSceneButton->changeSceneWhenButtonPress(sceneManager, gameplayScene);
 	}
-
 	
 	void Upgrader::draw(Survivor* survivor)
 	{

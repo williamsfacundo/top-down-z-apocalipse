@@ -22,12 +22,9 @@ namespace Z_APOCALIPSE
 		const short explanationTextAmountLetters = 36;				
 		const short chargerUpgradeValue = 6;
 		const short maxBulletsPlayerUpgradeValue = 18;		
-		const short maxLevel = 6;
-
-		const float velocityUpgradeValue = 15.0f;
+		const short maxLevel = 6;		
 		const float reloadTimeDecreaserValue = 0.32f;
 		const float shootingTimeDecreaserValue = 0.185f;
-		const float maxAcelerationUpgradeValue = 50.0f;
 		const float damageUpgradeValue = 5.0f;
 		const float upgradeTestsOffsetPercentage = 0.3f;		
 		const float buttonsRadiusDivider = 80.0f;
@@ -48,6 +45,8 @@ namespace Z_APOCALIPSE
 		const float heightButtonsSeparationPercentage = 0.07f;	
 		const float moneyTextXPercentage = 0.01f;
 		const float moneyTextYPercentage = 0.90f;
+		const float maxAcelerationUpgradeValueDivider = 30.0f;
+		const float velocityUpgradeValueDivider = 75.0f;
 
 		const Color upgraderButtonsColor = BLUE;
 		const Color changeSceneButtonColorOne = YELLOW;
@@ -65,6 +64,9 @@ namespace Z_APOCALIPSE
 		static const short maxButtons = 8;
 
 		float playerMoneyCircleRadius; 
+
+		float velocityUpgradeValue;
+		float maxAcelerationUpgradeValue;
 
 		int priceHudSize; 
 		int playerMoneyHudSize;
@@ -91,6 +93,8 @@ namespace Z_APOCALIPSE
 		void resetLevels();		
 
 		void setPlayerMoneyCircleRadius();
+		void setMaxAcelerationUpgradeValue();
+		void setVelocityUpgradeValue();
 		void setPriceHudSize();
 		void setPlayerMoneyHudSize();
 		void setLevelSize();
@@ -99,6 +103,8 @@ namespace Z_APOCALIPSE
 		void setButtons();
 
 		float getPlayerMoneyCircleRadius();
+		float getMaxAcelerationUpgradeValue();
+		float getVelocityUpgradeValue();
 		int getPriceHudSize();
 		int getPlayerMoneyHudSize();
 		int getLevelSize();
