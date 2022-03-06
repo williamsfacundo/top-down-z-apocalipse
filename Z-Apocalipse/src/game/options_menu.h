@@ -9,6 +9,7 @@
 namespace Z_APOCALIPSE
 {
 	const short maxOptionsMenuButtons = 4;
+
 	const Vector2 initialResolution = { 800.0f, 450.0f };
 
 	class OptionsMenu

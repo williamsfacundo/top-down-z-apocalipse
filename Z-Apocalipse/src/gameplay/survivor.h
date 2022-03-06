@@ -1,6 +1,8 @@
 #ifndef SURVIVOR_H
 #define SURVIVOR_H
 
+#include <raylib.h>
+
 #include "character.h"
 #include "bullet.h"
 
@@ -46,8 +48,10 @@ namespace Z_APOCALIPSE
 			
 		short roundStartingLives;
 		short lives;
+
 		int money;
 		int initialRoundMoney;
+
 		short directionNumberMultiplyer;
 
 		MovementStatus movementStatus;
@@ -72,12 +76,14 @@ namespace Z_APOCALIPSE
 		float startingRoundReloadTime;
 		float reloadTimer;		
 		float startingRoundMaxAceleration;
+
 		short startingRoundMaxBulletsInCharger;
 		short bulletsInCharger;
 		short startingRoundRemainingBullets;
 		short remainingBullets;			
 
 		Bullet* bullets[maxBullets];
+
 		Rectangle gameplayMap;		
 	public:
 		Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap);

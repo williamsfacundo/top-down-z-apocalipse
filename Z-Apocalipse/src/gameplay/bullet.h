@@ -5,16 +5,12 @@
 
 namespace Z_APOCALIPSE 
 {
-	enum class BulletsType { GUN };
-
 	class Bullet
 	{
 	private:
 		const Color gunTypeColor = BLACK;		
 		
-		const float initialVelocityDivider = 2.0f;
-
-		BulletsType type;
+		const float initialVelocityDivider = 2.0f;		
 
 		Vector2 position;		
 		Vector2 direction;
@@ -27,10 +23,9 @@ namespace Z_APOCALIPSE
 
 		static short bulletsCreated;
 	public:
-		Bullet(Vector2 position, Vector2 direction, BulletsType type, float radius);
+		Bullet(Vector2 position, Vector2 direction, float radius);
 		~Bullet();
 
-		void setType(BulletsType type);
 		void setPosition(Vector2 position);
 		void setDirection(Vector2 direction);
 		void setColor(Color color);
@@ -39,7 +34,7 @@ namespace Z_APOCALIPSE
 		void setRadius(float radius);		
 		void setBulletsCreated(short bulletsCreated);
 
-		BulletsType getType();
+		
 		Vector2 getPosition();
 		Vector2 getDirection();
 		Color getColor();

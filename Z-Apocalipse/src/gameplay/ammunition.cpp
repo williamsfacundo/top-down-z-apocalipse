@@ -1,5 +1,7 @@
 #include "ammunition.h"
 
+#include <raylib.h>
+
 namespace Z_APOCALIPSE 
 {
 	short Ammunition::amountOfAmmunitions = 0;

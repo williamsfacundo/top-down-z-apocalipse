@@ -4,7 +4,7 @@
 
 #include "button.h"
 #include "main_menu.h"
-#include "..\MATH\math.h"
+#include "..\math\math.h"
 
 namespace Z_APOCALIPSE 
 {

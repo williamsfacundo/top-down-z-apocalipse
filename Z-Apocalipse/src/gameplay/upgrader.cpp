@@ -1,5 +1,7 @@
 #include "upgrader.h"
 
+#include <raylib.h>
+
 #include "upgrader_button.h"
 #include "survivor.h"
 #include "..\game\button.h"

@@ -8,36 +8,21 @@ namespace Z_APOCALIPSE
 {
 	short Bullet::bulletsCreated = 0;
 
-	Bullet::Bullet(Vector2 position, Vector2 direction, BulletsType type, float radius)
+	Bullet::Bullet(Vector2 position, Vector2 direction, float radius)
 	{
 		setPosition(position);
 		setDirection(direction);
 		setInitialVelocity();
 		setVelocity(getInitialVelocity());
-		setType(type);
-
-		switch (getType())
-		{
-		case BulletsType::GUN:
-
-			setColor(gunTypeColor);
-			setRadius(radius);
-			break;
-		default:
-			break;
-		}	
-			
+		setColor(gunTypeColor);
+		setRadius(radius);
+					
 		bulletsCreated += 1;
 	}
 
 	Bullet::~Bullet() 
 	{
 		bulletsCreated -= 1;
-	}
-
-	void Bullet::setType(BulletsType type) 
-	{
-		this->type = type;
 	}
 
 	void Bullet::setPosition(Vector2 position)
@@ -108,11 +93,6 @@ namespace Z_APOCALIPSE
 	short Bullet::getBulletsCreated() 
 	{
 		return bulletsCreated;
-	}
-
-	BulletsType Bullet::getType() 
-	{
-		return type;
 	}
 
 	void Bullet::update() 

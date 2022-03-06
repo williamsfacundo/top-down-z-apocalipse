@@ -1,6 +1,8 @@
 #ifndef UPGRADER_H
 #define UPGRADER_H
 
+#include <raylib.h>
+
 #include "upgrader_button.h"
 #include "survivor.h"
 #include "..\game\button.h"

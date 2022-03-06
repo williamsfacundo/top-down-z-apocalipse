@@ -490,7 +490,7 @@ namespace Z_APOCALIPSE
 		{
 			setShootingTimer(getStartingRoundShootingTime());			
 
-			bullets[getEmptyBulletIndex()] = new Bullet(getPosition(), getBulletDirection(), BulletsType::GUN, (getRadius() / bulletsSizeDivider) / 2.0f);
+			bullets[getEmptyBulletIndex()] = new Bullet(getPosition(), getBulletDirection(), (getRadius() / bulletsSizeDivider) / 2.0f);
 			decreasBulletsInCharger();
 		}
 	}

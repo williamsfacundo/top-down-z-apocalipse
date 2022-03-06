@@ -9,9 +9,11 @@ namespace Z_APOCALIPSE
 	{
 	private:
 		const short bulletsForPickUp = 5;
+
 		const Color ammunitionColor = YELLOW;
 
 		Vector2 position;
+
 		float radius;
 
 		static short amountOfAmmunitions;

@@ -12,6 +12,7 @@ namespace Z_APOCALIPSE
 	private:		
 		const float initialDamageTaken = 0.0f;		
 		const float healthBarHeight = 10.0f;
+
 		const Color healthBarColor = YELLOW;
 
 		float damageTaken;

@@ -1,15 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "scene_manager.h"
-#include "gameplay.h"
-#include "..\game\main_menu.h"
-#include "..\game\credits.h"
+#include "main_menu.h"
+#include "credits.h"
+#include "options_menu.h"
+#include "..\gameplay\scene_manager.h"
+#include "..\gameplay\gameplay.h"
 #include "..\gameplay\upgrader.h"
 #include "..\gameplay\tutorial.h"
 #include "..\gameplay\end_game.h"
 #include "..\gameplay\pause_menu.h"
-#include "..\game\options_menu.h"
 
 namespace Z_APOCALIPSE 
 {
