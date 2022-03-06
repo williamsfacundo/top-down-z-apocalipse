@@ -21,6 +21,7 @@ namespace Z_APOCALIPSE
 		
 		const char* buttonText = "MENU";
 		const char* developerNameText = "Game Dev: WILLIAMS FACUNDO";
+		const char* toolsText = "TOOLS USED: visual studio and raylib library";
 		
 		const short developerNameTextAmountOfLetters = 26;
 				
@@ -29,6 +30,7 @@ namespace Z_APOCALIPSE
 		const float buttonHeightPercentage = 0.1f;	
 		const float creditsTextYPercentage = 0.3f;
 		const float creditsFontSizeDivider = 38.0f;
+		const float creditsSeparationPercentage = 0.12f;
 
 		int creditsFontSize;
 		
@@ -53,6 +55,7 @@ namespace Z_APOCALIPSE
 		void input(SceneManager* sceneManager);
 		void draw(MainMenu* mainMenu);
 		void drawDevName();
+		void drawToolsText();
 	};
 }
 

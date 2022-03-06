@@ -81,6 +81,8 @@ namespace Z_APOCALIPSE
 		mainMenu->drawTitle();
 
 		drawDevName();
+
+		drawToolsText();
 		
 		button->draw();		
 	}	
@@ -88,5 +90,10 @@ namespace Z_APOCALIPSE
 	void Credits::drawDevName() 
 	{
 		DrawText(developerNameText, static_cast<int>(getCreditsTextsPosition().x), static_cast<int>(getCreditsTextsPosition().y), getCreditsFontSize(), developerTextColor);
+	}
+
+	void Credits::drawToolsText() 
+	{
+		DrawText(toolsText, static_cast<int>(getCreditsTextsPosition().x), static_cast<int>(getCreditsTextsPosition().y + (GetScreenHeight() * creditsSeparationPercentage)), getCreditsFontSize(), developerTextColor);
 	}
 }
