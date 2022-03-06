@@ -748,7 +748,7 @@ namespace Z_APOCALIPSE
 		drawRoundHud();
 		drawPlayerMoney();
 		drawPauseButton();
-		drawMuteButton();
+		//drawMuteButton();
 	}
 
 	void Gameplay::drawTimer() 

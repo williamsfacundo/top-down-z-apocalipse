@@ -12,6 +12,7 @@ namespace Z_APOCALIPSE
 	Survivor::Survivor(Color color, Vector2 position, float radius, Rectangle gameplayMap) : Character(color, position, radius, gameplayMap)
 	{
 		setInitialVelocity();
+		setInitialMaxAceleration();
 
 		startingSurvivorStats();
 	}
@@ -197,6 +198,11 @@ namespace Z_APOCALIPSE
 	void Survivor::addStartingRoundMaxAceleration(float value) 
 	{
 		startingRoundMaxAceleration += value;
+	}
+
+	void Survivor::setInitialMaxAceleration()
+	{
+		initialMaxAceleration = vectorMath::getScreenHypotenuse() / initialMaxAcelerationDivider;
 	}
 
 	void Survivor::setStartingRoundMaxBulletsInCharger(short startingRoundmaxBulletsInCharger)
@@ -409,6 +415,11 @@ namespace Z_APOCALIPSE
 	{
 		return startingRoundMaxAceleration;
 	}
+
+	float Survivor::getInitialMaxAceleration() 
+	{
+		return initialMaxAceleration;
+	}
 	
 	short Survivor::getStartingRoundMaxBulletsInCharger()
 	{
@@ -458,12 +469,7 @@ namespace Z_APOCALIPSE
 	short Survivor::getMaxBulletsPlayerCanHave() 
 	{
 		return maxBulletsPlayerCanHave;
-	}
-
-	float Survivor::getMaxAceleration() 
-	{
-		return maxAceleration;
-	}
+	}	
 
 	float Survivor::getMaxVelocity() 
 	{
@@ -846,7 +852,7 @@ namespace Z_APOCALIPSE
 		setReloadKey(initialReloadKey);
 		setBulletsToNull();
 		setStartingRoundReloadTime(initialReloadTime);
-		setStartingRoundMaxAceleration(initialMaxAceleration);
+		setStartingRoundMaxAceleration(getInitialMaxAceleration());
 		setReloadTimer(0.0f);
 	}
 }

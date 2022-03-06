@@ -37,12 +37,11 @@ namespace Z_APOCALIPSE
 		const float invulnerabilityTime = 1.8f;
 		const float initialReloadTime = 2.2f;
 		const float minReloadTime = 0.7f;
-		const float bulletsSizeDivider = 3.0f;
-		const float initialMaxAceleration = 50.0f;
-		const float maxAceleration = 350.0f;		 
+		const float bulletsSizeDivider = 3.0f;						 
 		const float maxVelocity = 125.0f;
 		const float maxDamage = 35.0f;
 		const float initialVelocityDivider = 18.0f;
+		const float initialMaxAcelerationDivider = 18;
 
 		static const short maxBullets = 36;
 			
@@ -76,6 +75,7 @@ namespace Z_APOCALIPSE
 		float startingRoundReloadTime;
 		float reloadTimer;		
 		float startingRoundMaxAceleration;
+		float initialMaxAceleration;
 
 		short startingRoundMaxBulletsInCharger;
 		short bulletsInCharger;
@@ -123,6 +123,7 @@ namespace Z_APOCALIPSE
 		void setReloadTimer(float reloadTimer);		
 		void setStartingRoundMaxAceleration(float startingRoundMaxAceleration);
 		void addStartingRoundMaxAceleration(float value);
+		void setInitialMaxAceleration();
 		void setStartingRoundMaxBulletsInCharger(short startingRoundmaxBulletsInCharger);
 		void addStartingRoundMaxBulletsInCharger(short value);
 		void setBulletsInCharger(short bulletsInCharger);
@@ -160,6 +161,7 @@ namespace Z_APOCALIPSE
 		float getStartingRoundShootingTime();
 		float getReloadTimer();		
 		float getStartingRoundMaxAceleration();
+		float getInitialMaxAceleration();
 		short getStartingRoundMaxBulletsInCharger();
 		short getBulletsInCharger();	
 		short getStartingRoundRemainingBullets();
@@ -169,8 +171,7 @@ namespace Z_APOCALIPSE
 		float getMinReloadTime();
 		float getMinShootingTime();
 		short getMaxBulletsChargerSupports();
-		short getMaxBulletsPlayerCanHave();
-		float getMaxAceleration();
+		short getMaxBulletsPlayerCanHave();		
 		float getMaxVelocity();
 		float getMaxDamage();
 

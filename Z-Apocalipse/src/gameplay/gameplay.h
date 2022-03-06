@@ -34,7 +34,7 @@ namespace Z_APOCALIPSE
 		const float decreasZombieSpawnerPercentage = 0.06f;
 		const float addEndRoundTimePercentage = 0.3f;
 		const float addMoneyRewardPercentage = 0.45f;
-		const float increasedZombiesVelocity = 0.15f;
+		const float increasedZombiesVelocity = 0.10f;
 		const float increasedZombiesDamageToDie = 0.5f;
 		const float initialTimeToCreatNewAmmo = 8.5f;
 		const float uiSmallSizeDivider = 30.0f;  

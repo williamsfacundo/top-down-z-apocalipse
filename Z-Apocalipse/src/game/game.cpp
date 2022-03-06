@@ -21,7 +21,7 @@ namespace Z_APOCALIPSE
 		setScreenHeight(static_cast<int>(initialResolution.y));
 
 		SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-		InitWindow(getScreenWidth(), getScreenHeight(), title);		
+		InitWindow(getScreenWidth(), getScreenHeight(), title);				
 
 		setWindowPosition();
 
